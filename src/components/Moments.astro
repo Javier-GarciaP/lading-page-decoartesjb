@@ -1,151 +1,137 @@
-<h2 class="text-center font-primary text-5xl mb-10">Momentos inolvidables</h2>
-<div class="slider">
-  <!-- Flecha izquierda -->
-  <button class="arrow left-arrow">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="m9.55 12l7.35 7.35q.375.375.363.875t-.388.875t-.875.375t-.875-.375l-7.7-7.675q-.3-.3-.45-.675t-.15-.75t.15-.75t.45-.675l7.7-7.7q.375-.375.888-.363t.887.388t.375.875t-.375.875z"/>
-    </svg>
-  </button>
-
-  <!-- Contenedor de imágenes -->
-  <div class="slides">
-    <!-- Duplicamos las imágenes al final -->
-    <img src="/imagen1.jpg" alt="Image 1" class="slide" />
-    <img src="/imagen2.jpg" alt="Image 2" class="slide" />
-    <img src="/imagen3.jpg" alt="Image 3" class="slide" />
-    <img src="/imagen4.jpg" alt="Image 4" class="slide" />
-    <img src="/imagen5.jpg" alt="Image 5" class="slide" />
-    <!-- Duplicamos las imágenes al principio -->
-    <img src="/imagen1.jpg" alt="Image 1" class="slide" />
-    <img src="/imagen2.jpg" alt="Image 2" class="slide" />
-    <img src="/imagen3.jpg" alt="Image 3" class="slide" />
-    <img src="/imagen4.jpg" alt="Image 4" class="slide" />
-    <img src="/imagen5.jpg" alt="Image 5" class="slide" />
-  </div>
-
-  <!-- Flecha derecha -->
-  <button class="arrow right-arrow">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><path fill="currentColor" d="m14.475 12l-7.35-7.35q-.375-.375-.363-.888t.388-.887t.888-.375t.887.375l7.675 7.7q.3.3.45.675t.15.75t-.15.75t-.45.675l-7.7 7.7q-.375.375-.875.363T7.15 21.1t-.375-.888t.375-.887z"/>
-    </svg>
-  </button>
-</div>
-
 <style>
-  /* Estilos generales del slider */
-  .slider {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 80%;
-    margin: 0 auto;
-    overflow: hidden;
+  .carousel-container {
+    perspective: 1000px;
+    touch-action: pan-y pinch-zoom;
+    max-width: 100%;
+    width: 90vw;
   }
 
-  /* Contenedor de imágenes */
-  .slides {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
+  .carousel-track {
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
   }
 
-  /* Estilos de las imágenes */
-  .slide {
-    width: 500px;
-    height: 500px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin: 0 10px;
-    transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
-    opacity: 0.7;
-    transform: scale(0.8); /* Zoom reducido por defecto */
+  .carousel-item {
+    backface-visibility: hidden;
+    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
   }
 
-  /* Imagen central con zoom */
-  .slide.active {
-    transform: scale(1.2); /* Zoom aumentado */
+  .carousel-item.active {
     opacity: 1;
-    z-index: 2;
+    transform: scale(1) translateZ(0);
   }
 
-  /* Flechas de navegación */
-  .arrow {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    color: white;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
-    font-size: 24px;
-    z-index: 3;
+  @media (max-width: 640px) {
+    .carousel-container {
+      width: 95vw;
+    }
+    
+    .carousel-item img {
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .carousel-item.prev {
+      opacity: 0;
+      transform: scale(0.85) translateX(-40%) translateZ(-100px);
+    }
+
+    .carousel-item.next {
+      opacity: 0;
+      transform: scale(0.85) translateX(40%) translateZ(-100px);
+    }
   }
 
-  .left-arrow {
-    left: 10px;
+  @media (min-width: 641px) {
+    .carousel-item.prev {
+      opacity: 0.7;
+      transform: scale(0.9) translateX(-100%) translateZ(-100px);
+    }
+
+    .carousel-item.next {
+      opacity: 0.7;
+      transform: scale(0.9) translateX(100%) translateZ(-100px);
+    }
   }
 
-  .right-arrow {
-    right: 10px;
+  .carousel-item.hidden {
+    opacity: 0;
+    transform: scale(0.8) translateZ(-200px);
+  }
+
+  .nav-button {
+    transition: all 0.3s;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  @media (hover: hover) {
+    .nav-button:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.1);
+    }
+  }
+
+  .nav-button:active {
+    transform: scale(0.95);
   }
 </style>
 
+<div class="bg-black min-h-screen flex items-center justify-center overflow-hidden">
+  <div class="w-full max-w-2xl mx-auto px-4">
+    <div class="carousel-container relative">
+      <button class="nav-button absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center z-20 text-white" onclick="prevSlide()">
+        &#10094;
+      </button>
+      <button class="nav-button absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center z-20 text-white" onclick="nextSlide()">
+        &#10095;
+      </button>
+
+      <div class="carousel-track relative h-[250px] sm:h-[400px] overflow-hidden">
+        <div class="carousel-item active absolute top-0 left-0 w-full h-full">
+          <img src="imagen1.jpg" alt="Imagen 1" class="w-full h-full object-cover rounded-lg" />
+        </div>
+        <div class="carousel-item absolute top-0 left-0 w-full h-full">
+          <img src="imagen2.jpg" alt="Imagen 2" class="w-full h-full object-cover rounded-lg" />
+        </div>
+        <div class="carousel-item absolute top-0 left-0 w-full h-full">
+          <img src="imagen3.jpg" alt="Imagen 3" class="w-full h-full object-cover rounded-lg" />
+        </div>
+        <div class="carousel-item absolute top-0 left-0 w-full h-full">
+          <img src="imagen4.jpg" alt="Imagen 4" class="w-full h-full object-cover rounded-lg" />
+        </div>
+        <div class="carousel-item absolute top-0 left-0 w-full h-full">
+          <img src="imagen5.jpg" alt="Imagen 5" class="w-full h-full object-cover rounded-lg" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
-  const slides = document.querySelectorAll(".slide");
-    const slidesContainer = document.querySelector(".slides");
-    const leftArrow = document.querySelector(".left-arrow");
-    const rightArrow = document.querySelector(".right-arrow");
+  let currentSlide = 0;
 
-    const totalOriginalSlides = 5; // Número de imágenes originales
-    let currentIndex = 2; // Inicia en la 3ra imagen original
-
-    // Función para actualizar el slider
-    function updateSlider() {
-      // Calcular el índice de la imagen activa (central)
-      const activeIndex = (currentIndex + totalOriginalSlides) % slides.length;
-
-      // Aplicar zoom solo a la imagen central
-      slides.forEach((slide, index) => {
-        if (index === activeIndex) {
-          slide.classList.add("active"); // Aplica zoom a la imagen central
-        } else {
-          slide.classList.remove("active"); // Quita el zoom de las otras imágenes
-        }
-      });
-
-      // Mueve el contenedor de imágenes para centrar la imagen actual
-      const slideWidth = slides[0].offsetWidth + 20; // Ancho de la imagen + margen
-      const offset = -currentIndex * slideWidth;
-      slidesContainer.style.transform = `translateX(${offset}px)`;
-    }
-
-    // Navegación hacia la izquierda
-    leftArrow.addEventListener("click", () => {
-      if (currentIndex <= 0) {
-        // Saltar al final sin transición
-        slidesContainer.style.transition = "none";
-        currentIndex = totalOriginalSlides;
-        updateSlider();
-        void slidesContainer.offsetWidth; // Forzar reflow
-        slidesContainer.style.transition = "transform 0.5s ease-in-out";
-      }
-      currentIndex--;
-      updateSlider();
+  function updateSlides() {
+    const slides = document.querySelectorAll(".carousel-item");
+    slides.forEach((slide, index) => {
+      slide.className = "carousel-item absolute top-0 left-0 w-full h-full";
+      if (index === currentSlide) slide.classList.add("active");
+      else if (index === (currentSlide + 1) % slides.length) slide.classList.add("next");
+      else if (index === (currentSlide - 1 + slides.length) % slides.length) slide.classList.add("prev");
+      else slide.classList.add("hidden");
     });
+  }
 
-    // Navegación hacia la derecha
-    rightArrow.addEventListener("click", () => {
-      if (currentIndex >= totalOriginalSlides - 1) {
-        // Saltar al inicio sin transición
-        slidesContainer.style.transition = "none";
-        currentIndex = -1;
-        updateSlider();
-        void slidesContainer.offsetWidth; // Forzar reflow
-        slidesContainer.style.transition = "transform 0.5s ease-in-out";
-      }
-      currentIndex++;
-      updateSlider();
-    });
+  window.nextSlide = function () {
+    currentSlide = (currentSlide + 1) % document.querySelectorAll(".carousel-item").length;
+    updateSlides();
+  };
 
-    // Inicializa el slider
-    updateSlider();
+  window.prevSlide = function () {
+    currentSlide = (currentSlide - 1 + document.querySelectorAll(".carousel-item").length) % document.querySelectorAll(".carousel-item").length;
+    updateSlides();
+  };
+
+  window.onload = updateSlides;
 </script>
