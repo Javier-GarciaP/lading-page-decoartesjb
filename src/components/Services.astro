@@ -1,21 +1,19 @@
-<div class="flex flex-col gap-5 px-5 py-5 justify-center items-center text-center text-sans">
-  <h3 class="font-primary text-4xl md:text-5xl mb-16">Nuestros Servicios</h3>
-  
-  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full max-w-5xl">
-    <div class="flex flex-col w-full p-4 border rounded-lg shadow-md">
-      <div class="flex items-center gap-2">
-        <div class="w-10 h-10 rounded-full bg-primary"></div>
-        <h4 class="text-xl sm:text-2xl">Cumpleaños</h4>
-      </div>
-      <p class="text-md md:text-xl mt-2">Descripción detallada de qué sería el servicio.</p>
-    </div>
-    
-    <div class="flex flex-col w-full p-4 border rounded-lg shadow-md">
-      <div class="flex items-center gap-2">
-        <div class="w-10 h-10 rounded-full bg-primary"></div>
-        <h4 class="text-xl sm:text-2xl">Bodas</h4>
-      </div>
-      <p class="text-md md:text-xl mt-2">Descripción detallada de qué sería el servicio.</p>
-    </div>
+---
+export interface EventCardProps {
+  title: string;
+  description: string;
+  image: string;
+}
+
+const props = Astro.props as EventCardProps;
+---
+
+<div
+  class="bg-white shadow-lg rounded-2xl overflow-hidden max-w-md flex flex-col h-full"
+>
+  <img src={props.image} alt={props.title} class="w-full h-56 object-cover" />
+  <div class="p-6 flex flex-col flex-grow">
+    <h2 class="text-xl font-bold text-gray-800">{props.title}</h2>
+    <p class="text-gray-600 mt-2 flex-grow">{props.description}</p>
   </div>
 </div>
