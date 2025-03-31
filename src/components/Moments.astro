@@ -25,7 +25,7 @@
     .carousel-container {
       width: 95vw;
     }
-    
+
     .carousel-item img {
       height: 100%;
       object-fit: cover;
@@ -77,33 +77,72 @@
     transform: scale(0.95);
   }
 </style>
-<h2 class="text-center font-primary text-4xl md:text-5xl mb-12">Momentos inolvidables</h2>
-<div class="flex items-center justify-center overflow-hidden">
+<h2 class="text-center font-primary text-4xl md:text-5xl mb-12">
+  Momentos inolvidables
+</h2>
+<div class="flex flex-col items-center justify-center overflow-hidden">
   <div class="w-full max-w-2xl mx-auto px-4">
     <div class="carousel-container relative">
-      <button class="nav-button absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center z-20 text-white" onclick="prevSlide()">
+      <button
+        class="nav-button absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center z-20 text-white"
+        onclick="prevSlide()"
+      >
         &#10094;
       </button>
-      <button class="nav-button absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center z-20 text-white" onclick="nextSlide()">
+      <button
+        class="nav-button absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center z-20 text-white"
+        onclick="nextSlide()"
+      >
         &#10095;
       </button>
 
-      <div class="carousel-track relative h-[250px] sm:h-[400px] overflow-hidden">
+      <div
+        class="carousel-track relative h-[250px] sm:h-[400px] overflow-hidden"
+      >
         <div class="carousel-item active absolute top-0 left-0 w-full h-full">
-          <img src="eventos-carrusel/imagen1.jpg" alt="Imagen 1" class="w-full h-full object-cover rounded-lg" />
+          <img
+            src="eventos-carrusel/imagen-1.jpg"
+            alt="Imagen 1"
+            class="w-full h-full object-cover rounded-lg"
+          />
+        </div>
+        <div class="carousel-item active absolute top-0 left-0 w-full h-full">
+          <img
+            src="eventos-carrusel/imagen-2.jpg"
+            alt="Imagen 1"
+            class="w-full h-full object-cover rounded-lg"
+          />
         </div>
         <div class="carousel-item absolute top-0 left-0 w-full h-full">
-          <img src="eventos-carrusel/imagen3.jpg" alt="Imagen 3" class="w-full h-full object-cover rounded-lg" />
+          <img
+            src="eventos-carrusel/imagen-3.jpg"
+            alt="Imagen 3"
+            class="w-full h-full object-cover rounded-lg"
+          />
         </div>
         <div class="carousel-item absolute top-0 left-0 w-full h-full">
-          <img src="eventos-carrusel/imagen4.jpg" alt="Imagen 4" class="w-full h-full object-cover rounded-lg" />
+          <img
+            src="eventos-carrusel/imagen-4.jpg"
+            alt="Imagen 4"
+            class="w-full h-full object-cover rounded-lg"
+          />
         </div>
         <div class="carousel-item absolute top-0 left-0 w-full h-full">
-          <img src="eventos-carrusel/imagen5.jpg" alt="Imagen 5" class="w-full h-full object-cover rounded-lg" />
+          <img
+            src="eventos-carrusel/imagen-5.jpg"
+            alt="Imagen 5"
+            class="w-full h-full object-cover rounded-lg"
+          />
         </div>
       </div>
     </div>
   </div>
+  <a
+    href="#galeria"
+    class="px-6 md:px-8 py-3 bg-primary rounded-lg font-bold text-white hover:bg-opacity-80 transition mt-8"
+  >
+    Revisa nuestra galeria de recuerdos
+  </a>
 </div>
 
 <script>
@@ -114,19 +153,24 @@
     slides.forEach((slide, index) => {
       slide.className = "carousel-item absolute top-0 left-0 w-full h-full";
       if (index === currentSlide) slide.classList.add("active");
-      else if (index === (currentSlide + 1) % slides.length) slide.classList.add("next");
-      else if (index === (currentSlide - 1 + slides.length) % slides.length) slide.classList.add("prev");
+      else if (index === (currentSlide + 1) % slides.length)
+        slide.classList.add("next");
+      else if (index === (currentSlide - 1 + slides.length) % slides.length)
+        slide.classList.add("prev");
       else slide.classList.add("hidden");
     });
   }
 
   window.nextSlide = function () {
-    currentSlide = (currentSlide + 1) % document.querySelectorAll(".carousel-item").length;
+    currentSlide =
+      (currentSlide + 1) % document.querySelectorAll(".carousel-item").length;
     updateSlides();
   };
 
   window.prevSlide = function () {
-    currentSlide = (currentSlide - 1 + document.querySelectorAll(".carousel-item").length) % document.querySelectorAll(".carousel-item").length;
+    currentSlide =
+      (currentSlide - 1 + document.querySelectorAll(".carousel-item").length) %
+      document.querySelectorAll(".carousel-item").length;
     updateSlides();
   };
 
