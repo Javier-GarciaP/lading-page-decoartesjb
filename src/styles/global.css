@@ -1,8 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Allura&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 @import "tailwindcss";
 
 @theme {
+    --color-dark-blue: #1D1F33;
+    --color-light-blue: #2A3A59;
+    --color-soft-blue: #5F6F92;
+    --color-gray-light: #D1D5DB;
+    --color-gray-dark: #4B5563;
     --color-primary: #5ab4b4;
     --color-primary-bg: #F0EDE8;
     --font-primary: "Great Vibes";
+    --font-secundary: "Righteous";
+    --font-title: "Lobster";
+    --font-description: "Crimson Pro";
+    --font-name: "Allura";
+}
+
+body{
+    p, a, li {
+        font-family: "Crimson Pro";
+    }
 }

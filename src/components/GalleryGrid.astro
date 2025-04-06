@@ -1,0 +1,24 @@
+---
+export interface Props {
+  title: string;
+  folder: string;
+  count: number;
+}
+
+const { title, folder, count } = Astro.props;
+---
+
+<div
+  class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 px-4 md:px-10 py-6"
+>
+  {
+    Array.from({ length: count }, (_, i) => (
+      <img
+        src={`/${folder}/imagen-${i + 1}.jpg`}
+        alt={`Imagen ${i + 1}`}
+        class="w-full h-60 object-cover rounded-xl hover:scale-105 transition-transform"
+        loading="lazy"
+      />
+    ))
+  }
+</div>

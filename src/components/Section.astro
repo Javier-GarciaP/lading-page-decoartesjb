@@ -1,12 +1,12 @@
 ---
-const { title: titulo } = Astro.props;
+const { title: titulo, id } = Astro.props;
 const hasTitle = titulo?.trim();
 const headingId = hasTitle ? titulo.toLowerCase().replace(/\s+/g, "-") : undefined;
 ---
 
-<section class="mb-20" { ...(hasTitle ? { 'aria-labelledby': headingId } : {}) }>
+<section id={id} class="mb-20" { ...(hasTitle ? { 'aria-labelledby': headingId } : {}) }>
   {hasTitle && (
-    <h2 id={headingId} class="text-center font-primary text-4xl md:text-5xl mb-8">
+    <h2 id={headingId} class="text-center text-dark-blue font-title text-4xl md:text-5xl mb-8">
       {titulo}
     </h2>
   )}
