@@ -1,17 +1,24 @@
 ---
- import '../styles/global.css'
+import Reception from "../components/Reception.astro";
+import "../styles/global.css";
 ---
 
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="" />
-		<meta name="generator" content={Astro.generator} />
-		<title>decoartesjb</title>
-	</head>
-	<body  class="bg-primary-bg">
-		<slot />
-	</body>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="description" content="Decora tus eventos con Decoartesjb. Especializados en bodas, cumpleaños, eventos empresariales y más." />
+    <meta property="og:title" content="Decoartesjb" />
+    <meta property="og:description" content="Transformamos tus sueños en eventos inolvidables." />
+    <meta property="og:image" content="/path/to/your/image.jpg" />
+    <meta property="og:url" content="https://www.tusitio.com" />
+    <link rel="icon" href="/favicon.ico" />
+    <title>decoartesjb</title>
+  </head>
+  <body class="bg-primary-bg">
+    <Reception />
+    <slot />
+  </body>
 </html>

@@ -1,51 +1,41 @@
 ---
 import Loading from "./Loading.astro";
+import Section from "./Section.astro";
 ---
 
-<section
-  id="sobre-mi"
-  class="px-6 md:px-10 py-10 flex justify-center min-h-[75vh]"
->
-  <div
-    class="presentation flex flex-col-reverse md:flex-row items-center gap-6 md:gap-10 max-w-5xl w-full"
-  >
-    <!-- Texto -->
-    <div class="text-left">
-      <h2 class="font-primary text-center text-4xl md:text-5xl my-6">
-        ¿Quién soy?
-      </h2>
-      <p class="text-sm md:text-xl leading-relaxed font-sans">
-        Soy Jonathan un joven emprendedor Venezolano radicado en Santiago de
-        Chile, con más de 15 años de experiencias en el ramo de la decoración de
-        eventos inolvidables tales como bodas, cumpleaños, empresariales,
-        sociales y culturales, haciendo magia para cada uno de nuestros
-        clientes.
-      </p>
-    </div>
-
-    <!-- Imagen y Mariposa -->
-    <div class="relative flex justify-center">
-      <div
-        class="w-64 md:w-80 aspect-square rounded-full bg-primary shadow-lg overflow-hidden"
-      >
-        <img
-          class="w-full h-full object-cover"
-          src="perfil/perfil-2.jpg"
-          alt="Jonathan sonriendo"
-        />
+<Section>
+  <section id="sobre-mi" class="flex justify-center min-h-[75vh]">
+    <div class="presentation flex flex-col-reverse md:flex-row items-center gap-6 md:gap-10 max-w-5xl w-full">
+      <!-- Texto descriptivo -->
+      <div class="text-left w-full md:w-1/2">
+        <h2 class="font-primary text-center text-4xl md:text-5xl my-6">
+          ¿Quién soy?
+        </h2>
+        <p class="text-sm md:text-xl leading-relaxed font-sans text-gray-800">
+          Soy Jonathan, un joven emprendedor venezolano radicado en Santiago de Chile, con más de 15 años de experiencia en el ramo de la decoración de eventos inolvidables tales como bodas, cumpleaños, eventos empresariales, sociales y culturales, haciendo magia para cada uno de nuestros clientes.
+        </p>
       </div>
-      <!-- Mariposa -->
-      <Loading
-        class="absolute -top-3 right-3 md:-top-10 md:right-10 w-8 h-8 md:w-12 md:h-12"
-      />
+
+      <!-- Imagen de perfil con mariposa -->
+      <div class="relative flex justify-center w-full md:w-1/2">
+        <div class="w-64 md:w-80 aspect-square rounded-full bg-primary shadow-lg overflow-hidden">
+          <img
+            src="perfil/perfil-2.jpg"
+            alt="Jonathan sonriendo"
+            class="w-full h-full object-cover"
+          />
+        </div>
+        <Loading class="absolute -top-3 right-3 md:-top-10 md:right-10 w-8 h-8 md:w-12 md:h-12" />
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+</Section>
 
 <style>
   .presentation {
     position: relative;
   }
+
   .presentation::before {
     content: "";
     position: absolute;

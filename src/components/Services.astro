@@ -9,9 +9,13 @@ const props = Astro.props as EventCardProps;
 ---
 
 <div
-  class="bg-white shadow-lg rounded-2xl overflow-hidden max-w-md flex flex-col h-full"
+  class="bg-white shadow-lg rounded-2xl overflow-hidden max-w-md flex flex-col h-full transition-transform duration-300 hover:scale-105 hover:shadow-xl"
 >
-  <img src={props.image} alt={props.title} class="w-full h-56 object-cover" />
+  <img
+    src={props.image}
+    alt={props.title}
+    class="w-full h-56 object-cover"
+  />
   <div class="p-6 flex flex-col flex-grow">
     <h2 class="text-xl font-bold text-gray-800">{props.title}</h2>
     <p class="text-gray-600 mt-2 flex-grow">{props.description}</p>

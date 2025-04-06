@@ -1,77 +1,87 @@
 ---
 import Instagram from "./icons/Instagram.astro";
 import Whasapp from "./icons/Whasapp.astro";
+import Section from "./Section.astro";
 ---
 
-<div
-  id="contact"
-  class="px-5 md:px-10 py-12 flex flex-col lg:flex-row justify-center items-center lg:items-start mt-8 lg:mt-16"
->
-  <div class="flex flex-col gap-5 w-full lg:w-1/2 lg:text-left">
-    <h3 class="font-primary text-4xl md:text-5xl">Contáctanos</h3>
-    <p class="text-md md:text-xl pr-10">
-      Por favor, rellene el formulario a continuación y póngase en contacto con
-      nosotros. Le responderemos lo más rápido posible.
-    </p>
-    <div class="flex justify-center gap-10 md:flex-col">
-      <div class="flex gap-3 items-center justify-center lg:justify-start">
-        <Whasapp />
-        <div>
-          <p class="text-gray-700 text-md md:text-xl">WhatsApp</p>
-          <p class="text-gray-500">+56 9 3770 8933</p>
-        </div>
-      </div>
+<Section>
+  <section id="contact" class="flex flex-col lg:flex-row justify-center items-start gap-10 font-sans px-10">
+    <!-- Información de contacto -->
+    <div class="w-full lg:w-1/2 flex flex-col gap-6">
+      <h2 class="text-4xl md:text-5xl font-primary">Contáctanos</h2>
+      <p class="text-md md:text-xl text-gray-700">
+        Por favor, rellene el formulario a continuación y póngase en contacto con nosotros. Le responderemos lo más rápido posible.
+      </p>
 
-      <a
-        href="https://www.instagram.com/decoartesjb?igsh=ejJhc3BjdmFiODN6"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        <div class="flex gap-3 items-center justify-center lg:justify-start">
+      <div class="flex flex-col gap-6">
+        <div class="flex gap-3 items-center">
+          <Whasapp />
+          <div>
+            <p class="text-gray-700 text-md md:text-xl">WhatsApp</p>
+            <p class="text-gray-500">+56 9 3770 8933</p>
+          </div>
+        </div>
+
+        <a
+          href="https://www.instagram.com/decoartesjb?igsh=ejJhc3BjdmFiODN6"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex gap-3 items-center"
+        >
           <Instagram />
           <div>
             <p class="text-gray-700 text-md md:text-xl">Instagram</p>
             <p class="text-gray-500">@decoartesjb</p>
           </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Formulario -->
+    <div class="w-full lg:w-1/2">
+      <form class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6" aria-label="Formulario de contacto">
+        <input
+          type="text"
+          name="nombre"
+          placeholder="Nombre"
+          required
+          class="block w-full text-sm h-12 px-4 text-gray-900 bg-white rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary"
+        />
+        <input
+          type="text"
+          name="apellido"
+          placeholder="Apellido (Opcional)"
+          class="block w-full text-sm h-12 px-4 text-gray-900 bg-white rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary"
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Correo Electrónico"
+          required
+          class="block w-full text-sm h-12 px-4 text-gray-900 bg-white rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary col-span-1 md:col-span-2"
+        />
+        <input
+          type="tel"
+          name="telefono"
+          placeholder="Número Telefónico"
+          class="block w-full text-sm h-12 px-4 text-gray-900 bg-white rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary col-span-1 md:col-span-2"
+        />
+        <textarea
+          name="mensaje"
+          placeholder="Mensaje"
+          required
+          class="block w-full text-sm px-4 py-3 text-gray-900 bg-white rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary h-28 col-span-1 md:col-span-2"
+        ></textarea>
+
+        <div class="col-span-1 md:col-span-2 flex justify-center lg:justify-end mt-2">
+          <button
+            type="submit"
+            class="bg-primary text-white w-full md:w-auto px-6 py-2 rounded-lg shadow-md hover:bg-primary-600 transition"
+          >
+            Enviar
+          </button>
         </div>
-      </a>
+      </form>
     </div>
-  </div>
-
-  <div class="w-full lg:w-1/2 mt-8 lg:mt-0">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
-      <input
-        type="text"
-        placeholder="Nombre"
-        class="block w-full text-sm h-12 px-4 text-gray-900 bg-white rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary"
-      />
-      <input
-        type="text"
-        placeholder="Apellido (Opcional)"
-        class="block w-full text-sm h-12 px-4 text-gray-900 bg-white rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary"
-      />
-      <input
-        type="email"
-        placeholder="Correo Electrónico"
-        class="block w-full text-sm h-12 px-4 text-gray-900 bg-white rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary col-span-1 md:col-span-2"
-      />
-      <input
-        type="tel"
-        placeholder="Número Telefónico"
-        class="block w-full text-sm h-12 px-4 text-gray-900 bg-white rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary col-span-1 md:col-span-2"
-      />
-      <textarea
-        placeholder="Mensaje"
-        class="block w-full text-sm h-12 px-4 text-gray-900 bg-white rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary h-28 col-span-1 md:col-span-2"
-      ></textarea>
-    </div>
-
-    <div class="flex justify-center lg:justify-end mt-6">
-      <button
-        class="bg-primary text-white w-full md:w-auto px-6 py-2 rounded-lg shadow-md hover:bg-primary-600 transition"
-      >
-        Enviar
-      </button>
-    </div>
-  </div>
-</div>
+  </section>
+</Section>

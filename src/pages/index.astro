@@ -1,57 +1,56 @@
 ---
 import Moments from "../components/Moments.astro";
-import Reception from "../components/Reception.astro";
 import Layout from "../layouts/Layout.astro";
 import I from "../components/I.astro";
 import Opinions from "../components/Opinions.astro";
 import Services from "../components/Services.astro";
 import Contact from "../components/Contact.astro";
+import Section from "../components/Section.astro";
 ---
 
 <Layout>
-  <Reception />
   <I />
   <Moments />
+  <Section title="Nuestros Servicios">
+    <div
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-6 md:px-10 py-5 font-sans"
+    >
+      <Services
+        title="Bodas"
+        description="Diferentes estilos de bodas elegantes, clásicas, románticas, rústicas, naturales, estacionarias. Desde el mágico arreglo de novia hasta decoraciones en estaciones del cóctel, salón, mesas de novios con sus respectivos aéreos, centros de mesa de invitados y decoraciones de bufet, quesos y postres."
+        image="matrimonios/matrimonio-2/imagen-3.jpg"
+        alt="Decoración elegante para bodas con flores y centros de mesa"
+      />
+
+      <Services
+        title="Eventos Empresariales"
+        description="Decoraciones vanguardistas y naturalistas con toques de flores, incluyendo estaciones decoradas según el tipo de evento empresarial."
+        image="evento-empresarial/imagen-13.jpg"
+        alt="Decoración empresarial con elementos naturales y florales"
+      />
+
+      <Services
+        title="Cumpleaños"
+        description="Desde arreglos florales hasta decoraciones modernas con la última tendencia en globos, ofreciendo un ambiente elegante y festivo."
+        image="cumpleaños/imagen-4.jpg"
+        alt="Decoración festiva para cumpleaños con globos y flores"
+      />
+
+      <Services
+        title="Baby Shower"
+        description="Lo mágico e inolvidable en sus vidas con arreglos y estaciones en globos según la temática prevista, creando un ambiente especial y acogedor."
+        image="baby-shower/imagen-1.jpg"
+        alt="Decoración de baby shower con globos y detalles temáticos"
+      />
+
+      <Services
+        title="Arreglos Florales"
+        description="Según el gusto del cliente, se confeccionan arreglos para momentos especiales como cumpleaños, aniversarios, día de enamorados, día de la madre y bodas."
+        image="arreglos-florales/imagen-7.jpg"
+        alt="Arreglos florales personalizados para diferentes ocasiones"
+      />
+    </div>
+  </Section>
   <Opinions />
-
-  <h2
-    id="servicios"
-    class="text-center font-primary text-4xl md:text-5xl mb-12"
-  >
-    Nuestros Servicios
-  </h2>
-  <div
-    class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 px-6 md:px-10 py-5 font-sans"
-  >
-    <Services
-      title="Bodas"
-      description="Diferentes estilos de bodas elegantes, clásicas, románticas, rústicas, naturales, estacionarias. Desde el mágico arreglo de novia hasta decoraciones en estaciones del cóctel, salón, mesas de novios con sus respectivos aéreos, centros de mesa de invitados y decoraciones de bufet, quesos y postres."
-      image="matrimonios/matrimonio-2/imagen-3.jpg"
-    />
-
-    <Services
-      title="Eventos Empresariales"
-      description="Decoraciones vanguardistas y naturalistas con toques de flores, incluyendo estaciones decoradas según el tipo de evento empresarial."
-      image="evento-empresarial/imagen-13.jpg"
-    />
-
-    <Services
-      title="Cumpleaños"
-      description="Desde arreglos florales hasta decoraciones modernas con la última tendencia en globos, ofreciendo un ambiente elegante y festivo."
-      image="cumpleaños/imagen-4.jpg"
-    />
-
-    <Services
-      title="Baby Shower"
-      description="Lo mágico e inolvidable en sus vidas con arreglos y estaciones en globos según la temática prevista, creando un ambiente especial y acogedor."
-      image="baby-shower/imagen-1.jpg"
-    />
-
-    <Services
-      title="Arreglos Florales"
-      description="Según el gusto del cliente, se confeccionan arreglos para momentos especiales como cumpleaños, aniversarios, día de enamorados, día de la madre y bodas."
-      image="arreglos-florales/imagen-7.jpg"
-    />
-  </div>
   <Contact />
 </Layout>
