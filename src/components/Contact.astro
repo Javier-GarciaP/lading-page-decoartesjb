@@ -8,8 +8,8 @@ import Section from "./Section.astro";
   <section class="flex flex-col lg:flex-row justify-center items-start gap-10 font-sans px-10">
     <!-- Información de contacto -->
     <div class="w-full lg:w-1/2 flex flex-col gap-6">
-      <h2 class="text-4xl md:text-5xl font-primary">Contáctanos</h2>
-      <p class="text-md md:text-xl text-gray-700">
+      <h2 class="text-m-hn md:text-hn font-title text-dark-blue">Contáctanos</h2>
+      <p class="text-m-p md:text-p font-p text-gray-700">
         Por favor, rellene el formulario a continuación y póngase en contacto con nosotros. Le responderemos lo más rápido posible.
       </p>
 
@@ -17,8 +17,8 @@ import Section from "./Section.astro";
         <div class="flex gap-3 items-center">
           <Whasapp />
           <div>
-            <p class="text-gray-700 text-md md:text-xl">WhatsApp</p>
-            <p class="text-gray-500">+56 9 3770 8933</p>
+            <p class="text-gray-700 text-m-p md:text-p font-p">WhatsApp</p>
+            <p class="text-gray-500 text-m-p md:text-p font-p">+56 9 3770 8933</p>
           </div>
         </div>
 
@@ -26,12 +26,12 @@ import Section from "./Section.astro";
           href="https://www.instagram.com/decoartesjb?igsh=ejJhc3BjdmFiODN6"
           target="_blank"
           rel="noopener noreferrer"
-          class="flex gap-3 items-center"
+          class="flex gap-3 items-center text-m-p md:text-p font-p"
         >
           <Instagram />
           <div>
-            <p class="text-gray-700 text-md md:text-xl">Instagram</p>
-            <p class="text-gray-500">@decoartesjb</p>
+            <p class="text-gray-700 text-m-p md:text-p font-p">Instagram</p>
+            <p class="text-gray-500 text-m-p md:text-p font-p">@decoartesjb</p>
           </div>
         </a>
       </div>
@@ -39,8 +39,8 @@ import Section from "./Section.astro";
 
     <!-- Formulario -->
     <div class="w-full lg:w-1/2">
-      <form class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6" aria-label="Formulario de contacto">
-        <input
+      <form class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 font-p" aria-label="Formulario de contacto">
+        <input 
           type="text"
           name="nombre"
           placeholder="Nombre"
@@ -76,7 +76,7 @@ import Section from "./Section.astro";
         <div class="col-span-1 md:col-span-2 flex justify-center lg:justify-end mt-2">
           <button
             type="submit"
-            class="bg-primary text-white w-full md:w-auto px-6 py-2 rounded-lg shadow-md hover:bg-primary-600 transition"
+            class="bg-primary text-m-b md:text-b text-white w-full md:w-auto px-6 py-2 rounded-lg shadow-md hover:bg-primary-600 transition"
           >
             Enviar
           </button>

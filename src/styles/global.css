@@ -14,15 +14,27 @@
     --color-gray-dark: #4B5563;
     --color-primary: #5ab4b4;
     --color-primary-bg: #F0EDE8;
+
     --font-primary: "Great Vibes";
     --font-secundary: "Righteous";
     --font-title: "Lobster";
-    --font-description: "Crimson Pro";
+    --font-p: "Crimson Pro";
     --font-name: "Allura";
+
+    --text-h1: 42px;
+    --text-hn: 24px;
+    --text-p: 16px;
+    --text-ancor: 14px;
+    --text-b: 16px;
+
+    --text-m-h1: 34px;
+    --text-m-hn: 18px;
+    --text-m-p: 14px;
+    --text-m-ancor: 12px;
+    --text-m-b: 14px;
 }
 
-body{
-    p, a, li {
-        font-family: "Crimson Pro";
-    }
-}
+/* 
+*{
+    outline: solid 1px red;
+} */
