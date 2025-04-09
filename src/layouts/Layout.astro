@@ -1,5 +1,5 @@
 ---
-const {title : titulo} = Astro.props
+const { title: titulo, description } = Astro.props;
 import Reception from "../components/Reception.astro";
 import "../styles/global.css";
 ---
@@ -8,18 +8,96 @@ import "../styles/global.css";
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="description" content="Decora tus eventos con Decoartesjb. Especializados en bodas, cumpleaños, eventos empresariales y más." />
-    <meta property="og:title" content="eventos de decoracion - decoraciones Santiago de Chile - decoartesjb" />
-    <meta property="og:description" content="Transformamos tus sueños en eventos inolvidables." />
-    <meta property="og:image" content="/path/to/your/image.jpg" />
+
+    <!-- SEO general -->
+    <title>
+      {
+        titulo
+          ? `${titulo} | Decoartesjb`
+          : "Decoartesjb | Decoración de eventos en Santiago de Chile"
+      }
+    </title>
+    <meta
+      name="description"
+      content={description ??
+        "Decora tus eventos con Decoartesjb. Especializados en bodas, cumpleaños, eventos empresariales y más."}
+    />
+    <link rel="canonical" href="https://www.decoartesjb.vercel.app" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:title"
+      content={titulo ?? "Decoartesjb | Decoración de eventos"}
+    />
+    <meta
+      property="og:description"
+      content={description ??
+        "Transformamos tus sueños en eventos inolvidables con nuestras decoraciones."}
+    />
+    <meta
+      property="og:image"
+      content="https://www.decoartesjb.vercel.app/images/og-default.jpg"
+    />
     <meta property="og:url" content="https://www.decoartesjb.vercel.app" />
+    <meta property="og:site_name" content="Decoartesjb" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content={titulo ?? "Decoartesjb | Decoración de eventos"}
+    />
+    <meta
+      name="twitter:description"
+      content={description ?? "Decoración de eventos en Santiago de Chile"}
+    />
+    <meta
+      name="twitter:image"
+      content="https://www.decoartesjb.vercel.app/images/og-default.jpg"
+    />
+
+    <!-- Icon -->
     <link rel="icon" href="/favicon.ico" />
-    <title>decoartesjb</title>
+
+    <!-- Estilos globales ya importados arriba -->
   </head>
   <body class="bg-primary-bg">
-    <Reception title={titulo}/>
-    <slot />
+    <Reception title={titulo} />
+    <main>
+      <slot />
+    </main>
+
+    <!-- Scroll suave a secciones si viene con hash -->
+    <script is:inline>
+      window.addEventListener("DOMContentLoaded", () => {
+        if (window.location.hash) {
+          const el = document.querySelector(window.location.hash);
+          if (el) {
+            el.scrollIntoView({ behavior: "smooth" });
+          }
+        }
+      });
+    </script>
+
+    <!-- SEO local con JSON-LD -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "name": "Decoartesjb",
+        "image": "https://www.decoartesjb.vercel.app/images/og-default.jpg",
+        "url": "https://www.decoartesjb.vercel.app",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Santiago",
+          "addressCountry": "CL"
+        },
+        "description": "Decoración de eventos: bodas, cumpleaños, eventos empresariales y más.",
+        "telephone": "+56 9 XXXX XXXX"
+      }
+    </script>
   </body>
 </html>
