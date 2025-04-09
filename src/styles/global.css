@@ -38,3 +38,7 @@
 *{
     outline: solid 1px red;
 } */
+
+html {
+    scroll-behavior: smooth;
+}
