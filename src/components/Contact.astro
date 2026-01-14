@@ -5,20 +5,33 @@ import Section from "./Section.astro";
 ---
 
 <Section id="contact">
-  <section class="flex flex-col lg:flex-row justify-center items-start gap-10 font-sans px-10">
+  <section
+    class="flex flex-col lg:flex-row justify-center items-start gap-16 font-sans px-6 max-w-6xl mx-auto pb-20"
+  >
     <!-- Información de contacto -->
-    <div class="w-full lg:w-1/2 flex flex-col gap-6">
-      <h2 class="text-m-hn md:text-hn font-title text-dark-blue">Contáctanos</h2>
-      <p class="text-m-p md:text-p font-p text-gray-700">
-        Por favor, rellene el formulario a continuación y póngase en contacto con nosotros. Le responderemos lo más rápido posible.
-      </p>
+    <div class="w-full lg:w-1/2 flex flex-col gap-8">
+      <div>
+        <h2 class="text-4xl md:text-5xl font-heading font-bold text-white mb-6">
+          Contáctanos
+        </h2>
+        <p class="text-lg text-zinc-400 leading-relaxed">
+          Estamos listos para hacer realidad tu evento soñado. Rellena el
+          formulario o escríbenos directamente por nuestras redes o WhatsApp.
+        </p>
+      </div>
 
       <div class="flex flex-col gap-6">
-        <div class="flex gap-3 items-center">
-          <Whasapp />
+        <div
+          class="flex gap-4 items-center group p-4 rounded-xl hover:bg-white/5 transition-colors duration-300"
+        >
+          <div
+            class="p-3 bg-primary/10 rounded-full text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300"
+          >
+            <Whasapp />
+          </div>
           <div>
-            <p class="text-gray-700 text-m-p md:text-p font-p">WhatsApp</p>
-            <p class="text-gray-500 text-m-p md:text-p font-p">+56 9 3770 8933</p>
+            <p class="text-white font-bold text-lg">WhatsApp</p>
+            <p class="text-zinc-400">+56 9 3770 8933</p>
           </div>
         </div>
 
@@ -26,59 +39,96 @@ import Section from "./Section.astro";
           href="https://www.instagram.com/decoartesjb?igsh=ejJhc3BjdmFiODN6"
           target="_blank"
           rel="noopener noreferrer"
-          class="flex gap-3 items-center text-m-p md:text-p font-p"
+          class="flex gap-4 items-center group p-4 rounded-xl hover:bg-white/5 transition-colors duration-300"
         >
-          <Instagram />
+          <div
+            class="p-3 bg-pink-500/10 rounded-full text-pink-500 group-hover:bg-pink-500 group-hover:text-white transition-all duration-300"
+          >
+            <Instagram />
+          </div>
           <div>
-            <p class="text-gray-700 text-m-p md:text-p font-p">Instagram</p>
-            <p class="text-gray-500 text-m-p md:text-p font-p">@decoartesjb</p>
+            <p class="text-white font-bold text-lg">Instagram</p>
+            <p class="text-zinc-400">@decoartesjb</p>
           </div>
         </a>
       </div>
     </div>
 
     <!-- Formulario -->
-    <div class="w-full lg:w-1/2">
-      <form class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 font-p" aria-label="Formulario de contacto">
-        <input 
-          type="text"
-          name="nombre"
-          placeholder="Nombre"
-          required
-          class="block w-full text-sm h-12 px-4 text-gray-900 bg-white rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary"
-        />
-        <input
-          type="text"
-          name="apellido"
-          placeholder="Apellido (Opcional)"
-          class="block w-full text-sm h-12 px-4 text-gray-900 bg-white rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary"
-        />
-        <input
-          type="email"
-          name="email"
-          placeholder="Correo Electrónico"
-          required
-          class="block w-full text-sm h-12 px-4 text-gray-900 bg-white rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary col-span-1 md:col-span-2"
-        />
-        <input
-          type="tel"
-          name="telefono"
-          placeholder="Número Telefónico"
-          class="block w-full text-sm h-12 px-4 text-gray-900 bg-white rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary col-span-1 md:col-span-2"
-        />
-        <textarea
-          name="mensaje"
-          placeholder="Mensaje"
-          required
-          class="block w-full text-sm px-4 py-3 text-gray-900 bg-white rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary h-28 col-span-1 md:col-span-2"
-        ></textarea>
+    <div
+      class="w-full lg:w-1/2 bg-bg-secondary p-8 md:p-10 rounded-3xl border border-white/5 shadow-2xl"
+    >
+      <form
+        class="grid grid-cols-1 md:grid-cols-2 gap-6"
+        aria-label="Formulario de contacto"
+      >
+        <div class="col-span-1">
+          <label class="block text-sm font-medium text-zinc-400 mb-2"
+            >Nombre</label
+          >
+          <input
+            type="text"
+            name="nombre"
+            placeholder="Tu nombre"
+            required
+            class="block w-full h-12 px-4 text-white bg-bg border border-zinc-700 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+          />
+        </div>
+        <div class="col-span-1">
+          <label class="block text-sm font-medium text-zinc-400 mb-2"
+            >Apellido</label
+          >
+          <input
+            type="text"
+            name="apellido"
+            placeholder="Tu apellido (Opcional)"
+            class="block w-full h-12 px-4 text-white bg-bg border border-zinc-700 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+          />
+        </div>
 
-        <div class="col-span-1 md:col-span-2 flex justify-center lg:justify-end mt-2">
+        <div class="col-span-1 md:col-span-2">
+          <label class="block text-sm font-medium text-zinc-400 mb-2"
+            >Email</label
+          >
+          <input
+            type="email"
+            name="email"
+            placeholder="tucorreo@ejemplo.com"
+            required
+            class="block w-full h-12 px-4 text-white bg-bg border border-zinc-700 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+          />
+        </div>
+
+        <div class="col-span-1 md:col-span-2">
+          <label class="block text-sm font-medium text-zinc-400 mb-2"
+            >Teléfono</label
+          >
+          <input
+            type="tel"
+            name="telefono"
+            placeholder="+56 9 1234 5678"
+            class="block w-full h-12 px-4 text-white bg-bg border border-zinc-700 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-colors"
+          />
+        </div>
+
+        <div class="col-span-1 md:col-span-2">
+          <label class="block text-sm font-medium text-zinc-400 mb-2"
+            >Mensaje</label
+          >
+          <textarea
+            name="mensaje"
+            placeholder="Cuéntanos sobre tu evento..."
+            required
+            class="block w-full px-4 py-3 text-white bg-bg border border-zinc-700 rounded-lg focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary h-32 resize-none transition-colors"
+          ></textarea>
+        </div>
+
+        <div class="col-span-1 md:col-span-2 mt-4">
           <button
             type="submit"
-            class="bg-primary text-m-b md:text-b text-white w-full md:w-auto px-6 py-2 rounded-lg shadow-md hover:bg-primary-600 transition"
+            class="w-full bg-primary text-white font-bold text-lg px-8 py-4 rounded-xl shadow-lg hover:bg-primary-dark transition-all duration-300 transform hover:-translate-y-1"
           >
-            Enviar
+            Enviar Mensaje
           </button>
         </div>
       </form>

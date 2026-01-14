@@ -7,53 +7,67 @@ const galleryEvents = [
     description:
       "Diseños únicos con flores frescas para toda ocasión especial, desde cumpleaños hasta aniversarios.",
     image: "/arreglos-florales/imagen-1.jpg",
-    route: "/galeria/arreglos-florales"
+    route: "/galeria/arreglos-florales",
   },
   {
     title: "Baby Shower",
     description:
       "Decoraciones tiernas y personalizadas para dar la bienvenida al nuevo miembro de la familia.",
     image: "/baby-shower/imagen-1.jpg",
-    route: "/galeria/baby-shower"
+    route: "/galeria/baby-shower",
   },
   {
     title: "Cumpleaños",
     description:
       "Ambientes festivos con estilo y elegancia para celebrar la vida de tus seres queridos.",
     image: "/cumpleaños/imagen-1.jpg",
-    route: "/galeria/cumpleaños"
+    route: "/galeria/cumpleaños",
   },
   {
     title: "Eventos Empresariales",
     description:
       "Decoraciones que transmiten profesionalismo y modernidad en reuniones corporativas.",
     image: "/evento-empresarial/empresarial-1/imagen-1.jpg",
-    route: "/galeria/empresariales"
+    route: "/galeria/empresariales",
   },
   {
     title: "Matrimonios",
     description:
       "Cada boda es única y mágica. Explora las diferentes ceremonias y estilos realizados.",
     image: "/matrimonios/matrimonio-1/imagen-1.jpg",
-    route: "/galeria/matrimonios"
-  }
+    route: "/galeria/matrimonios",
+  },
 ];
 ---
 
 <Layout title="Galería de Eventos">
-  <section class="px-6 md:px-10 py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-    {galleryEvents.map(event => (
-      <a href={event.route} class="group block relative rounded-xl overflow-hidden shadow-lg">
-        <img
-          src={event.image}
-          alt={event.title}
-          class="w-full h-64 object-cover transform transition duration-300 group-hover:scale-110"
-        />
-        <div class="absolute inset-0 bg-black/50 flex flex-col justify-end p-4 opacity-0 group-hover:opacity-100 transition">
-          <h3 class="text-white text-xl font-bold">{event.title}</h3>
-          <p class="text-white text-sm mt-1">{event.description}</p>
-        </div>
-      </a>
-    ))}
+  <section
+    class="px-6 md:px-10 py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+  >
+    {
+      galleryEvents.map((event, index) => (
+        <a
+          href={event.route}
+          class="group block relative rounded-xl overflow-hidden shadow-xl border border-transparent hover:border-primary/30 transition-all duration-300"
+        >
+          <div class="overflow-hidden h-80">
+            <img
+              src={event.image}
+              alt={event.title}
+              class="w-full h-full object-cover transform transition duration-700 group-hover:scale-110"
+            />
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-6">
+            <h3 class="text-primary text-2xl font-heading mb-2 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300">
+              {event.title}
+            </h3>
+            <p class="text-gray-200 text-sm font-body opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-300 delay-75">
+              {event.description}
+            </p>
+            <div class="mt-4 w-12 h-0.5 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left" />
+          </div>
+        </a>
+      ))
+    }
   </section>
 </Layout>

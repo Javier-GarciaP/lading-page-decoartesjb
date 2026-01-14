@@ -4,48 +4,63 @@ import Section from "./Section.astro";
 ---
 
 <Section id="sobre-mi">
-  <section class="flex justify-center min-h-[75vh]">
-    <div class="presentation flex flex-col-reverse md:flex-row items-center gap-6 md:gap-10 max-w-5xl w-full">
+  <section class="flex justify-center py-20">
+    <div
+      class="presentation flex flex-col-reverse md:flex-row items-center gap-12 max-w-6xl w-full px-6"
+    >
       <!-- Texto descriptivo -->
       <div class="text-left w-full md:w-1/2">
-        <h2 class="font-title text-center text-dark-blue text-m-hn md:text-hn my-6">
-          ¿Quién soy?
+        <h2
+          class="font-heading text-left text-white text-4xl md:text-5xl mb-8 font-bold tracking-tight"
+        >
+          ¿Quién <span
+            class="text-primary text-transparent bg-clip-text bg-gradient-to-r from-primary to-purple-400"
+            >soy?</span
+          >
         </h2>
-        <p class="text-m-p md:text-p font-p leading-relaxed m-5">
-          Soy Jonathan, un joven emprendedor venezolano radicado en Santiago de Chile, con más de 15 años de experiencia en el ramo de la decoración de eventos inolvidables tales como bodas, cumpleaños, eventos empresariales, sociales y culturales, haciendo magia para cada uno de nuestros clientes.
+        <p
+          class="text-lg md:text-xl font-body text-zinc-400 leading-relaxed mb-6"
+        >
+          Soy <span class="text-white font-semibold">Jonathan</span>, un joven
+          emprendedor venezolano radicado en Santiago de Chile, con más de <span
+            class="text-primary font-bold">15 años de experiencia</span
+          > en el arte de la decoración.
+        </p>
+        <p class="text-lg md:text-xl font-body text-zinc-400 leading-relaxed">
+          Transformo espacios en escenarios mágicos para bodas, cumpleaños y
+          eventos corporativos. Mi pasión es crear experiencias visuales únicas
+          que perduren en la memoria de cada invitado.
         </p>
       </div>
 
-      <!-- Imagen de perfil con mariposa -->
+      <!-- Imagen de perfil con efecto moderno -->
       <div class="relative flex justify-center w-full md:w-1/2">
-        <div class="w-64 md:w-80 aspect-square rounded-full bg-primary shadow-lg overflow-hidden">
-          <img
-            src="perfil/perfil-2.jpg"
-            alt="Jonathan sonriendo"
-            class="w-full h-full object-cover"
-          />
+        <div class="relative w-72 md:w-96 aspect-square">
+          <div
+            class="absolute inset-0 bg-gradient-to-br from-primary to-purple-600 rounded-full blur-2xl opacity-20 animate-pulse"
+          >
+          </div>
+          <div
+            class="relative w-full h-full rounded-2xl bg-zinc-800 border border-zinc-700 shadow-2xl overflow-hidden transform rotate-3 hover:rotate-0 transition-all duration-500"
+          >
+            <img
+              src="perfil/perfil-2.jpg"
+              alt="Jonathan"
+              class="w-full h-full object-cover filter contrast-110"
+            />
+          </div>
+          <!-- Decorative elements -->
+          <div
+            class="absolute -bottom-6 -right-6 w-24 h-24 bg-zinc-900 rounded-xl border border-zinc-800 shadow-xl flex items-center justify-center -rotate-6 z-10"
+          >
+            <span class="text-3xl">🎨</span>
+          </div>
         </div>
-        <Loading class="absolute -top-3 right-3 md:-top-10 md:right-10 w-8 h-8 md:w-12 md:h-12" />
       </div>
     </div>
   </section>
 </Section>
 
 <style>
-  .presentation {
-    position: relative;
-  }
-
-  .presentation::before {
-    content: "";
-    position: absolute;
-    width: 500px;
-    height: 500px;
-    background: rgba(48, 206, 171, 0.5);
-    border-radius: 50%;
-    filter: blur(150px);
-    z-index: -1;
-    top: -200px;
-    left: -300px;
-  }
+  /* Optional: Add custom animations or overrides if needed */
 </style>

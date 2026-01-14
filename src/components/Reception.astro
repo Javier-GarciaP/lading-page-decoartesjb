@@ -4,85 +4,196 @@ const hayTitulo = titulo ? true : false;
 import Section from "./Section.astro";
 ---
 
-<Section>
-  <header
-    class="relative w-full min-h-screen bg-[url('/fondo.jpg')] bg-cover bg-center text-white"
+<header class="relative w-full min-h-screen flex flex-col">
+  <!-- Integration of Background Image with Modern Overlay -->
+  <div class="absolute inset-0 z-0">
+    <div class="absolute inset-0 bg-bg/70 z-10"></div>
+    <!-- Zinc-950 overlay -->
+    <div
+      class="absolute inset-0 bg-gradient-to-b from-bg via-transparent to-bg z-20"
+    >
+    </div>
+    <img
+      src="/fondo.jpg"
+      alt="Fondo Decoración"
+      class="w-full h-full object-cover opacity-60 grayscale-[30%]"
+    />
+  </div>
+
+  <!-- Navbar - Glassmorphism -->
+  <nav
+    class="fixed top-0 w-full z-50 transition-all duration-300 bg-bg/50 backdrop-blur-md border-b border-white/5"
   >
-    <!-- Capa oscura -->
-    <div class="absolute inset-0 bg-black/85"></div>
-
-    <div class="relative z-10 min-h-screen flex flex-col px-6 md:px-10 py-5">
-      <!-- Navbar -->
-      <nav
-        class="w-full flex justify-between items-center font-sans"
-        aria-label="Navegación principal"
-      >
-        <a href="/"
-          ><h4 class="font-primary text-primary text-3xl md:text-4xl">
-            Decoartesjb
-          </h4>
-        </a>
-
-        <ul class="flex gap-6 items-center font-p text-m-ancor md:text-ancor">
-          <li class="hidden md:block">
-            <a href="/#sobre-mi" class="hover:text-primary transition-all"
-              >Sobre mí</a>
-          </li>
-          <li class="hidden md:block">
-            <a href="/#opiniones" class="hover:text-primary transition-all"
-              >Reseñas</a>
-          </li>
-          <li>
-            <a href="/#servicios" class="hover:text-primary transition-all"
-              >Servicios</a>
-          </li>
-          <li>
-            <a href="/galery" class="hover:text-primary transition-all"
-              >Galería</a>
-          </li>
-        </ul>
-
-        <a
-          href="/#contact"
-          class="hidden text-m-b md:text-b font-p md:block px-6 md:px-8 py-2 bg-primary rounded-lg font-bold text-white hover:bg-opacity-80 transition"
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <a href="/" class="group flex items-center gap-2">
+        <span
+          class="font-heading font-black text-2xl text-white tracking-tighter"
         >
-          Contáctanos
-        </a>
-      </nav>
+          DECOARTES<span class="text-primary">JB</span>
+        </span>
+      </a>
 
-      <!-- Mostrar título si se pasa como prop, de lo contrario mostrar contenido principal -->
-      {
-        hayTitulo ? (
-          <div class="flex flex-col justify-center items-center flex-grow text-center px-4">
-            <h1 class="font-primary text-m-h1 md:text-h1 leading-tight">
-              {titulo}
-            </h1>
-          </div>
-        ) : (
-          <div class="flex flex-col justify-center items-center flex-grow text-center px-4">
-            <h2 class="font-primary text-m-h1 md:text-h1 leading-tight">
-              Transformamos tus sueños en <br />
-              <span class="text-primary">Eventos Inolvidables</span>
-            </h2>
-            <p class="text-m-p md:text-p font-p mt-4">
-              ¿Imaginas un evento que supere todas tus expectativas?
-              <br />
-              15+ años de experiencia diseñando bodas, eventos corporativos,
-              cumpleaños y más.
-            </p>
-            <p class="text-m-p md:text-p font-p mt-2">
-              ¡Contáctame y hagamos algo especial juntos!
-            </p>
+      <!-- Desktop Menu -->
+      <ul
+        class="hidden md:flex items-center gap-8 font-medium text-sm text-zinc-300"
+      >
+        <li>
+          <a href="/#sobre-mi" class="hover:text-primary transition-colors"
+            >Sobre mí</a>
+        </li>
+        <li>
+          <a href="/#servicios" class="hover:text-primary transition-colors"
+            >Servicios</a>
+        </li>
+        <li>
+          <a href="/galery" class="hover:text-primary transition-colors"
+            >Galería</a>
+        </li>
+        <li>
+          <a href="/#opiniones" class="hover:text-primary transition-colors"
+            >Reseñas</a>
+        </li>
+        <li>
+          <a
+            href="/#contact"
+            class="px-5 py-2.5 bg-white text-bg font-bold rounded-lg hover:bg-zinc-200 transition-colors"
+          >
+            Contáctanos
+          </a>
+        </li>
+      </ul>
 
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-btn"
+        class="md:hidden text-white"
+        aria-label="Menu"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          ><line x1="4" x2="20" y1="12" y2="12"></line><line
+            x1="4"
+            x2="20"
+            y1="6"
+            y2="6"></line><line x1="4" x2="20" y1="18" y2="18"></line></svg
+        >
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu Overlay -->
+  <div
+    id="mobile-menu"
+    class="fixed inset-0 bg-bg/98 z-40 hidden flex flex-col items-center justify-center gap-8 opacity-0 transition-opacity duration-300"
+  >
+    <button
+      id="close-menu-btn"
+      class="absolute top-6 right-6 text-zinc-400 hover:text-white"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="32"
+        height="32"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        ><path d="M18 6 6 18"></path><path d="m6 6 12 12"></path></svg
+      >
+    </button>
+    <a
+      href="/"
+      class="text-2xl font-bold text-white mb-4"
+      onclick="toggleMenu()">DECOARTES<span class="text-primary">JB</span></a
+    >
+    <a href="/#sobre-mi" class="text-xl text-zinc-300" onclick="toggleMenu()"
+      >Sobre mí</a
+    >
+    <a href="/#servicios" class="text-xl text-zinc-300" onclick="toggleMenu()"
+      >Servicios</a
+    >
+    <a href="/galery" class="text-xl text-zinc-300" onclick="toggleMenu()"
+      >Galería</a
+    >
+    <a
+      href="/#contact"
+      class="px-8 py-3 bg-primary text-white font-bold rounded-lg mt-4"
+      onclick="toggleMenu()">Contáctanos</a
+    >
+  </div>
+
+  <!-- Hero Content -->
+  <div
+    class="relative z-30 flex-grow flex flex-col justify-center items-center text-center px-4 pt-20"
+  >
+    {
+      hayTitulo ? (
+        <h1 class="font-heading text-5xl md:text-7xl font-bold text-white mb-6 max-w-4xl leading-tight animate-fade-in-up">
+          {titulo}
+        </h1>
+      ) : (
+        <div class="max-w-5xl mx-auto">
+          <span class="inline-block py-1 px-3 rounded-full bg-primary/10 text-primary border border-primary/20 text-sm font-semibold mb-6 animate-fade-in-up">
+            Decoración de Eventos Premium
+          </span>
+          <h1 class="font-heading text-5xl md:text-7xl lg:text-8xl font-black text-white mb-8 tracking-tight leading-[1.1] animate-fade-in-up delay-100">
+            Creamos momentos <br />
+            <span class="text-transparent bg-clip-text bg-gradient-to-r from-primary via-purple-400 to-indigo-400">
+              Inolvidables
+            </span>
+          </h1>
+          <p class="text-zinc-400 text-lg md:text-xl max-w-2xl mx-auto mb-10 leading-relaxed animate-fade-in-up delay-200">
+            Transformamos espacios con un diseño elegante y moderno. Más de 15
+            años haciendo realidad bodas y eventos corporativos únicos.
+          </p>
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in-up delay-300">
             <a
               href="/#contact"
-              class="block text-m-b md:text-b font-p md:hidden px-6 md:px-8 py-3 bg-primary rounded-lg font-bold hover:bg-opacity-80 transition mt-8"
+              class="w-full sm:w-auto px-8 py-4 bg-primary text-white font-bold rounded-lg hover:bg-primary-dark transition-colors shadow-lg shadow-primary/25"
             >
-              Reserva con nosotros
+              Cotizar Evento
+            </a>
+            <a
+              href="/galery"
+              class="w-full sm:w-auto px-8 py-4 bg-white/5 text-white font-semibold rounded-lg hover:bg-white/10 border border-white/10 backdrop-blur-sm transition-colors"
+            >
+              Ver Portafolio
             </a>
           </div>
-        )
-      }
-    </div>
-  </header>
-</Section>
+        </div>
+      )
+    }
+  </div>
+</header>
+
+<script is:inline>
+  function toggleMenu() {
+    const menu = document.getElementById("mobile-menu");
+    const body = document.body;
+    if (menu.classList.contains("hidden")) {
+      menu.classList.remove("hidden");
+      setTimeout(() => menu.classList.remove("opacity-0"), 10);
+      body.style.overflow = "hidden";
+    } else {
+      menu.classList.add("opacity-0");
+      setTimeout(() => menu.classList.add("hidden"), 300);
+      body.style.overflow = "";
+    }
+  }
+  document
+    .getElementById("mobile-menu-btn")
+    .addEventListener("click", toggleMenu);
+  document
+    .getElementById("close-menu-btn")
+    .addEventListener("click", toggleMenu);
+</script>

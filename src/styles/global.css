@@ -1,44 +1,80 @@
-@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Righteous&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Allura&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
 @import "tailwindcss";
 
 @theme {
-    --color-dark-blue: #1D1F33;
-    --color-light-blue: #2A3A59;
-    --color-soft-blue: #5F6F92;
-    --color-gray-light: #D1D5DB;
-    --color-gray-dark: #4B5563;
-    --color-primary: #5ab4b4;
-    --color-primary-bg: #F0EDE8;
+    /* Color Palette - Modern Dark & Subtle Purple */
+    --color-bg: #09090b;
+    /* Deep Zinc */
+    --color-bg-secondary: #18181b;
+    /* Lighter Zinc for cards */
+    --color-primary: #8b5cf6;
+    /* Violet */
+    --color-primary-dark: #7c3aed;
+    --color-secondary: #a1a1aa;
+    /* Muted Text */
+    --color-white: #fafafa;
+    /* Main Text */
+    --color-border: #27272a;
+    /* Gentle borders */
 
-    --font-primary: "Great Vibes";
-    --font-secundary: "Righteous";
-    --font-title: "Lobster";
-    --font-p: "Crimson Pro";
-    --font-name: "Allura";
+    /* Legacy/Compat variables */
+    --color-dark-blue: var(--color-bg);
+    --color-light-blue: var(--color-bg-secondary);
+    --color-primary-bg: var(--color-bg);
 
-    --text-h1: 42px;
-    --text-hn: 24px;
-    --text-p: 16px;
-    --text-ancor: 14px;
-    --text-b: 16px;
+    /* Fonts - Clean Sans-Serif */
+    --font-heading: "Inter", sans-serif;
+    --font-body: "Inter", sans-serif;
+    --font-accent: "Inter", sans-serif;
 
-    --text-m-h1: 34px;
-    --text-m-hn: 18px;
-    --text-m-p: 14px;
-    --text-m-ancor: 12px;
-    --text-m-b: 14px;
+    /* Legacy Font mappings */
+    --font-primary: var(--font-body);
+    --font-secundary: var(--font-heading);
+    --font-title: var(--font-heading);
+    --font-p: var(--font-body);
+    --font-name: var(--font-body);
+
+    /* Text Sizes - Modernized Scale */
+    --text-h1: 3.5rem;
+    /* ~56px */
+    --text-h2: 2.5rem;
+    /* ~40px */
+    --text-h3: 1.75rem;
+    /* ~28px */
+    --text-p: 1rem;
+    /* 16px standard */
+
+    --text-m-h1: 2.5rem;
+    /* Mobile */
+    --text-m-h2: 1.75rem;
+    --text-m-p: 0.95rem;
 }
-
-/* 
-*{
-    outline: solid 1px red;
-} */
 
 html {
     scroll-behavior: smooth;
+    background-color: var(--color-bg);
+}
+
+body {
+    background-color: var(--color-bg);
+    color: var(--color-white);
+}
+
+/* Custom Scrollbar for Dark Mode */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #3f3f46;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-primary);
 }

@@ -2,165 +2,145 @@
 import Section from "./Section.astro";
 ---
 
-<Section title="Momentos inolvidables">
-  <section class="flex flex-col items-center justify-center overflow-hidden">
-    <div class="w-full max-w-2xl mx-auto px-4">
-      <div class="carousel-container relative">
-        <!-- Botón anterior -->
-        <button
-          class="nav-button absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center z-20 text-white"
-          onclick="prevSlide()"
-          aria-label="Imagen anterior"
-        >
-          &#10094;
-        </button>
+<Section title="Momentos Inolvidables">
+  <section class="relative w-full py-10 overflow-hidden">
+    <!-- Decorative background elements -->
+    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full max-w-4xl h-96 bg-primary/20 blur-[120px] rounded-full z-0 opacity-20 pointer-events-none"></div>
 
-        <!-- Botón siguiente -->
-        <button
-          class="nav-button absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-10 h-10 sm:w-12 sm:h-12 rounded-full flex items-center justify-center z-20 text-white"
-          onclick="nextSlide()"
-          aria-label="Imagen siguiente"
-        >
-          &#10095;
-        </button>
+    <div class="carousel-3d-container relative w-full max-w-5xl mx-auto h-[500px] perspective-1000 flex items-center justify-center z-10">
+      
+      <!-- Navigation Buttons -->
+      <button class="nav-btn prev absolute left-4 md:-left-8 z-50 p-3 rounded-full bg-white/5 border border-white/10 text-white hover:bg-primary hover:border-primary transition-all duration-300 backdrop-blur-sm" onclick="moveCarousel(-1)">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
+        </svg>
+      </button>
 
-        <!-- Carrusel -->
-        <div class="carousel-track relative h-[250px] sm:h-[400px] overflow-hidden">
-          {[
+      <button class="nav-btn next absolute right-4 md:-right-8 z-50 p-3 rounded-full bg-white/5 border border-white/10 text-white hover:bg-primary hover:border-primary transition-all duration-300 backdrop-blur-sm" onclick="moveCarousel(1)">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+        </svg>
+      </button>
+
+      <!-- Carousel Track -->
+      <div id="track" class="relative w-full h-full flex items-center justify-center transform-style-3d transition-transform duration-700 ease-out">
+        {
+          [
             "imagen-1.jpg",
             "imagen-2.jpg",
             "imagen-3.jpg",
             "imagen-4.jpg",
-            "imagen-5.jpg",
+            "imagen-5.jpg"
           ].map((img, index) => (
-            <figure
-              class={`carousel-item absolute top-0 left-0 w-full h-full ${
-                index === 0 ? "active" : ""
-              }`}
+            <div
+              class="card absolute w-[300px] md:w-[400px] h-[450px] bg-cover bg-center rounded-2xl shadow-2xl transition-all duration-700 ease-out cursor-pointer border border-white/10"
+              style={`background-image: url('eventos-carrusel/${img}')`}
+              data-index={index}
             >
-              <img
-                src={`eventos-carrusel/${img}`}
-                alt={`Evento destacado ${index + 1}`}
-                class="w-full h-full object-cover rounded-lg"
-              />
-            </figure>
-          ))}
-        </div>
+              <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent rounded-2xl opacity-60 group-hover:opacity-40 transition-opacity duration-300"></div>
+              
+              <!-- Reflection effect -->
+              <div class="absolute -bottom-[20px] left-0 right-0 h-[20px] bg-gradient-to-t from-primary/20 to-transparent blur-sm transform scale-y-[-1] opacity-30"></div>
+            </div>
+          ))
+        }
       </div>
     </div>
 
-    <!-- CTA a galería -->
-    <a
-      href="/galery"
-      class="px-6 text-m-b md:text-b font-p md:px-8 py-3 bg-primary rounded-lg font-bold text-white hover:bg-opacity-80 transition mt-8"
-    >
-      Revisa nuestra galería de recuerdos
-    </a>
+    <!-- CTA -->
+    <div class="flex justify-center mt-16 relative z-10">
+        <a
+        href="/galery"
+        class="px-8 py-4 bg-transparent border border-zinc-700 text-white font-heading text-lg rounded-full hover:bg-white hover:text-black transition-all duration-300 shadow-lg tracking-wide hover:scale-105"
+      >
+        Ver Galería Completa
+      </a>
+    </div>
   </section>
 </Section>
 
 <style>
-  .carousel-container {
+  .perspective-1000 {
     perspective: 1000px;
-    touch-action: pan-y pinch-zoom;
-    width: 90vw;
-    max-width: 100%;
   }
-
-  .carousel-track {
+  .transform-style-3d {
     transform-style: preserve-3d;
-    transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
   }
-
-  .carousel-item {
-    backface-visibility: hidden;
-    transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-    opacity: 0;
-    transform: scale(0.8) translateZ(-200px);
-  }
-
-  .carousel-item.active {
-    opacity: 1;
-    transform: scale(1) translateZ(0);
-    z-index: 10;
-  }
-
-  .carousel-item.next,
-  .carousel-item.prev {
-    opacity: 0.7;
-    transform: scale(0.9) translateZ(-100px);
-  }
-
-  @media (max-width: 640px) {
-    .carousel-container {
-      width: 95vw;
-    }
-
-    .carousel-item.next {
-      transform: scale(0.85) translateX(40%) translateZ(-100px);
-    }
-
-    .carousel-item.prev {
-      transform: scale(0.85) translateX(-40%) translateZ(-100px);
-    }
-  }
-
-  @media (min-width: 641px) {
-    .carousel-item.next {
-      transform: scale(0.9) translateX(100%) translateZ(-100px);
-    }
-
-    .carousel-item.prev {
-      transform: scale(0.9) translateX(-100%) translateZ(-100px);
-    }
-  }
-
-  .nav-button {
-    transition: all 0.3s;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-  }
-
-  @media (hover: hover) {
-    .nav-button:hover {
-      background: rgba(255, 255, 255, 0.2);
-      transform: scale(1.1);
-    }
-  }
-
-  .nav-button:active {
-    transform: scale(0.95);
+  .card {
+     /* Initial positions handled by JS */
+     backface-visibility: hidden;
   }
 </style>
 
-<script>
-  let currentSlide = 0;
+<script is:inline>
+  let activeIndex = 2; // Center initial slide
+  const cards = document.querySelectorAll('.card');
+  const count = cards.length;
 
-  function updateSlides() {
-    const slides = document.querySelectorAll(".carousel-item");
-    slides.forEach((slide, index) => {
-      slide.className = "carousel-item absolute top-0 left-0 w-full h-full";
-      if (index === currentSlide) slide.classList.add("active");
-      else if (index === (currentSlide + 1) % slides.length)
-        slide.classList.add("next");
-      else if (index === (currentSlide - 1 + slides.length) % slides.length)
-        slide.classList.add("prev");
+  function updateCarousel() {
+    cards.forEach((card, i) => {
+      const offset = i - activeIndex;
+      const absOffset = Math.abs(offset);
+      
+      let transform = '';
+      let zIndex = 0;
+      let opacity = 1;
+      let pointerEvents = 'auto';
+
+      if (offset === 0) {
+        // Active card
+        transform = `translateX(0) translateZ(200px) rotateY(0deg)`;
+        zIndex = 20;
+      } else if (absOffset === 1) {
+        // Neighbors
+        transform = `translateX(${offset * 250}px) translateZ(0px) rotateY(${offset * -15}deg)`;
+        zIndex = 10;
+        opacity = 0.8;
+      } else {
+        // Far cards
+        transform = `translateX(${offset * 200}px) translateZ(-200px) rotateY(${offset * -30}deg)`;
+        zIndex = 5;
+        opacity = 0.5;
+        pointerEvents = 'none';
+      }
+
+      // Responsive adjustments
+      if (window.innerWidth < 768) {
+          if (offset === 0) transform = `translateX(0) translateZ(100px) rotateY(0deg) scale(0.9)`;
+          else transform = `translateX(${offset * 120}px) translateZ(-100px) rotateY(${offset * -10}deg) scale(0.8)`;
+      }
+
+      card.style.transform = transform;
+      card.style.zIndex = zIndex;
+      card.style.opacity = opacity;
+      card.style.pointerEvents = pointerEvents;
     });
   }
 
-  window.nextSlide = function () {
-    currentSlide =
-      (currentSlide + 1) % document.querySelectorAll(".carousel-item").length;
-    updateSlides();
-  };
+  window.moveCarousel = (direction) => {
+    activeIndex += direction;
+    if (activeIndex < 0) activeIndex = count - 1;
+    if (activeIndex >= count) activeIndex = 0;
+    updateCarousel();
+  }
 
-  window.prevSlide = function () {
-    currentSlide =
-      (currentSlide - 1 + document.querySelectorAll(".carousel-item").length) % 
-      document.querySelectorAll(".carousel-item").length;
-    updateSlides();
-  };
+  // Click on card to center
+  cards.forEach((card, index) => {
+      card.addEventListener('click', () => {
+          activeIndex = index;
+          updateCarousel();
+      });
+  });
 
-  window.onload = updateSlides;
+  // Auto-rotate
+  let autoRotate = setInterval(() => moveCarousel(1), 4000);
+  
+  // Pause on hover
+  document.querySelector('.carousel-3d-container').addEventListener('mouseenter', () => clearInterval(autoRotate));
+  document.querySelector('.carousel-3d-container').addEventListener('mouseleave', () => {
+      autoRotate = setInterval(() => moveCarousel(1), 4000);
+  });
+
+  updateCarousel();
+  window.addEventListener('resize', updateCarousel);
 </script>

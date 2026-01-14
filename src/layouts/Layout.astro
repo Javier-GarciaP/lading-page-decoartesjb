@@ -64,7 +64,9 @@ import "../styles/global.css";
 
     <!-- Estilos globales ya importados arriba -->
   </head>
-  <body class="bg-primary-bg">
+  <body
+    class="bg-bg text-secondary font-body selection:bg-primary selection:text-white antialiased"
+  >
     <Reception title={titulo} />
     <main>
       <slot />
@@ -98,6 +100,55 @@ import "../styles/global.css";
         "description": "Decoración de eventos: bodas, cumpleaños, eventos empresariales y más.",
         "telephone": "+56 9 XXXX XXXX"
       }
+    </script>
+
+    <style is:global>
+      /* Animation Classes */
+      .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+      }
+
+      .reveal-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      /* Staggered delays */
+      .delay-100 {
+        transition-delay: 100ms;
+      }
+      .delay-200 {
+        transition-delay: 200ms;
+      }
+      .delay-300 {
+        transition-delay: 300ms;
+      }
+    </style>
+
+    <script>
+      // Global Scroll Reveal Observer
+      const observerOptions = {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.1,
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("reveal-visible");
+            observer.unobserve(entry.target); // Only animate once
+          }
+        });
+      }, observerOptions);
+
+      // Observe all elements with .reveal class
+      document.addEventListener("DOMContentLoaded", () => {
+        const hiddenElements = document.querySelectorAll(".reveal");
+        hiddenElements.forEach((el) => observer.observe(el));
+      });
     </script>
   </body>
 </html>
