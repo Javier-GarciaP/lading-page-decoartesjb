@@ -2,25 +2,25 @@ import { sendEmail } from '../../utils/send-email';
 
 export const prerender = false;
 
-export const POST = async ({ request }) => {
-    try {
-        const data = await request.json();
-        const {
-            nombre,
-            email,
-            telefono,
-            tipoEvento,
-            fechaEvento,
-            presupuesto,
-            invitados,
-            mensaje
-        } = data;
+export const POST = async ({ request, locals }) => {
+  try {
+    const data = await request.json();
+    const {
+      nombre,
+      email,
+      telefono,
+      tipoEvento,
+      fechaEvento,
+      presupuesto,
+      invitados,
+      mensaje
+    } = data;
 
-        if (!nombre || !email || !mensaje) {
-            return new Response(JSON.stringify({ error: 'Faltan campos requeridos' }), { status: 400 });
-        }
+    if (!nombre || !email || !mensaje) {
+      return new Response(JSON.stringify({ error: 'Faltan campos requeridos' }), { status: 400 });
+    }
 
-        const html = `
+    const html = `
       <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; background-color: #f9f9f9; padding: 20px; border-radius: 10px;">
         <h2 style="color: #333; border-bottom: 2px solid #ccc; padding-bottom: 10px;">Nuevo Pedido de Evento ✨</h2>
         
@@ -47,19 +47,20 @@ export const POST = async ({ request }) => {
       </div>
     `;
 
-        const { error } = await sendEmail(
-            'josejaviergarciap123@gmail.com',
-            `✨ Nueva Consulta de Evento: ${nombre}`,
-            html
-        );
+    const { error } = await sendEmail(
+      'josejaviergarciap123@gmail.com',
+      `✨ Nueva Consulta de Evento: ${nombre}`,
+      html,
+      locals?.runtime?.env?.RESEND_API_KEY
+    );
 
-        if (error) {
-            console.error('Error Resend:', error);
-            return new Response(JSON.stringify({ error: error.message }), { status: 500 });
-        }
-
-        return new Response(JSON.stringify({ success: true }), { status: 200 });
-    } catch (err) {
-        return new Response(JSON.stringify({ error: 'Error interno del servidor' }), { status: 500 });
+    if (error) {
+      console.error('Error Resend:', error);
+      return new Response(JSON.stringify({ error: error.message }), { status: 500 });
     }
+
+    return new Response(JSON.stringify({ success: true }), { status: 200 });
+  } catch (err) {
+    return new Response(JSON.stringify({ error: 'Error interno del servidor' }), { status: 500 });
+  }
 };
