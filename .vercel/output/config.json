@@ -84,7 +84,7 @@
 			"dest": "_render"
 		},
 		{
-			"src": "^/galery/?$",
+			"src": "^/gallery/?$",
 			"dest": "_render"
 		},
 		{

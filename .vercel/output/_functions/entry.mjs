@@ -1,7 +1,7 @@
 import { renderers } from './renderers.mjs';
 import { a as actions } from './chunks/_noop-actions_CfKMStZn.mjs';
 import { c as createExports } from './chunks/entrypoint_DKKSRXmI.mjs';
-import { manifest } from './manifest_BXooP7wf.mjs';
+import { manifest } from './manifest_KaZwJ7bq.mjs';
 
 const serverIslandMap = new Map();;
 
@@ -22,7 +22,7 @@ const _page13 = () => import('./pages/galeria/matrimonio-5.astro.mjs');
 const _page14 = () => import('./pages/galeria/matrimonio-6.astro.mjs');
 const _page15 = () => import('./pages/galeria/matrimonio-7.astro.mjs');
 const _page16 = () => import('./pages/galeria/matrimonios.astro.mjs');
-const _page17 = () => import('./pages/galery.astro.mjs');
+const _page17 = () => import('./pages/gallery.astro.mjs');
 const _page18 = () => import('./pages/index.astro.mjs');
 const pageMap = new Map([
     ["node_modules/astro/dist/assets/endpoint/generic.js", _page0],
@@ -42,7 +42,7 @@ const pageMap = new Map([
     ["src/pages/galeria/matrimonio-6.astro", _page14],
     ["src/pages/galeria/matrimonio-7.astro", _page15],
     ["src/pages/galeria/matrimonios.astro", _page16],
-    ["src/pages/galery.astro", _page17],
+    ["src/pages/gallery.astro", _page17],
     ["src/pages/index.astro", _page18]
 ]);
 
@@ -54,7 +54,7 @@ const _manifest = Object.assign(manifest, {
     middleware: () => import('./_noop-middleware.mjs')
 });
 const _args = {
-    "middlewareSecret": "e7d16e58-55d3-4c4c-b8ac-e40c2f508dcb",
+    "middlewareSecret": "0660eafa-165f-4509-b978-ba175c030d48",
     "skewProtection": false
 };
 const _exports = createExports(_manifest, _args);

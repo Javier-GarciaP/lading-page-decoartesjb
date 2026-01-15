@@ -1,7 +1,7 @@
 import { a as createComponent, d as renderComponent, r as renderTemplate } from '../../chunks/astro/server_CX1FWOFY.mjs';
 import 'kleur/colors';
 import { $ as $$GalleryGrid } from '../../chunks/GalleryGrid_CR-nAKCu.mjs';
-import { $ as $$Layout } from '../../chunks/Layout_DqsmTFv5.mjs';
+import { $ as $$Layout } from '../../chunks/Layout_DLxa-FEj.mjs';
 export { renderers } from '../../renderers.mjs';
 
 const $$Empresarial2 = createComponent(($$result, $$props, $$slots) => {

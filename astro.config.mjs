@@ -9,6 +9,8 @@ import preact from '@astrojs/preact';
 
 import sitemap from '@astrojs/sitemap';
 
+import cloudflare from '@astrojs/cloudflare';
+
 export default defineConfig({
   output: 'server',
   integrations: [preact(), sitemap()],
@@ -17,6 +19,6 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  adapter: vercel(),
+  adapter: cloudflare(),
   site: 'https://www.decoartesjb.vercel.app'
 });
