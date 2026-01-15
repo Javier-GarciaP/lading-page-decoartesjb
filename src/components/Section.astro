@@ -8,14 +8,14 @@ const headingId = hasTitle
 
 <section
   id={id}
-  class:list={["mb-24 reveal", className]}
+  class:list={["py-20 md:py-28 reveal", className]}
   {...hasTitle ? { "aria-labelledby": headingId } : {}}
 >
   {
     hasTitle && (
       <h2
         id={headingId}
-        class="text-center text-primary font-heading text-4xl md:text-5xl mb-12 font-bold tracking-tight"
+        class="text-center text-white font-heading text-4xl md:text-5xl lg:text-6xl mb-10 font-bold tracking-tight animate-fade-in-up"
       >
         {titulo}
       </h2>

@@ -1,76 +1,27 @@
 ---
-import Moments from "../components/Moments.astro";
+import Process from "../components/Process.astro";
 import Layout from "../layouts/Layout.astro";
-import I from "../components/I.astro";
-import Opinions from "../components/Opinions.astro";
+import About from "../components/About.astro";
+import Testimonials from "../components/Testimonials.astro";
 import Services from "../components/Services.astro";
 import Contact from "../components/Contact.astro";
 import Section from "../components/Section.astro";
+import Stats from "../components/Stats.astro";
 ---
 
 <Layout>
   <!-- About Section -->
-  <I />
+  <About />
 
-  <!-- Moments Carousel -->
-  <Moments />
+  <!-- Stats Section - Corporate Credibility -->
+  <Stats />
+  <Process />
 
-  <!-- Services Section -->
-  <Section id="servicios" title="Nuestros Servicios">
-    <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div
-        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12"
-      >
-        <div class="reveal delay-100 h-full">
-          <Services
-            title="Bodas"
-            description="Diferentes estilos de bodas elegantes, clásicas, románticas, rústicas, naturales. Desde el mágico arreglo de novia hasta decoraciones en estaciones del cóctel, salón y mesas."
-            image="matrimonios/matrimonio-2/imagen-3.jpg"
-            alt="Decoración elegante para bodas"
-          />
-        </div>
-
-        <div class="reveal delay-200 h-full">
-          <Services
-            title="Eventos Empresariales"
-            description="Decoraciones vanguardistas y naturalistas con toques de flores, incluyendo estaciones decoradas según el tipo de evento empresarial."
-            image="evento-empresarial/empresarial-3/imagen-13.jpg"
-            alt="Decoración empresarial"
-          />
-        </div>
-
-        <div class="reveal delay-300 h-full">
-          <Services
-            title="Cumpleaños"
-            description="Desde arreglos florales hasta decoraciones modernas con la última tendencia en globos, ofreciendo un ambiente elegante y festivo."
-            image="cumpleaños/imagen-4.jpg"
-            alt="Decoración festiva"
-          />
-        </div>
-
-        <div class="reveal delay-100 h-full">
-          <Services
-            title="Baby Shower"
-            description="Lo mágico e inolvidable en sus vidas con arreglos y estaciones en globos según la temática prevista, creando un ambiente especial."
-            image="baby-shower/imagen-1.jpg"
-            alt="Decoración de baby shower"
-          />
-        </div>
-
-        <div class="reveal delay-200 h-full">
-          <Services
-            title="Arreglos Florales"
-            description="Según el gusto del cliente, se confeccionan arreglos para momentos especiales como cumpleaños, aniversarios y días festivos."
-            image="arreglos-florales/imagen-7.jpg"
-            alt="Arreglos florales"
-          />
-        </div>
-      </div>
-    </div>
-  </Section>
+  <!-- Services/Process Section -->
+  <Services />
 
   <!-- Opinions Section -->
-  <Opinions />
+  <Testimonials />
 
   <!-- Contact Section -->
   <Contact />

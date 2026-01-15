@@ -1,6 +1,9 @@
 ---
 const { title: titulo, description } = Astro.props;
-import Reception from "../components/Reception.astro";
+import Hero from "../components/Hero.astro";
+import Footer from "../components/Footer.astro";
+import ParticlesBackground from "../components/effects/ParticlesBackground.astro";
+import FloatingElements from "../components/effects/FloatingElements.astro";
 import "../styles/global.css";
 ---
 
@@ -10,6 +13,14 @@ import "../styles/global.css";
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- SEO general -->
     <title>
@@ -24,7 +35,18 @@ import "../styles/global.css";
       content={description ??
         "Decora tus eventos con Decoartesjb. Especializados en bodas, cumpleaños, eventos empresariales y más."}
     />
-    <link rel="canonical" href="https://www.decoartesjb.vercel.app" />
+    <meta
+      name="keywords"
+      content="decoración de eventos, bodas, matrimonios, cumpleaños, baby shower, eventos corporativos, santiago, chile, ambientación, decoartesjb"
+    />
+    <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#d4af37" />
+    <link
+      rel="canonical"
+      href={new URL(Astro.url.pathname, "https://www.decoartesjb.vercel.app")
+        .href}
+    />
+    <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
@@ -60,17 +82,90 @@ import "../styles/global.css";
     />
 
     <!-- Icon -->
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="shortcut icon" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
 
     <!-- Estilos globales ya importados arriba -->
   </head>
   <body
     class="bg-bg text-secondary font-body selection:bg-primary selection:text-white antialiased"
   >
-    <Reception title={titulo} />
-    <main>
+    <Hero title={titulo} />
+    <main class="relative z-10">
       <slot />
     </main>
+    <Footer />
+
+    <!-- Ambient Effects -->
+    <!-- <FloatingElements /> -->
+    <ParticlesBackground />
+
+    <!-- Scroll Progress Bar -->
+    <script>
+      const createScrollProgress = () => {
+        const progressBar = document.createElement("div");
+        progressBar.className = "scroll-progress";
+        progressBar.setAttribute("aria-hidden", "true");
+        document.body.appendChild(progressBar);
+
+        const updateProgress = () => {
+          const scrollPercent =
+            (window.scrollY /
+              (document.body.scrollHeight - window.innerHeight)) *
+            100;
+          progressBar.style.width = Math.min(scrollPercent, 100) + "%";
+        };
+
+        window.addEventListener("scroll", updateProgress, { passive: true });
+        updateProgress(); // Initial call
+      };
+
+      document.addEventListener("DOMContentLoaded", createScrollProgress);
+    </script>
+    <style>
+      /* Spotlight Effect Global Styles */
+      .spotlight-card {
+        position: relative;
+        overflow: hidden;
+      }
+
+      .spotlight-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(
+          800px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+          rgba(255, 255, 255, 0.06),
+          transparent 40%
+        );
+        z-index: 1;
+        opacity: 0;
+        transition: opacity 0.5s;
+        pointer-events: none;
+      }
+
+      .spotlight-card:hover::before {
+        opacity: 1;
+      }
+    </style>
+
+    <script>
+      // Global Spotlight Handler
+      document.addEventListener("mousemove", (e) => {
+        const cards = document.querySelectorAll(".spotlight-card");
+        cards.forEach((card) => {
+          const rect = (card as HTMLElement).getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const y = e.clientY - rect.top;
+          (card as HTMLElement).style.setProperty("--mouse-x", `${x}px`);
+          (card as HTMLElement).style.setProperty("--mouse-y", `${y}px`);
+        });
+      });
+    </script>
 
     <!-- Scroll suave a secciones si viene con hash -->
     <script is:inline>
@@ -103,19 +198,54 @@ import "../styles/global.css";
     </script>
 
     <style is:global>
-      /* Animation Classes */
-      .reveal {
+      /* --- Core Animation Utilities --- */
+
+      /* Base state for all animated elements: hidden and prepared */
+      [class*="reveal-"] {
         opacity: 0;
-        transform: translateY(30px);
-        transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        will-change: opacity, transform, filter;
+        transition:
+          opacity 1s cubic-bezier(0.2, 0.8, 0.2, 1),
+          transform 1s cubic-bezier(0.2, 0.8, 0.2, 1),
+          filter 1s cubic-bezier(0.2, 0.8, 0.2, 1);
       }
 
-      .reveal-visible {
+      /* State when element enters viewport */
+      [class*="reveal-"].active {
         opacity: 1;
-        transform: translateY(0);
+        transform: translate(0, 0) scale(1);
+        filter: blur(0);
       }
 
-      /* Staggered delays */
+      /* -- Variants -- */
+
+      /* Fade Up (Standard) */
+      .reveal-fade-up {
+        transform: translateY(40px);
+      }
+
+      /* Fade Left */
+      .reveal-fade-left {
+        transform: translateX(-40px);
+      }
+
+      /* Fade Right */
+      .reveal-fade-right {
+        transform: translateX(40px);
+      }
+
+      /* Scale Up (Zoom In) */
+      .reveal-scale {
+        transform: scale(0.95);
+      }
+
+      /* Blur In (Dreamy effect for text) */
+      .reveal-blur {
+        filter: blur(12px);
+        transform: translateY(10px);
+      }
+
+      /* -- Delays (Staggering) -- */
       .delay-100 {
         transition-delay: 100ms;
       }
@@ -125,29 +255,166 @@ import "../styles/global.css";
       .delay-300 {
         transition-delay: 300ms;
       }
+      .delay-400 {
+        transition-delay: 400ms;
+      }
+      .delay-500 {
+        transition-delay: 500ms;
+      }
+      .delay-700 {
+        transition-delay: 700ms;
+      }
+
+      /* Reduced motion preference */
+      @media (prefers-reduced-motion: reduce) {
+        [class*="reveal-"] {
+          transition: none !important;
+          opacity: 1 !important;
+          transform: none !important;
+          filter: none !important;
+        }
+      }
     </style>
 
     <script>
-      // Global Scroll Reveal Observer
+      // Professional Intersection Observer for Scroll Animations with Parallax
       const observerOptions = {
         root: null,
-        rootMargin: "0px",
-        threshold: 0.1,
+        rootMargin: "0px 0px -10% 0px",
+        threshold: 0.15,
       };
 
-      const observer = new IntersectionObserver((entries) => {
+      const handleIntersect = (
+        entries: IntersectionObserverEntry[],
+        observer: IntersectionObserver,
+      ) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add("reveal-visible");
-            observer.unobserve(entry.target); // Only animate once
+            entry.target.classList.add("active");
+
+            // Apply shimmer effect to special elements
+            if (entry.target.classList.contains("shimmer-on-reveal")) {
+              applyShimmer(entry.target as HTMLElement);
+            }
+
+            observer.unobserve(entry.target);
           }
         });
-      }, observerOptions);
+      };
 
-      // Observe all elements with .reveal class
-      document.addEventListener("DOMContentLoaded", () => {
-        const hiddenElements = document.querySelectorAll(".reveal");
-        hiddenElements.forEach((el) => observer.observe(el));
+      const observer = new IntersectionObserver(
+        handleIntersect,
+        observerOptions,
+      );
+
+      // Shimmer effect helper
+      function applyShimmer(element: HTMLElement) {
+        const shimmer = document.createElement("div");
+        shimmer.style.cssText = `
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+          animation: shimmer 1.5s ease-in-out;
+          pointer-events: none;
+          z-index: 10;
+        `;
+
+        const position = getComputedStyle(element).position;
+        if (position === "static") {
+          element.style.position = "relative";
+        }
+        element.style.overflow = "hidden";
+        element.appendChild(shimmer);
+
+        setTimeout(() => shimmer.remove(), 1500);
+      }
+
+      // Parallax effect for background elements
+      const initParallax = () => {
+        const parallaxElements = document.querySelectorAll("[data-parallax]");
+
+        const handleParallax = () => {
+          const scrolled = window.pageYOffset;
+
+          parallaxElements.forEach((el) => {
+            const element = el as HTMLElement;
+            const speed = parseFloat(
+              element.getAttribute("data-parallax") || "0.5",
+            );
+            const elementTop = element.offsetTop;
+            const elementHeight = element.offsetHeight;
+            const windowHeight = window.innerHeight;
+
+            // Only apply parallax when element is in viewport
+            if (
+              scrolled + windowHeight > elementTop &&
+              scrolled < elementTop + elementHeight
+            ) {
+              const yPos = (scrolled - elementTop) * speed;
+              element.style.transform = `translateY(${yPos}px)`;
+            }
+          });
+        };
+
+        window.addEventListener("scroll", handleParallax, { passive: true });
+        handleParallax(); // Initial call
+      };
+
+      // Stagger animations for groups
+      const initStaggerAnimations = () => {
+        const staggerGroups = document.querySelectorAll("[data-stagger]");
+
+        staggerGroups.forEach((group) => {
+          const children = group.children;
+          const delay = parseInt(group.getAttribute("data-stagger") || "100");
+
+          Array.from(children).forEach((child, index) => {
+            if (child instanceof HTMLElement) {
+              child.style.transitionDelay = `${index * delay}ms`;
+              child.style.animationDelay = `${index * delay}ms`;
+            }
+          });
+        });
+      };
+
+      // Initialize on load and support view transitions
+      const initAnimations = () => {
+        const animatedElements =
+          document.querySelectorAll('[class*="reveal-"]');
+        animatedElements.forEach((el) => observer.observe(el));
+
+        initParallax();
+        initStaggerAnimations();
+
+        // Add initial opacity to prevent flash
+        document.body.style.opacity = "1";
+      };
+
+      // Run on DOM ready
+      if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", initAnimations);
+      } else {
+        initAnimations();
+      }
+
+      // Handle page visibility changes (for animations that need to restart)
+      document.addEventListener("visibilitychange", () => {
+        if (!document.hidden) {
+          // Re-trigger certain animations when page becomes visible
+          const autoAnimations = document.querySelectorAll(
+            ".animate-pulse, .animate-float",
+          );
+          autoAnimations.forEach((el) => {
+            const element = el as HTMLElement;
+            element.style.animation = "none";
+            setTimeout(() => {
+              element.style.animation = "";
+            }, 10);
+          });
+        }
       });
     </script>
   </body>

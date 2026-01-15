@@ -1,0 +1,272 @@
+---
+// Floating Elements Component - Decorative particles that float across the screen
+---
+
+<div
+    id="floating-elements"
+    class="fixed inset-0 pointer-events-none z-50 overflow-hidden"
+>
+</div>
+
+<script>
+    const prefersReducedMotion = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    type FloatingElementType = "balloon" | "bubble";
+
+    class FloatingElementsManager {
+        container: HTMLElement | null;
+        elements: HTMLElement[] = [];
+        intervalId: number | null = null;
+
+        constructor() {
+            this.container = document.getElementById("floating-elements");
+            if (!this.container || prefersReducedMotion) return;
+
+            this.init();
+        }
+
+        init() {
+            // Create initial elements spread across the screen
+            const isMobile = window.innerWidth < 768;
+            const initialCount = isMobile ? 8 : 15;
+            const types: FloatingElementType[] = ["balloon", "bubble"];
+
+            // Create multiple elements immediately with staggered timing
+            for (let i = 0; i < initialCount; i++) {
+                const type = types[Math.floor(Math.random() * types.length)];
+                const delay = i * 200; // Stagger creation by 200ms
+                setTimeout(() => this.createFloatingElement(type, true), delay);
+            }
+
+            // Periodically create new elements
+            this.intervalId = window.setInterval(() => {
+                const random = types[Math.floor(Math.random() * types.length)];
+                this.createFloatingElement(random, false);
+            }, 5000); // Create new element every 5 seconds
+        }
+
+        createFloatingElement(
+            type: FloatingElementType,
+            isInitial: boolean = false,
+        ) {
+            if (!this.container) return;
+
+            const element = document.createElement("div");
+            element.className = "floating-element";
+            element.innerHTML = this.getSVGForType(type);
+            element.style.cssText = this.getStyleForType(type, isInitial);
+
+            this.container.appendChild(element);
+            this.elements.push(element);
+
+            // Remove element after animation completes
+            const duration =
+                parseFloat(element.style.animationDuration || "10") * 1000;
+            setTimeout(() => {
+                element.remove();
+                this.elements = this.elements.filter((el) => el !== element);
+            }, duration);
+        }
+
+        getSVGForType(type: FloatingElementType): string {
+            const size = 30 + Math.random() * 30; // 30-60px
+
+            switch (type) {
+                case "balloon":
+                    const balloonColor = this.getRandomColor([
+                        "#FF6B9D",
+                        "#C44569",
+                        "#FFA07A",
+                        "#FFB6C1",
+                    ]);
+                    return `
+                        <svg width="${size}" height="${size * 1.3}" viewBox="0 0 100 130" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Balloon -->
+                            <defs>
+                                <radialGradient id="balloon-grad-${Date.now()}" cx="40%" cy="40%">
+                                    <stop offset="0%" style="stop-color:${balloonColor};stop-opacity:0.9" />
+                                    <stop offset="100%" style="stop-color:${this.darkenColor(balloonColor)};stop-opacity:1" />
+                                </radialGradient>
+                            </defs>
+                            <ellipse cx="50" cy="45" rx="35" ry="45" fill="url(#balloon-grad-${Date.now()})" />
+                            <!-- Shine highlight -->
+                            <ellipse cx="35" cy="30" rx="12" ry="18" fill="white" opacity="0.4" />
+                            <!-- String -->
+                            <path d="M 50 90 Q 45 100, 50 110 T 50 130" stroke="${balloonColor}" stroke-width="1.5" fill="none" />
+                        </svg>
+                    `;
+
+                case "bubble":
+                    return `
+                        <svg width="${size}" height="${size}" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+                            <defs>
+                                <radialGradient id="bubble-grad-${Date.now()}" cx="35%" cy="35%">
+                                    <stop offset="0%" style="stop-color:rgba(255,255,255,0.4)" />
+                                    <stop offset="100%" style="stop-color:rgba(200,220,255,0.2)" />
+                                </radialGradient>
+                            </defs>
+                            <circle cx="50" cy="50" r="45" fill="url(#bubble-grad-${Date.now()})" stroke="rgba(255,255,255,0.6)" stroke-width="2" />
+                            <circle cx="30" cy="30" r="12" fill="rgba(255,255,255,0.6)" />
+                        </svg>
+                    `;
+            }
+        }
+
+        getStyleForType(
+            type: FloatingElementType,
+            isInitial: boolean = false,
+        ): string {
+            const startX = Math.random() * 100;
+            const duration = 8 + Math.random() * 12; // 8-20 seconds
+            const delay = Math.random() * 2;
+            const drift = (Math.random() - 0.5) * 150;
+
+            let animation = "";
+            let zIndex = Math.floor(Math.random() * 3); // Layer depth
+            let startPosition = "";
+
+            // For initial elements, position them randomly across the entire screen
+            if (isInitial) {
+                const startY = Math.random() * 100; // Random Y position 0-100%
+                startPosition = `top: ${startY}%;`;
+            } else {
+                // For new elements, start them off-screen based on type
+                startPosition = `bottom: ${type === "balloon" || type === "bubble" ? "-60px" : "110%"};`;
+            }
+
+            switch (type) {
+                case "balloon":
+                    animation = `float-up ${duration}s ease-in ${delay}s forwards, sway ${3 + Math.random() * 2}s ease-in-out infinite`;
+                    break;
+                case "bubble":
+                    animation = `float-up ${duration}s ease-in ${delay}s forwards, sway ${4}s ease-in-out infinite`;
+                    break;
+            }
+
+            return `
+                position: absolute;
+                left: ${startX}%;
+                ${startPosition}
+                opacity: ${0.6 + Math.random() * 0.3};
+                animation: ${animation};
+                --drift: ${drift}px;
+                filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+                z-index: ${zIndex};
+            `;
+        }
+
+        getRandomColor(colors: string[]): string {
+            return colors[Math.floor(Math.random() * colors.length)];
+        }
+
+        darkenColor(color: string): string {
+            // Simple darkening for balloon gradient
+            const colorMap: { [key: string]: string } = {
+                "#FF6B9D": "#D4567A",
+                "#C44569": "#A03050",
+                "#FFA07A": "#CC8060",
+                "#FFB6C1": "#CC92A0",
+            };
+            return colorMap[color] || color;
+        }
+
+        destroy() {
+            if (this.intervalId) {
+                clearInterval(this.intervalId);
+            }
+            this.elements.forEach((el) => el.remove());
+        }
+    }
+
+    // Initialize
+    let floatingManager: FloatingElementsManager | null = null;
+
+    document.addEventListener("DOMContentLoaded", () => {
+        if (!prefersReducedMotion) {
+            floatingManager = new FloatingElementsManager();
+        }
+    });
+
+    window.addEventListener("beforeunload", () => {
+        floatingManager?.destroy();
+    });
+</script>
+
+<style>
+    @keyframes float-up {
+        0% {
+            transform: translateY(0) translateX(0);
+            opacity: 0.7;
+        }
+        50% {
+            opacity: 0.9;
+        }
+        100% {
+            transform: translateY(-120vh) translateX(var(--drift));
+            opacity: 0;
+        }
+    }
+
+    @keyframes float-down {
+        0% {
+            transform: translateY(0) translateX(0) rotate(0deg);
+            opacity: 0.7;
+        }
+        50% {
+            opacity: 0.9;
+        }
+        100% {
+            transform: translateY(120vh) translateX(var(--drift)) rotate(360deg);
+            opacity: 0;
+        }
+    }
+
+    @keyframes sway {
+        0%,
+        100% {
+            transform: translateX(0);
+        }
+        50% {
+            transform: translateX(30px);
+        }
+    }
+
+    @keyframes petal-sway {
+        0% {
+            transform: translateX(0) rotate(0deg);
+        }
+        25% {
+            transform: translateX(20px) rotate(5deg);
+        }
+        75% {
+            transform: translateX(-20px) rotate(-5deg);
+        }
+        100% {
+            transform: translateX(0) rotate(0deg);
+        }
+    }
+
+    @keyframes petal-spin {
+        from {
+            transform: rotateY(0deg);
+        }
+        to {
+            transform: rotateY(360deg);
+        }
+    }
+
+    @keyframes spin {
+        from {
+            transform: rotate(0deg);
+        }
+        to {
+            transform: rotate(360deg);
+        }
+    }
+
+    .floating-element {
+        will-change: transform, opacity;
+    }
+</style>

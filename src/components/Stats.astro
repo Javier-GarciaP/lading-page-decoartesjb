@@ -1,0 +1,333 @@
+---
+import Section from "./Section.astro";
+
+const STATS = [
+    {
+        number: "500",
+        suffix: "+",
+        label: "Eventos Exitosos",
+        icon: "sparkles",
+        description: "Celebraciones memorables",
+    },
+    {
+        number: "15",
+        suffix: "+",
+        label: "Años de Experiencia",
+        icon: "clock",
+        description: "Perfeccionando cada detalle",
+    },
+    {
+        number: "98",
+        suffix: "%",
+        label: "Satisfacción Cliente",
+        icon: "badge",
+        description: "Clientes felices y satisfechos",
+    },
+    {
+        number: "5",
+        suffix: "",
+        label: "Calificación Promedio",
+        icon: "star",
+        description: "Excelencia garantizada",
+        showStars: true,
+    },
+];
+---
+
+<Section>
+    <div class="relative py-16 overflow-hidden">
+        <!-- Animated Background Gradient -->
+        <div
+            class="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent opacity-50"
+        >
+        </div>
+
+        <!-- Decorative Elements -->
+        <div
+            class="absolute top-10 left-10 w-72 h-72 bg-primary/10 rounded-full blur-[100px] animate-pulse"
+        >
+        </div>
+        <div
+            class="absolute bottom-10 right-10 w-96 h-96 bg-amber-500/10 rounded-full blur-[120px] animate-pulse"
+            style="animation-delay: 1s"
+        >
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
+            <!-- Header -->
+            <div class="text-center mb-12 space-y-4">
+                <div
+                    class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm"
+                >
+                    <span
+                        class="text-sm font-semibold text-primary uppercase tracking-wider"
+                        >Nuestros Logros</span
+                    >
+                </div>
+
+                <h2
+                    class="text-3xl md:text-4xl font-heading font-bold text-white leading-tight"
+                >
+                    Números que
+                    <span
+                        class="bg-gradient-to-r from-primary via-amber-300 to-yellow-400 bg-clip-text text-transparent"
+                    >
+                        Hablan por Sí Solos
+                    </span>
+                </h2>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                {
+                    STATS.map((stat, index) => (
+                        <div
+                            class="stat-card group relative p-6 rounded-3xl bg-gradient-to-br from-white/[0.07] to-white/[0.02] border border-white/10 backdrop-blur-xl hover:border-primary/30 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2"
+                            data-index={index}
+                        >
+                            {/* Gradient Accent Line */}
+                            <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-t-3xl" />
+
+                            {/* Icon */}
+                            <div class="mb-6 flex justify-center">
+                                <div class="relative">
+                                    <div class="absolute inset-0 bg-primary/20 rounded-2xl blur-xl group-hover:blur-2xl transition-all duration-500" />
+                                    <div class="relative w-14 h-14 rounded-2xl bg-gradient-to-br from-primary/20 to-amber-500/20 border border-primary/30 flex items-center justify-center group-hover:scale-110 transition-transform duration-500">
+                                        {stat.icon === "sparkles" && (
+                                            <svg
+                                                class="w-8 h-8 text-primary"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="1.5"
+                                                    d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+                                                />
+                                            </svg>
+                                        )}
+                                        {stat.icon === "clock" && (
+                                            <svg
+                                                class="w-8 h-8 text-primary"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="1.5"
+                                                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                                                />
+                                            </svg>
+                                        )}
+                                        {stat.icon === "badge" && (
+                                            <svg
+                                                class="w-8 h-8 text-primary"
+                                                fill="none"
+                                                stroke="currentColor"
+                                                viewBox="0 0 24 24"
+                                            >
+                                                <path
+                                                    stroke-linecap="round"
+                                                    stroke-linejoin="round"
+                                                    stroke-width="1.5"
+                                                    d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
+                                                />
+                                            </svg>
+                                        )}
+                                        {stat.icon === "star" && (
+                                            <svg
+                                                class="w-8 h-8 text-primary"
+                                                viewBox="0 0 20 20"
+                                                fill="currentColor"
+                                            >
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                            </svg>
+                                        )}
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Number */}
+                            <div class="text-center mb-4">
+                                <div class="flex items-center justify-center gap-1">
+                                    <span
+                                        class="stat-number font-heading text-4xl md:text-5xl font-bold bg-gradient-to-r from-primary to-amber-400 bg-clip-text text-transparent"
+                                        data-target={stat.number}
+                                    >
+                                        0
+                                    </span>
+                                    {stat.suffix && (
+                                        <span class="font-heading text-2xl md:text-3xl font-bold text-primary">
+                                            {stat.suffix}
+                                        </span>
+                                    )}
+                                </div>
+
+                                {/* Stars for rating */}
+                                {stat.showStars && (
+                                    <div class="flex justify-center gap-1 mt-2">
+                                        {[...Array(5)].map(() => (
+                                            <svg
+                                                class="w-5 h-5 text-primary"
+                                                viewBox="0 0 20 20"
+                                                fill="currentColor"
+                                            >
+                                                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                                            </svg>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+
+                            {/* Label */}
+                            <div class="text-center space-y-1">
+                                <h3 class="text-white font-semibold text-lg tracking-wide">
+                                    {stat.label}
+                                </h3>
+                                <p class="text-secondary text-sm">
+                                    {stat.description}
+                                </p>
+                            </div>
+
+                            {/* Hover Glow Effect */}
+                            <div class="absolute inset-0 rounded-3xl bg-gradient-to-br from-primary/0 to-primary/0 group-hover:from-primary/5 group-hover:to-transparent transition-all duration-500 pointer-events-none" />
+                        </div>
+                    ))
+                }
+            </div>
+
+            <!-- Bottom Accent -->
+            <div class="mt-16 text-center">
+                <p class="text-secondary text-lg max-w-2xl mx-auto">
+                    Cada número representa nuestra dedicación a crear eventos
+                    excepcionales que superan las expectativas de nuestros
+                    clientes.
+                </p>
+            </div>
+        </div>
+    </div>
+</Section>
+
+<script>
+    // Animated counters for stats
+    const initStatsCounters = () => {
+        const statNumbers = document.querySelectorAll(".stat-number");
+
+        const animateCounter = (
+            element: Element,
+            target: number,
+            duration: number = 2000,
+        ) => {
+            const start = 0;
+            const startTime = performance.now();
+
+            const updateCounter = (currentTime: number) => {
+                const elapsed = currentTime - startTime;
+                const progress = Math.min(elapsed / duration, 1);
+
+                // Ease out cubic
+                const easeProgress = 1 - Math.pow(1 - progress, 3);
+                const current = Math.floor(
+                    start + (target - start) * easeProgress,
+                );
+
+                (element as HTMLElement).textContent = current.toString();
+
+                if (progress < 1) {
+                    requestAnimationFrame(updateCounter);
+                } else {
+                    (element as HTMLElement).textContent = target.toString();
+                }
+            };
+
+            requestAnimationFrame(updateCounter);
+        };
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const target = parseInt(
+                            entry.target.getAttribute("data-target") || "0",
+                        );
+                        animateCounter(entry.target, target);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.3 },
+        );
+
+        statNumbers.forEach((el) => observer.observe(el));
+    };
+
+    // Stagger animation for cards
+    const initCardAnimations = () => {
+        const cards = document.querySelectorAll(".stat-card");
+
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target as HTMLElement;
+                        const index = parseInt(
+                            element.getAttribute("data-index") || "0",
+                        );
+
+                        setTimeout(() => {
+                            element.style.opacity = "1";
+                            element.style.transform = "translateY(0)";
+                        }, index * 100);
+
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.2 },
+        );
+
+        cards.forEach((card) => {
+            const element = card as HTMLElement;
+            element.style.opacity = "0";
+            element.style.transform = "translateY(30px)";
+            element.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+            observer.observe(card);
+        });
+    };
+
+    // Initialize on load
+    if (document.readyState === "loading") {
+        document.addEventListener("DOMContentLoaded", () => {
+            initStatsCounters();
+            initCardAnimations();
+        });
+    } else {
+        initStatsCounters();
+        initCardAnimations();
+    }
+</script>
+
+<style>
+    .stat-card {
+        position: relative;
+    }
+
+    /* Subtle animation for background gradients */
+    @keyframes pulse {
+        0%,
+        100% {
+            opacity: 0.5;
+        }
+        50% {
+            opacity: 0.8;
+        }
+    }
+
+    .animate-pulse {
+        animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+</style>

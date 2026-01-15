@@ -9,21 +9,39 @@ const { title, folder, count } = Astro.props;
 ---
 
 <div class="px-4 md:px-10 py-6">
-  <div class="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
+  <div
+    class="columns-2 md:columns-3 lg:columns-4 gap-6 space-y-6"
+    data-stagger="50"
+  >
     {
       Array.from({ length: count }, (_, i) => (
         <div
-          class="break-inside-avoid relative group overflow-hidden rounded-xl cursor-pointer"
+          class="reveal-scale break-inside-avoid relative group overflow-hidden rounded-2xl cursor-pointer border border-white/5 hover:border-primary/50 transition-all duration-500"
           onclick={`openLightbox('/${folder}/imagen-${i + 1}.jpg')`}
         >
           <img
             src={`/${folder}/imagen-${i + 1}.jpg`}
             alt={`Imagen ${i + 1}`}
-            class="w-full h-auto object-cover transform transition duration-500 group-hover:scale-110"
+            class="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-110"
             loading="lazy"
           />
-          <div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
-            <span class="text-white text-3xl font-light">+</span>
+          <div class="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center backdrop-blur-[2px]">
+            <div class="w-14 h-14 rounded-full bg-white/10 border border-white/30 flex items-center justify-center transform scale-0 group-hover:scale-100 transition-transform duration-300 delay-100 hover:bg-white/20">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                class="h-6 w-6 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7"
+                />
+              </svg>
+            </div>
           </div>
         </div>
       ))
@@ -34,10 +52,10 @@ const { title, folder, count } = Astro.props;
 <!-- Lightbox Modal -->
 <div
   id="lightbox"
-  class="fixed inset-0 z-50 bg-black/95 hidden flex justify-center items-center opacity-0 transition-opacity duration-300"
+  class="fixed inset-0 z-50 bg-black/95 hidden flex justify-center items-center opacity-0 transition-all duration-300"
 >
   <button
-    class="absolute top-4 right-4 text-white hover:text-primary transition-colors focus:outline-none z-50 p-2"
+    class="absolute top-4 right-4 text-white hover:text-primary transition-colors focus:outline-none z-50 p-2 hover:rotate-90 transition-transform duration-300"
     onclick="closeLightbox()"
   >
     <svg
@@ -59,7 +77,7 @@ const { title, folder, count } = Astro.props;
     id="lightbox-img"
     src=""
     alt="Vista ampliada"
-    class="max-h-[90vh] max-w-[90vw] object-contain shadow-2xl rounded-sm"
+    class="max-h-[90vh] max-w-[90vw] object-contain shadow-2xl rounded-sm transform scale-95 transition-transform duration-300"
   />
 </div>
 
@@ -72,15 +90,22 @@ const { title, folder, count } = Astro.props;
     img.src = src;
     lightbox.classList.remove("hidden");
     // Timeout to allow display block to apply before opacity transition
-    setTimeout(() => lightbox.classList.remove("opacity-0"), 10);
+    setTimeout(() => {
+      lightbox.classList.remove("opacity-0");
+      img.classList.add("scale-100");
+      img.classList.remove("scale-95");
+    }, 10);
     body.style.overflow = "hidden"; // Prevent scrolling
   }
 
   function closeLightbox() {
     const lightbox = document.getElementById("lightbox");
+    const img = document.getElementById("lightbox-img");
     const body = document.body;
 
     lightbox.classList.add("opacity-0");
+    img.classList.add("scale-95");
+    img.classList.remove("scale-100");
     setTimeout(() => {
       lightbox.classList.add("hidden");
       document.getElementById("lightbox-img").src = "";

@@ -1,0 +1,155 @@
+---
+// Magnetic Button Component - Button that follows cursor when nearby
+export interface Props {
+    href?: string;
+    text: string;
+    variant?: "primary" | "secondary";
+    class?: string;
+}
+
+const {
+    href = "#",
+    text,
+    variant = "primary",
+    class: className = "",
+} = Astro.props;
+const Tag = href === "#" ? "button" : "a";
+---
+
+<Tag
+    href={href}
+    class:list={[
+        "magnetic-button",
+        "relative inline-flex items-center justify-center px-8 py-4 rounded-full font-semibold text-lg overflow-hidden transition-all duration-300",
+        variant === "primary"
+            ? "bg-primary text-white hover:bg-primary-hover"
+            : "bg-white/10 text-white hover:bg-white/20",
+        "hover-shine",
+        className,
+    ]}
+    data-magnetic
+>
+    <span class="relative z-10">{text}</span>
+
+    <!-- Ripple effect container -->
+    <span
+        class="ripple-container absolute inset-0 overflow-hidden rounded-full pointer-events-none"
+    ></span>
+</Tag>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const magneticButtons = document.querySelectorAll("[data-magnetic]");
+
+        magneticButtons.forEach((button) => {
+            const element = button as HTMLElement;
+            let bounds: DOMRect;
+
+            const updateBounds = () => {
+                bounds = element.getBoundingClientRect();
+            };
+
+            updateBounds();
+            window.addEventListener("resize", updateBounds);
+
+            // Track mouse globally for magnetic effect
+            let globalMouseX = 0;
+            let globalMouseY = 0;
+
+            const handleGlobalMouseMove = (e: MouseEvent) => {
+                globalMouseX = e.clientX;
+                globalMouseY = e.clientY;
+                updateMagneticEffect();
+            };
+
+            const updateMagneticEffect = () => {
+                updateBounds();
+
+                const centerX = bounds.left + bounds.width / 2;
+                const centerY = bounds.top + bounds.height / 2;
+
+                const deltaX = globalMouseX - centerX;
+                const deltaY = globalMouseY - centerY;
+
+                const distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+                const maxDistance = 150; // Increased from 100
+
+                if (distance < maxDistance) {
+                    const strength = 1 - distance / maxDistance;
+                    const moveX = deltaX * strength * 0.5; // Increased from 0.3
+                    const moveY = deltaY * strength * 0.5;
+
+                    // Enhanced scale based on proximity
+                    const scale = 1.05 + strength * 0.03; // Max 1.08
+
+                    // Dynamic glow intensity
+                    const glowIntensity = strength * 0.6;
+                    const glowSize = 20 + strength * 40;
+
+                    element.style.transform = `translate(${moveX}px, ${moveY}px) scale(${scale})`;
+                    element.style.boxShadow = `
+                        0 0 ${glowSize}px rgba(212, 175, 55, ${glowIntensity}),
+                        0 0 ${glowSize * 1.5}px rgba(212, 175, 55, ${glowIntensity * 0.5}),
+                        0 10px 30px rgba(0, 0, 0, 0.3)
+                    `;
+                    element.style.transition =
+                        "box-shadow 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94)";
+                } else {
+                    element.style.transform = "";
+                    element.style.boxShadow = "";
+                }
+            };
+
+            window.addEventListener("mousemove", handleGlobalMouseMove);
+
+            element.addEventListener("mouseleave", () => {
+                element.style.transform = "";
+                element.style.boxShadow = "";
+            });
+
+            // Enhanced ripple effect on click
+            element.addEventListener("click", (e: MouseEvent) => {
+                const rippleContainer =
+                    element.querySelector(".ripple-container");
+                if (!rippleContainer) return;
+
+                const ripple = document.createElement("span");
+                const rect = element.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height) * 2;
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+
+                ripple.style.cssText = `
+          position: absolute;
+          width: ${size}px;
+          height: ${size}px;
+          left: ${x}px;
+          top: ${y}px;
+          background: radial-gradient(circle, rgba(212, 175, 55, 0.8) 0%, rgba(244, 228, 180, 0.4) 40%, transparent 70%);
+          border-radius: 50%;
+          transform: scale(0);
+          animation: ripple-animation 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+          pointer-events: none;
+        `;
+
+                rippleContainer.appendChild(ripple);
+
+                setTimeout(() => ripple.remove(), 800);
+            });
+        });
+    });
+</script>
+
+<style>
+    @keyframes ripple-animation {
+        to {
+            transform: scale(1);
+            opacity: 0;
+        }
+    }
+
+    .magnetic-button {
+        will-change: transform, box-shadow;
+        transition: transform 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+</style>

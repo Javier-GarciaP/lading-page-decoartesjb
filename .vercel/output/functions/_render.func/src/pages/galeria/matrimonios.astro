@@ -1,0 +1,87 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+const galleryEvents = [
+  // 1
+  {
+    title: "Matrimonio inolvidable",
+    description:
+      "Y nos fuimos a la playa con este hermoso matrimonio de verano a las orillas del mar",
+    image: "/matrimonios/matrimonio-1/imagen-1.jpg",
+    route: "/galeria/matrimonio-1",
+  },
+  // 2
+  {
+    title: "Matrimonio inolvidable",
+    description: "Matrimonio elegante entre toques blancos y verdes",
+    image: "/matrimonios/matrimonio-2/imagen-1.jpg",
+    route: "/galeria/matrimonio-2",
+  },
+  // 3
+  {
+    title: "Matrimonio inolvidable",
+    description: "boda con tonos rojos.",
+    image: "/matrimonios/matrimonio-3/imagen-1.jpg",
+    route: "/galeria/matrimonio-3",
+  },
+  // 4
+  {
+    title: "Matrimonio inolvidable",
+    description:
+      "Expectacular matrimonio con colores lavanda, blanco y verdes.",
+    image: "/matrimonios/matrimonio-4/imagen-1.jpg",
+    route: "/galeria/matrimonio-4",
+  },
+  // 5
+  {
+    title: "Matrimonio inolvidable",
+    description:
+      "Entre variedad de verde y la elegancia del color blanco se impone este lindo matrimonio",
+    image: "/matrimonios/matrimonio-5/imagen-1.jpg",
+    route: "/galeria/matrimonio-5",
+  },
+  // 6
+  {
+    title: "Matrimonio inolvidable",
+    description:
+      "Un bello matrimonio en un lugar cultural e histórico de la ciudad de Santiago entre muros y esculturas  se refleja un bello momento.",
+    image: "/matrimonios/matrimonio-6/imagen-1.jpg",
+    route: "/galeria/matrimonio-6",
+  },
+  // 7
+  {
+    title: "Matrimonio inolvidable",
+    description:
+      "Una hermosa paleta de colores  veraniegos para este matrimonio inolvidable.",
+    image: "/matrimonios/matrimonio-7/imagen-1.jpg",
+    route: "/galeria/matrimonio-7",
+  },
+];
+---
+
+<Layout
+  title="Cada boda es única y mágica. Explora las diferentes ceremonias y estilos realizados."
+>
+  <section
+    class="px-6 md:px-10 py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
+  >
+    {
+      galleryEvents.map((event) => (
+        <a
+          href={event.route}
+          class="group block relative rounded-xl overflow-hidden shadow-lg"
+        >
+          <img
+            src={event.image}
+            alt={event.title}
+            class="w-full h-64 object-cover transform transition duration-300 group-hover:scale-110"
+          />
+          <div class="absolute inset-0 bg-black/50 flex flex-col justify-end p-4 opacity-0 group-hover:opacity-100 transition">
+            <h3 class="text-white text-xl font-bold">{event.title}</h3>
+            <p class="text-white text-sm mt-1">{event.description}</p>
+          </div>
+        </a>
+      ))
+    }
+  </section>
+</Layout>
