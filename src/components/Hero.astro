@@ -8,7 +8,8 @@ import MagneticButton from "./effects/MagneticButton.astro";
   <!-- Animated 3D Background -->
   <div class="absolute inset-0 z-0 select-none overflow-hidden">
     <!-- Dark Overlay -->
-    <div class="absolute inset-0 bg-gradient-to-b from-bg/90 via-bg/85 to-bg z-20"></div>
+    <!-- Dark Overlay -->
+    <div class="absolute inset-0 bg-gradient-to-b from-bg/90 via-bg/85 to-bg z-10"></div>
     
     <!-- Background Image -->
     <img
@@ -18,7 +19,8 @@ import MagneticButton from "./effects/MagneticButton.astro";
     />
 
     <!-- 3D Canvas Container -->
-    <canvas id="decoration-canvas" class="absolute inset-0 z-10"></canvas>
+    <!-- 3D Canvas Container -->
+    <canvas id="decoration-canvas" class="absolute inset-0 z-0 pointer-events-none"></canvas>
   </div>
 
   <!-- Floating Decorative Elements -->
@@ -138,7 +140,7 @@ import MagneticButton from "./effects/MagneticButton.astro";
 
   <!-- Hero Content -->
   <div
-    class="relative z-30 flex-grow flex flex-col justify-center items-center text-center px-6 pt-20 pb-12 max-w-5xl mx-auto"
+    class="relative z-20 flex-grow flex flex-col justify-center items-center text-center px-6 pt-20 pb-12 max-w-5xl mx-auto"
   >
     {
       hayTitulo ? (
@@ -205,7 +207,7 @@ import MagneticButton from "./effects/MagneticButton.astro";
   </div>
 
   <!-- Scroll Down Indicator -->
-  <div class="relative z-30 pb-8 flex justify-center animate-bounce">
+  <div class="relative z-20 pb-8 flex justify-center animate-bounce">
     <a
       href="#sobre-mi"
       class="flex flex-col items-center gap-2 text-secondary hover:text-primary transition-colors group"

@@ -39,11 +39,20 @@ const Tag = href === "#" ? "button" : "a";
 
 <script>
     document.addEventListener("DOMContentLoaded", () => {
+        const isTouchDevice =
+            "ontouchstart" in window || navigator.maxTouchPoints > 0;
         const magneticButtons = document.querySelectorAll("[data-magnetic]");
 
         magneticButtons.forEach((button) => {
             const element = button as HTMLElement;
+
+            if (isTouchDevice) {
+                // Return early for touch devices to avoid interaction issues
+                return;
+            }
+
             let bounds: DOMRect;
+            // ... (rest of the logic inside the check)
 
             const updateBounds = () => {
                 bounds = element.getBoundingClientRect();
