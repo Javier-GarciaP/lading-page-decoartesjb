@@ -6,7 +6,8 @@ import sitemap from '@astrojs/sitemap';
 import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
-  // Usamos 'server' para que funcionen tus APIs de correo
+  // Importante: añade tu URL aquí para que el sitemap no dé error
+  site: 'https://decoartesjb.pages.dev', 
   output: 'server',
 
   integrations: [preact(), sitemap()],
@@ -16,13 +17,10 @@ export default defineConfig({
   },
 
   adapter: cloudflare({
-    imageService: 'compile',
-    // Esta opción deshabilita las funciones automáticas que buscan el KV de SESSION
-    cloudflareModules: false,
+    // Cambia cloudflareModules a true si vas a usar funciones de Cloudflare, 
+    // pero para Pages lo ideal es dejarlo sencillo
     platformProxy: {
       enabled: true,
     },
   }),
-
-
 });
