@@ -1,0 +1,404 @@
+­ƒ¬Á  Writing logs to "C:\Users\josej\AppData\Roaming\xdg.config\.wrangler\logs\wrangler-2026-01-16_01-27-47_795.log"
+Metrics dispatcher: Posting data {"deviceId":"4cd1265f-222c-440c-bc9c-75c8ade421d0","event":"wrangler command started","timestamp":1768526867960,"properties":{"amplitude_session_id":1768526867957,"amplitude_event_id":0,"wranglerVersion":"4.59.1","osPlatform":"Windows","osVersion":"Windows 11 Home Single Language","nodeVersion":24,"packageManager":"npm","isFirstUsage":false,"configFileType":"none","isCI":false,"isPagesCI":false,"isWorkersCI":false,"isInteractive":false,"hasAssets":false,"argsUsed":["branch","projectName"],"argsCombination":"branch, projectName","agent":null,"command":"wrangler pages deploy","args":{}}}
+.env file not found at "C:\Users\josej\dev\lading-page-decoartesjb\.env.local". Continuing... For more details, refer to https://developers.cloudflare.com/workers/wrangler/system-environment-variables/
+
+ Ôøà´©Å wrangler 4.59.1 (update available 4.59.2)
+ÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇÔöÇ
+-- START CF API REQUEST: GET https://api.cloudflare.com/client/v4/accounts/65178ef5bd28543bf111d0369c41a46e/pages/projects/decoartesjb
+QUERY STRING: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+INIT: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API REQUEST
+-- START CF API RESPONSE: OK 200
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+RESPONSE: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API RESPONSE
+Ôû▓ [WARNING] Warning: Your working directory is a git repo and has uncommitted changes
+
+  To silence this warning, pass in --commit-dirty=true
+
+
+-- START CF API REQUEST: GET https://api.cloudflare.com/client/v4/accounts/65178ef5bd28543bf111d0369c41a46e/pages/projects/decoartesjb
+QUERY STRING: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+INIT: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API REQUEST
+-- START CF API RESPONSE: OK 200
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+RESPONSE: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API RESPONSE
+-- START CF API REQUEST: GET https://api.cloudflare.com/client/v4/accounts/65178ef5bd28543bf111d0369c41a46e/pages/projects/decoartesjb/upload-token
+QUERY STRING: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+INIT: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API REQUEST
+-- START CF API RESPONSE: OK 200
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+RESPONSE: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API RESPONSE
+-- START CF API REQUEST: POST https://api.cloudflare.com/client/v4/pages/assets/check-missing
+QUERY STRING: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+INIT: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API REQUEST
+-- START CF API RESPONSE: OK 200
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+RESPONSE: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API RESPONSE
+Uploading... (0/137)
+POST /pages/assets/upload
+-- START CF API REQUEST: POST https://api.cloudflare.com/client/v4/pages/assets/upload
+QUERY STRING: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+INIT: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API REQUEST
+POST /pages/assets/upload
+-- START CF API REQUEST: POST https://api.cloudflare.com/client/v4/pages/assets/upload
+QUERY STRING: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+INIT: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API REQUEST
+POST /pages/assets/upload
+-- START CF API REQUEST: POST https://api.cloudflare.com/client/v4/pages/assets/upload
+QUERY STRING: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+INIT: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API REQUEST
+-- START CF API RESPONSE: Bad Gateway 502
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+RESPONSE: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API RESPONSE
+failed: APIError: Received a malformed response from the API
+    at fetchInternal (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:120218:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async fetchResult (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:120377:47)
+    at async doUpload (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:222466:25)
+    at async C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:126886:30 {
+  telemetryMessage: undefined,
+  text: 'Received a malformed response from the API',
+  notes: [
+    {
+      text: '<!DOCTYPE html>\n' +
+        '<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en-US"> <![endif]-->\n' +
+        '<!--[if I... (length = 6442)'
+    },
+    { text: 'POST /pages/assets/upload -> 502 Bad Gateway' }
+  ],
+  location: undefined,
+  kind: 'error',
+  code: undefined,
+  accountTag: undefined
+} retrying...
+-- START CF API REQUEST: GET https://api.cloudflare.com/client/v4/accounts/65178ef5bd28543bf111d0369c41a46e/pages/projects/decoartesjb/upload-token
+QUERY STRING: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+INIT: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API REQUEST
+-- START CF API RESPONSE: OK 200
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+RESPONSE: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API RESPONSE
+POST /pages/assets/upload
+-- START CF API REQUEST: POST https://api.cloudflare.com/client/v4/pages/assets/upload
+QUERY STRING: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+INIT: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API REQUEST
+-- START CF API RESPONSE: Bad Gateway 502
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+RESPONSE: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API RESPONSE
+failed: APIError: Received a malformed response from the API
+    at fetchInternal (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:120218:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async fetchResult (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:120377:47)
+    at async doUpload (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:222466:25)
+    at async C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:126886:30 {
+  telemetryMessage: undefined,
+  text: 'Received a malformed response from the API',
+  notes: [
+    {
+      text: '<!DOCTYPE html>\n' +
+        '<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en-US"> <![endif]-->\n' +
+        '<!--[if I... (length = 6442)'
+    },
+    { text: 'POST /pages/assets/upload -> 502 Bad Gateway' }
+  ],
+  location: undefined,
+  kind: 'error',
+  code: undefined,
+  accountTag: undefined
+} retrying...
+-- START CF API REQUEST: GET https://api.cloudflare.com/client/v4/accounts/65178ef5bd28543bf111d0369c41a46e/pages/projects/decoartesjb/upload-token
+QUERY STRING: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+INIT: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API REQUEST
+-- START CF API RESPONSE: OK 200
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+RESPONSE: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API RESPONSE
+POST /pages/assets/upload
+-- START CF API REQUEST: POST https://api.cloudflare.com/client/v4/pages/assets/upload
+QUERY STRING: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+INIT: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API REQUEST
+failed: TypeError: fetch failed
+    at fetch (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:32948:17)
+    at async performApiFetch (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:120166:10)
+    at async fetchInternal (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:120186:20)
+    at async fetchResult (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:120377:47)
+    at async doUpload (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:222466:25)
+    at async C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:126886:30 {
+  [cause]: HeadersTimeoutError: Headers Timeout Error
+      at FastTimer.onParserTimeout [as _onTimeout] (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\undici\lib\dispatcher\client-h1.js:746:28)
+      at Timeout.onTick [as _onTimeout] (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\undici\lib\util\timers.js:162:13)
+      at listOnTimeout (node:internal/timers:605:17)
+      at process.processTimers (node:internal/timers:541:7) {
+    code: 'UND_ERR_HEADERS_TIMEOUT'
+  }
+} retrying...
+-- START CF API REQUEST: GET https://api.cloudflare.com/client/v4/accounts/65178ef5bd28543bf111d0369c41a46e/pages/projects/decoartesjb/upload-token
+QUERY STRING: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+INIT: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API REQUEST
+-- START CF API RESPONSE: OK 200
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+RESPONSE: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API RESPONSE
+POST /pages/assets/upload
+-- START CF API REQUEST: POST https://api.cloudflare.com/client/v4/pages/assets/upload
+QUERY STRING: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+INIT: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API REQUEST
+-- START CF API RESPONSE: Bad Gateway 502
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+RESPONSE: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API RESPONSE
+failed: APIError: Received a malformed response from the API
+    at fetchInternal (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:120218:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async fetchResult (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:120377:47)
+    at async doUpload (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:222466:25)
+    at async C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:126886:30 {
+  telemetryMessage: undefined,
+  text: 'Received a malformed response from the API',
+  notes: [
+    {
+      text: '<!DOCTYPE html>\n' +
+        '<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en-US"> <![endif]-->\n' +
+        '<!--[if I... (length = 6442)'
+    },
+    { text: 'POST /pages/assets/upload -> 502 Bad Gateway' }
+  ],
+  location: undefined,
+  kind: 'error',
+  code: undefined,
+  accountTag: undefined
+} retrying...
+-- START CF API REQUEST: GET https://api.cloudflare.com/client/v4/accounts/65178ef5bd28543bf111d0369c41a46e/pages/projects/decoartesjb/upload-token
+QUERY STRING: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+INIT: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API REQUEST
+-- START CF API RESPONSE: OK 200
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+RESPONSE: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API RESPONSE
+POST /pages/assets/upload
+-- START CF API REQUEST: POST https://api.cloudflare.com/client/v4/pages/assets/upload
+QUERY STRING: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+INIT: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API REQUEST
+failed: TypeError: fetch failed
+    at fetch (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:32948:17)
+    at async performApiFetch (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:120166:10)
+    at async fetchInternal (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:120186:20)
+    at async fetchResult (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:120377:47)
+    at async doUpload (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:222466:25)
+    at async C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:126886:30 {
+  [cause]: HeadersTimeoutError: Headers Timeout Error
+      at FastTimer.onParserTimeout [as _onTimeout] (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\undici\lib\dispatcher\client-h1.js:746:28)
+      at Timeout.onTick [as _onTimeout] (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\undici\lib\util\timers.js:162:13)
+      at listOnTimeout (node:internal/timers:605:17)
+      at process.processTimers (node:internal/timers:541:7) {
+    code: 'UND_ERR_HEADERS_TIMEOUT'
+  }
+} retrying...
+-- START CF API REQUEST: GET https://api.cloudflare.com/client/v4/accounts/65178ef5bd28543bf111d0369c41a46e/pages/projects/decoartesjb/upload-token
+QUERY STRING: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+INIT: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API REQUEST
+-- START CF API RESPONSE: OK 200
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+RESPONSE: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API RESPONSE
+POST /pages/assets/upload
+-- START CF API REQUEST: POST https://api.cloudflare.com/client/v4/pages/assets/upload
+QUERY STRING: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+INIT: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API REQUEST
+failed: TypeError: fetch failed
+    at fetch (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:32948:17)
+    at async performApiFetch (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:120166:10)
+    at async fetchInternal (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:120186:20)
+    at async fetchResult (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:120377:47)
+    at async doUpload (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:222466:25)
+    at async C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:126886:30 {
+  [cause]: HeadersTimeoutError: Headers Timeout Error
+      at FastTimer.onParserTimeout [as _onTimeout] (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\undici\lib\dispatcher\client-h1.js:746:28)
+      at Timeout.onTick [as _onTimeout] (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\undici\lib\util\timers.js:162:13)
+      at listOnTimeout (node:internal/timers:605:17)
+      at process.processTimers (node:internal/timers:541:7) {
+    code: 'UND_ERR_HEADERS_TIMEOUT'
+  }
+} retrying...
+-- START CF API REQUEST: GET https://api.cloudflare.com/client/v4/accounts/65178ef5bd28543bf111d0369c41a46e/pages/projects/decoartesjb/upload-token
+QUERY STRING: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+INIT: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API REQUEST
+-- START CF API RESPONSE: OK 200
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+RESPONSE: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API RESPONSE
+POST /pages/assets/upload
+-- START CF API REQUEST: POST https://api.cloudflare.com/client/v4/pages/assets/upload
+QUERY STRING: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+INIT: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API REQUEST
+failed: TypeError: fetch failed
+    at fetch (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:32948:17)
+    at async performApiFetch (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:120166:10)
+    at async fetchInternal (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:120186:20)
+    at async fetchResult (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:120377:47)
+    at async doUpload (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:222466:25)
+    at async C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:126886:30 {
+  [cause]: HeadersTimeoutError: Headers Timeout Error
+      at FastTimer.onParserTimeout [as _onTimeout] (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\undici\lib\dispatcher\client-h1.js:746:28)
+      at Timeout.onTick [as _onTimeout] (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\undici\lib\util\timers.js:162:13)
+      at listOnTimeout (node:internal/timers:605:17)
+      at process.processTimers (node:internal/timers:541:7) {
+    code: 'UND_ERR_HEADERS_TIMEOUT'
+  }
+} retrying...
+-- START CF API REQUEST: GET https://api.cloudflare.com/client/v4/accounts/65178ef5bd28543bf111d0369c41a46e/pages/projects/decoartesjb/upload-token
+QUERY STRING: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+INIT: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API REQUEST
+-- START CF API RESPONSE: OK 200
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+RESPONSE: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API RESPONSE
+POST /pages/assets/upload
+-- START CF API REQUEST: POST https://api.cloudflare.com/client/v4/pages/assets/upload
+QUERY STRING: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+INIT: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API REQUEST
+-- START CF API RESPONSE: Bad Gateway 502
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+RESPONSE: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API RESPONSE
+failed: APIError: Received a malformed response from the API
+    at fetchInternal (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:120218:11)
+    at process.processTicksAndRejections (node:internal/process/task_queues:103:5)
+    at async fetchResult (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:120377:47)
+    at async doUpload (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:222466:25)
+    at async C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:126886:30 {
+  telemetryMessage: undefined,
+  text: 'Received a malformed response from the API',
+  notes: [
+    {
+      text: '<!DOCTYPE html>\n' +
+        '<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en-US"> <![endif]-->\n' +
+        '<!--[if I... (length = 6442)'
+    },
+    { text: 'POST /pages/assets/upload -> 502 Bad Gateway' }
+  ],
+  location: undefined,
+  kind: 'error',
+  code: undefined,
+  accountTag: undefined
+} retrying...
+-- START CF API REQUEST: GET https://api.cloudflare.com/client/v4/accounts/65178ef5bd28543bf111d0369c41a46e/pages/projects/decoartesjb/upload-token
+QUERY STRING: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+INIT: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API REQUEST
+-- START CF API RESPONSE: OK 200
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+RESPONSE: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API RESPONSE
+POST /pages/assets/upload
+-- START CF API REQUEST: POST https://api.cloudflare.com/client/v4/pages/assets/upload
+QUERY STRING: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+INIT: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API REQUEST
+failed: TypeError: fetch failed
+    at fetch (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:32948:17)
+    at async performApiFetch (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:120166:10)
+    at async fetchInternal (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:120186:20)
+    at async fetchResult (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:120377:47)
+    at async doUpload (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:222466:25)
+    at async C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:126886:30 {
+  [cause]: Error: read ECONNRESET
+      at TLSWrap.onStreamRead (node:internal/stream_base_commons:216:20) {
+    errno: -4077,
+    code: 'ECONNRESET',
+    syscall: 'read'
+  }
+} retrying...
+-- START CF API REQUEST: GET https://api.cloudflare.com/client/v4/accounts/65178ef5bd28543bf111d0369c41a46e/pages/projects/decoartesjb/upload-token
+QUERY STRING: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+INIT: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API REQUEST
+-- START CF API RESPONSE: OK 200
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+RESPONSE: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API RESPONSE
+POST /pages/assets/upload
+-- START CF API REQUEST: POST https://api.cloudflare.com/client/v4/pages/assets/upload
+QUERY STRING: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+INIT: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API REQUEST
+failed: TypeError: fetch failed
+    at fetch (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:32948:17)
+    at async performApiFetch (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:120166:10)
+    at async fetchInternal (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:120186:20)
+    at async fetchResult (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:120377:47)
+    at async doUpload (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:222466:25)
+    at async C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:126886:30 {
+  [cause]: HeadersTimeoutError: Headers Timeout Error
+      at FastTimer.onParserTimeout [as _onTimeout] (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\undici\lib\dispatcher\client-h1.js:746:28)
+      at Timeout.onTick [as _onTimeout] (C:\Users\josej\dev\lading-page-decoartesjb\node_modules\undici\lib\util\timers.js:162:13)
+      at listOnTimeout (node:internal/timers:605:17)
+      at process.processTimers (node:internal/timers:541:7) {
+    code: 'UND_ERR_HEADERS_TIMEOUT'
+  }
+} retrying...
+-- START CF API REQUEST: GET https://api.cloudflare.com/client/v4/accounts/65178ef5bd28543bf111d0369c41a46e/pages/projects/decoartesjb/upload-token
+QUERY STRING: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+HEADERS: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+INIT: omitted; set WRANGLER_LOG_SANITIZE=false to include sanitized data
+-- END CF API REQUEST
+
+Error: Failed to upload files. Please try again. Error: {})
+    at C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:222515:19
+    at async C:\Users\josej\dev\lading-page-decoartesjb\node_modules\wrangler\wrangler-dist\cli.js:126886:30
+X [ERROR] Failed to upload files. Please try again. Error: {})
+
+
+Metrics dispatcher: Posting data {"deviceId":"4cd1265f-222c-440c-bc9c-75c8ade421d0","event":"wrangler command errored","timestamp":1768527813184,"properties":{"amplitude_session_id":1768526867957,"amplitude_event_id":1,"wranglerVersion":"4.59.1","osPlatform":"Windows","osVersion":"Windows 11 Home Single Language","nodeVersion":24,"packageManager":"npm","isFirstUsage":false,"configFileType":"none","isCI":false,"isPagesCI":false,"isWorkersCI":false,"isInteractive":false,"hasAssets":false,"argsUsed":["branch","projectName"],"argsCombination":"branch, projectName","agent":null,"command":"wrangler pages deploy","args":{},"durationMs":945236,"durationSeconds":945.236,"durationMinutes":15.753933333333332,"errorType":"FatalError"}}
+­ƒ¬Á  Logs were written to "C:\Users\josej\AppData\Roaming\xdg.config\.wrangler\logs\wrangler-2026-01-16_01-27-47_795.log"
