@@ -112,7 +112,7 @@ import MagneticButton from "./effects/MagneticButton.astro";
   <!-- Mobile Menu Overlay -->
   <div
     id="mobile-menu"
-    class="fixed inset-0 bg-bg/95 backdrop-blur-3xl z-40 flex-col items-center justify-center gap-8 opacity-0 transition-opacity duration-300"
+    class="fixed inset-0 bg-bg/95 backdrop-blur-3xl z-40 hidden flex-col items-center justify-center gap-8 opacity-0 transition-all duration-300"
   >
     <a
       href="/#sobre-mi"
@@ -455,11 +455,15 @@ import MagneticButton from "./effects/MagneticButton.astro";
 
     if (menu.classList.contains("hidden")) {
       menu.classList.remove("hidden");
+      menu.classList.add("flex");
       setTimeout(() => menu.classList.remove("opacity-0"), 10);
       body.style.overflow = "hidden";
     } else {
       menu.classList.add("opacity-0");
-      setTimeout(() => menu.classList.add("hidden"), 300);
+      setTimeout(() => {
+        menu.classList.add("hidden");
+        menu.classList.remove("flex");
+      }, 300);
       body.style.overflow = "";
     }
   }
