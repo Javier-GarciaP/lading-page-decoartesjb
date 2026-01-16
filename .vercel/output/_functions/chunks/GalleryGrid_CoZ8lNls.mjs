@@ -1,12 +1,12 @@
-import { c as createAstro, a as createComponent, r as renderTemplate, b as addAttribute, m as maybeRenderHead } from './astro/server_CX1FWOFY.mjs';
-import 'kleur/colors';
+import { e as createAstro, f as createComponent, r as renderTemplate, h as addAttribute, m as maybeRenderHead } from './astro/server_DXRTHAEE.mjs';
+import 'piccolore';
 import 'clsx';
 
 var __freeze = Object.freeze;
 var __defProp = Object.defineProperty;
 var __template = (cooked, raw) => __freeze(__defProp(cooked, "raw", { value: __freeze(cooked.slice()) }));
 var _a;
-const $$Astro = createAstro("https://www.decoartesjb.vercel.app");
+const $$Astro = createAstro("https://decoartesjb.vercel.app");
 const $$GalleryGrid = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro, $$props, $$slots);
   Astro2.self = $$GalleryGrid;

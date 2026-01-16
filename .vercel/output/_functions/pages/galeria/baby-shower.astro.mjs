@@ -1,7 +1,7 @@
-import { a as createComponent, d as renderComponent, r as renderTemplate } from '../../chunks/astro/server_CX1FWOFY.mjs';
-import 'kleur/colors';
-import { $ as $$GalleryGrid } from '../../chunks/GalleryGrid_CR-nAKCu.mjs';
-import { $ as $$Layout } from '../../chunks/Layout_DLxa-FEj.mjs';
+import { f as createComponent, k as renderComponent, r as renderTemplate } from '../../chunks/astro/server_DXRTHAEE.mjs';
+import 'piccolore';
+import { $ as $$GalleryGrid } from '../../chunks/GalleryGrid_CoZ8lNls.mjs';
+import { $ as $$Layout } from '../../chunks/Layout_DJ0rbSAV.mjs';
 export { renderers } from '../../renderers.mjs';
 
 const $$BabyShower = createComponent(($$result, $$props, $$slots) => {

@@ -1,11 +1,11 @@
-import { c as createAstro, a as createComponent, m as maybeRenderHead, b as addAttribute, s as spreadAttributes, g as renderSlot, r as renderTemplate, d as renderComponent, f as renderScript } from '../chunks/astro/server_CX1FWOFY.mjs';
-import 'kleur/colors';
+import { e as createAstro, f as createComponent, m as maybeRenderHead, h as addAttribute, s as spreadAttributes, l as renderSlot, r as renderTemplate, k as renderComponent, n as renderScript } from '../chunks/astro/server_DXRTHAEE.mjs';
+import 'piccolore';
 import 'clsx';
 /* empty css                                 */
-import { $ as $$Layout } from '../chunks/Layout_DLxa-FEj.mjs';
+import { $ as $$Layout } from '../chunks/Layout_DJ0rbSAV.mjs';
 export { renderers } from '../renderers.mjs';
 
-const $$Astro = createAstro("https://www.decoartesjb.vercel.app");
+const $$Astro = createAstro("https://decoartesjb.vercel.app");
 const $$Section = createComponent(($$result, $$props, $$slots) => {
   const Astro2 = $$result.createAstro($$Astro, $$props, $$slots);
   Astro2.self = $$Section;

@@ -1,19 +1,18 @@
-import { v as decryptString, w as createSlotValueFromString, x as isAstroComponentFactory, d as renderComponent, r as renderTemplate, y as ROUTE_TYPE_HEADER, z as REROUTE_DIRECTIVE_HEADER, A as AstroError, B as i18nNoLocaleFoundInPath, C as ResponseSentError, G as MiddlewareNoDataOrNextCalled, H as MiddlewareNotAResponse, J as originPathnameSymbol, K as RewriteWithBodyUsed, O as GetStaticPathsRequired, P as InvalidGetStaticPathsReturn, Q as InvalidGetStaticPathsEntry, S as GetStaticPathsExpectedParams, T as GetStaticPathsInvalidRouteParam, V as PageNumberParamNotFound, D as DEFAULT_404_COMPONENT, W as ActionNotFoundError, X as NoMatchingStaticPathFound, Y as PrerenderDynamicEndpointPathCollide, Z as ReservedSlotName, _ as renderSlotToString, $ as renderJSX, a0 as chunkToString, a1 as isRenderInstruction, a2 as ForbiddenRewrite, a3 as SessionStorageSaveError, a4 as SessionStorageInitError, a5 as ASTRO_VERSION, a6 as LocalsReassigned, a7 as PrerenderClientAddressNotAvailable, a8 as clientAddressSymbol, a9 as ClientAddressNotAvailable, aa as StaticClientAddressNotAvailable, ab as AstroResponseHeadersReassigned, ac as responseSentSymbol$1, ad as renderPage, ae as REWRITE_DIRECTIVE_HEADER_KEY, af as REWRITE_DIRECTIVE_HEADER_VALUE, ag as renderEndpoint, ah as LocalsNotAnObject, ai as REROUTABLE_STATUS_CODES } from './astro/server_CX1FWOFY.mjs';
-import { bold, red, yellow, dim, blue } from 'kleur/colors';
+import { v as decryptString, w as createSlotValueFromString, x as isAstroComponentFactory, k as renderComponent, r as renderTemplate, R as ROUTE_TYPE_HEADER, y as REROUTE_DIRECTIVE_HEADER, A as AstroError, z as i18nNoLocaleFoundInPath, B as ResponseSentError, C as ActionNotFoundError, D as MiddlewareNoDataOrNextCalled, G as MiddlewareNotAResponse, H as originPathnameSymbol, J as RewriteWithBodyUsed, K as GetStaticPathsRequired, O as InvalidGetStaticPathsReturn, P as InvalidGetStaticPathsEntry, Q as GetStaticPathsExpectedParams, S as GetStaticPathsInvalidRouteParam, T as PageNumberParamNotFound, V as DEFAULT_404_COMPONENT, W as NoMatchingStaticPathFound, X as PrerenderDynamicEndpointPathCollide, Y as ReservedSlotName, Z as renderSlotToString, _ as renderJSX, $ as chunkToString, a0 as isRenderInstruction, a1 as ForbiddenRewrite, a2 as SessionStorageInitError, a3 as SessionStorageSaveError, a4 as ASTRO_VERSION, a5 as CspNotEnabled, a6 as LocalsReassigned, a7 as generateCspDigest, a8 as PrerenderClientAddressNotAvailable, a9 as clientAddressSymbol, aa as ClientAddressNotAvailable, ab as StaticClientAddressNotAvailable, ac as AstroResponseHeadersReassigned, ad as responseSentSymbol$1, ae as renderPage, af as REWRITE_DIRECTIVE_HEADER_KEY, ag as REWRITE_DIRECTIVE_HEADER_VALUE, ah as renderEndpoint, ai as LocalsNotAnObject, aj as REROUTABLE_STATUS_CODES, ak as nodeRequestAbortControllerCleanupSymbol } from './astro/server_DXRTHAEE.mjs';
+import colors from 'piccolore';
 import 'clsx';
-import { serialize, parse } from 'cookie';
-import { A as ActionError, d as deserializeActionResult, s as serializeActionResult, a as ACTION_RPC_ROUTE_PATTERN, b as ACTION_QUERY_PARAMS, g as getActionQueryString, D as DEFAULT_404_ROUTE, c as default404Instance, N as NOOP_MIDDLEWARE_FN, e as ensure404Route } from './astro-designed-error-pages_BfJsQbjs.mjs';
+import { A as ActionError, d as deserializeActionResult, s as serializeActionResult, a as ACTION_RPC_ROUTE_PATTERN, b as ACTION_QUERY_PARAMS, g as getActionQueryString, D as DEFAULT_404_ROUTE, c as default404Instance, N as NOOP_MIDDLEWARE_FN, e as ensure404Route } from './astro-designed-error-pages_CN0yd6pm.mjs';
 import 'es-module-lexer';
 import buffer from 'node:buffer';
 import crypto$1 from 'node:crypto';
 import { Http2ServerResponse } from 'node:http2';
-import { b as appendForwardSlash, j as joinPaths, r as removeTrailingForwardSlash, p as prependForwardSlash, c as trimSlashes, f as fileExtension, s as slash, d as collapseDuplicateTrailingSlashes, h as hasFileExtension } from './index_CCxZAn8N.mjs';
+import { c as appendForwardSlash, j as joinPaths, f as fileExtension, s as slash, p as prependForwardSlash, r as removeTrailingForwardSlash, d as trimSlashes, m as matchPattern, e as isInternalPath, g as collapseDuplicateTrailingSlashes, h as hasFileExtension } from './index_ty8FbXfT.mjs';
+import { serialize, parse } from 'cookie';
 import { unflatten as unflatten$1, stringify as stringify$1 } from 'devalue';
 import { createStorage, builtinDrivers } from 'unstorage';
 import '@vercel/routing-utils';
 import 'deterministic-object-hash';
 import nodePath from 'node:path';
-import { builtinModules } from 'node:module';
 
 function shouldAppendForwardSlash(trailingSlash, buildFormat) {
   switch (trailingSlash) {
@@ -98,24 +97,26 @@ async function getRequestData(request) {
       if (!params.has("s") || !params.has("e") || !params.has("p")) {
         return badRequest("Missing required query parameters.");
       }
-      const rawSlots = params.get("s");
-      try {
-        return {
-          componentExport: params.get("e"),
-          encryptedProps: params.get("p"),
-          slots: JSON.parse(rawSlots)
-        };
-      } catch {
-        return badRequest("Invalid slots format.");
-      }
+      const encryptedSlots = params.get("s");
+      return {
+        componentExport: params.get("e"),
+        encryptedProps: params.get("p"),
+        encryptedSlots
+      };
     }
     case "POST": {
       try {
         const raw = await request.text();
         const data = JSON.parse(raw);
+        if ("slots" in data && typeof data.slots === "object") {
+          return badRequest("Plaintext slots are not allowed. Slots must be encrypted.");
+        }
         return data;
-      } catch {
-        return badRequest("Request format is invalid.");
+      } catch (e) {
+        if (e instanceof SyntaxError) {
+          return badRequest("Request format is invalid.");
+        }
+        throw e;
       }
     }
     default: {
@@ -146,13 +147,30 @@ function createEndpoint(manifest) {
     }
     const key = await manifest.key;
     const encryptedProps = data.encryptedProps;
-    const propString = encryptedProps === "" ? "{}" : await decryptString(key, encryptedProps);
-    const props = JSON.parse(propString);
+    let props = {};
+    if (encryptedProps !== "") {
+      try {
+        const propString = await decryptString(key, encryptedProps);
+        props = JSON.parse(propString);
+      } catch (_e) {
+        return badRequest("Encrypted props value is invalid.");
+      }
+    }
+    let decryptedSlots = {};
+    const encryptedSlots = data.encryptedSlots;
+    if (encryptedSlots !== "") {
+      try {
+        const slotsString = await decryptString(key, encryptedSlots);
+        decryptedSlots = JSON.parse(slotsString);
+      } catch (_e) {
+        return badRequest("Encrypted slots value is invalid.");
+      }
+    }
     const componentModule = await imp();
     let Component = componentModule[data.componentExport];
     const slots = {};
-    for (const prop in data.slots) {
-      slots[prop] = createSlotValueFromString(data.slots[prop]);
+    for (const prop in decryptedSlots) {
+      slots[prop] = createSlotValueFromString(decryptedSlots[prop]);
     }
     result.response.headers.set("X-Robots-Tag", "noindex");
     if (isAstroComponentFactory(Component)) {
@@ -331,7 +349,7 @@ function requestHasLocale(locales) {
   };
 }
 function pathHasLocale(path, locales) {
-  const segments = path.split("/");
+  const segments = path.split("/").map(normalizeThePath);
   for (const segment of segments) {
     for (const locale of locales) {
       if (typeof locale === "string") {
@@ -364,14 +382,19 @@ function getPathByLocale(locale, locales) {
 function normalizeTheLocale(locale) {
   return locale.replaceAll("_", "-").toLowerCase();
 }
-function toCodes(locales) {
-  return locales.map((loopLocale) => {
+function normalizeThePath(path) {
+  return path.endsWith(".html") ? path.slice(0, -5) : path;
+}
+function getAllCodes(locales) {
+  const result = [];
+  for (const loopLocale of locales) {
     if (typeof loopLocale === "string") {
-      return loopLocale;
+      result.push(loopLocale);
     } else {
-      return loopLocale.codes[0];
+      result.push(...loopLocale.codes);
     }
-  });
+  }
+  return result;
 }
 function redirectToDefaultLocale({
   trailingSlash,
@@ -444,6 +467,9 @@ function redirectToFallback({
         if (pathFallbackLocale === defaultLocale && strategy === "pathname-prefix-other-locales") {
           if (context.url.pathname.includes(`${base}`)) {
             newPathname = context.url.pathname.replace(`/${urlLocale}`, ``);
+            if (newPathname === "") {
+              newPathname = "/";
+            }
           } else {
             newPathname = context.url.pathname.replace(`/${urlLocale}`, `/`);
           }
@@ -464,6 +490,7 @@ function redirectToFallback({
 const DELETED_EXPIRATION = /* @__PURE__ */ new Date(0);
 const DELETED_VALUE = "deleted";
 const responseSentSymbol = Symbol.for("astro.responseSent");
+const identity = (value) => value;
 class AstroCookie {
   constructor(value) {
     this.value = value;
@@ -534,25 +561,35 @@ class AstroCookies {
         return void 0;
       }
     }
-    const values = this.#ensureParsed(options);
+    const decode = options?.decode ?? decodeURIComponent;
+    const values = this.#ensureParsed();
     if (key in values) {
       const value = values[key];
-      return new AstroCookie(value);
+      if (value) {
+        let decodedValue;
+        try {
+          decodedValue = decode(value);
+        } catch (_error) {
+          decodedValue = value;
+        }
+        return new AstroCookie(decodedValue);
+      }
     }
   }
   /**
    * Astro.cookies.has(key) returns a boolean indicating whether this cookie is either
    * part of the initial request or set via Astro.cookies.set(key)
    * @param key The cookie to check for.
+   * @param _options This parameter is no longer used.
    * @returns
    */
-  has(key, options = void 0) {
+  has(key, _options) {
     if (this.#outgoing?.has(key)) {
       let [, , isSetValue] = this.#outgoing.get(key);
       return isSetValue;
     }
-    const values = this.#ensureParsed(options);
-    return !!values[key];
+    const values = this.#ensureParsed();
+    return values[key] !== void 0;
   }
   /**
    * Astro.cookies.set(key, value) is used to set a cookie's value. If provided
@@ -629,9 +666,9 @@ class AstroCookies {
     cookies.#consumed = true;
     return cookies.headers();
   }
-  #ensureParsed(options = void 0) {
+  #ensureParsed() {
     if (!this.#requestValues) {
-      this.#parse(options);
+      this.#parse();
     }
     if (!this.#requestValues) {
       this.#requestValues = {};
@@ -644,12 +681,12 @@ class AstroCookies {
     }
     return this.#outgoing;
   }
-  #parse(options = void 0) {
+  #parse() {
     const raw = this.#request.headers.get("cookie");
     if (!raw) {
       return;
     }
-    this.#requestValues = parse(raw, options);
+    this.#requestValues = parse(raw, { decode: identity });
   }
 }
 
@@ -724,7 +761,7 @@ function getEventPrefix({ level, label }) {
   const timestamp = `${dateTimeFormat.format(/* @__PURE__ */ new Date())}`;
   const prefix = [];
   if (level === "error" || level === "warn") {
-    prefix.push(bold(timestamp));
+    prefix.push(colors.bold(timestamp));
     prefix.push(`[${level.toUpperCase()}]`);
   } else {
     prefix.push(timestamp);
@@ -733,15 +770,15 @@ function getEventPrefix({ level, label }) {
     prefix.push(`[${label}]`);
   }
   if (level === "error") {
-    return red(prefix.join(" "));
+    return colors.red(prefix.join(" "));
   }
   if (level === "warn") {
-    return yellow(prefix.join(" "));
+    return colors.yellow(prefix.join(" "));
   }
   if (prefix.length === 1) {
-    return dim(prefix[0]);
+    return colors.dim(prefix[0]);
   }
-  return dim(prefix[0]) + " " + blue(prefix.splice(1).join(" "));
+  return colors.dim(prefix[0]) + " " + colors.blue(prefix.splice(1).join(" "));
 }
 class Logger {
   options;
@@ -798,7 +835,7 @@ const consoleLogDestination = {
   write(event) {
     let dest = console.error;
     if (levels[event.level] < levels["error"]) {
-      dest = console.log;
+      dest = console.info;
     }
     if (event.label === "SKIP_FORMAT") {
       dest(event.message);
@@ -808,6 +845,74 @@ const consoleLogDestination = {
     return true;
   }
 };
+
+function getAssetsPrefix(fileExtension, assetsPrefix) {
+  let prefix = "";
+  if (!assetsPrefix) {
+    prefix = "";
+  } else if (typeof assetsPrefix === "string") {
+    prefix = assetsPrefix;
+  } else {
+    const dotLessFileExtension = fileExtension.slice(1);
+    prefix = assetsPrefix[dotLessFileExtension] || assetsPrefix.fallback;
+  }
+  return prefix;
+}
+
+function createAssetLink(href, base, assetsPrefix, queryParams) {
+  let url = "";
+  if (assetsPrefix) {
+    const pf = getAssetsPrefix(fileExtension(href), assetsPrefix);
+    url = joinPaths(pf, slash(href));
+  } else if (base) {
+    url = prependForwardSlash(joinPaths(base, slash(href)));
+  } else {
+    url = href;
+  }
+  return url;
+}
+function createStylesheetElement(stylesheet, base, assetsPrefix, queryParams) {
+  if (stylesheet.type === "inline") {
+    return {
+      props: {},
+      children: stylesheet.content
+    };
+  } else {
+    return {
+      props: {
+        rel: "stylesheet",
+        href: createAssetLink(stylesheet.src, base, assetsPrefix)
+      },
+      children: ""
+    };
+  }
+}
+function createStylesheetElementSet(stylesheets, base, assetsPrefix, queryParams) {
+  return new Set(
+    stylesheets.map((s) => createStylesheetElement(s, base, assetsPrefix))
+  );
+}
+function createModuleScriptElement(script, base, assetsPrefix, queryParams) {
+  if (script.type === "external") {
+    return createModuleScriptElementWithSrc(script.value, base, assetsPrefix);
+  } else {
+    return {
+      props: {
+        type: "module"
+      },
+      children: script.value
+    };
+  }
+}
+function createModuleScriptElementWithSrc(src, base, assetsPrefix, queryParams) {
+  return {
+    props: {
+      type: "module",
+      src: createAssetLink(src, base, assetsPrefix)
+    },
+    children: ""
+  };
+}
 
 const ACTION_API_CONTEXT_SYMBOL = Symbol.for("astro.actionAPIContext");
 const formContentTypes = ["application/x-www-form-urlencoded", "multipart/form-data"];
@@ -830,7 +935,15 @@ function getActionContext(context) {
           pipeline.manifest.trailingSlash,
           pipeline.manifest.buildFormat
         ) ? removeTrailingForwardSlash(callerInfo.name) : callerInfo.name;
-        const baseAction = await pipeline.getAction(callerInfoName);
+        let baseAction;
+        try {
+          baseAction = await pipeline.getAction(callerInfoName);
+        } catch (error) {
+          if (error instanceof Error && "name" in error && typeof error.name === "string" && error.name === ActionNotFoundError.name) {
+            return { data: void 0, error: new ActionError({ code: "NOT_FOUND" }) };
+          }
+          throw error;
+        }
         let input;
         try {
           input = await parseRequestBody(context.request);
@@ -840,13 +953,15 @@ function getActionContext(context) {
           }
           throw e;
         }
-        const {
-          props: _props,
-          getActionResult: _getActionResult,
-          callAction: _callAction,
-          redirect: _redirect,
-          ...actionAPIContext
-        } = context;
+        const omitKeys = ["props", "getActionResult", "callAction", "redirect"];
+        const actionAPIContext = Object.create(
+          Object.getPrototypeOf(context),
+          Object.fromEntries(
+            Object.entries(Object.getOwnPropertyDescriptors(context)).filter(
+              ([key]) => !omitKeys.includes(key)
+            )
+          )
+        );
         Reflect.set(actionAPIContext, ACTION_API_CONTEXT_SYMBOL, true);
         const handler = baseAction.bind(actionAPIContext);
         return handler(input);
@@ -944,7 +1059,7 @@ function parseLocale(header) {
   return result;
 }
 function sortAndFilterLocales(browserLocaleList, locales) {
-  const normalizedLocales = toCodes(locales).map(normalizeTheLocale);
+  const normalizedLocales = getAllCodes(locales).map(normalizeTheLocale);
   return browserLocaleList.filter((browserLocale) => {
     if (browserLocale.locale !== "*") {
       return normalizedLocales.includes(normalizeTheLocale(browserLocale.locale));
@@ -968,11 +1083,13 @@ function computePreferredLocale(request, locales) {
         if (typeof currentLocale === "string") {
           if (normalizeTheLocale(currentLocale) === normalizeTheLocale(firstResult.locale)) {
             result = currentLocale;
+            break;
           }
         } else {
           for (const currentCode of currentLocale.codes) {
             if (normalizeTheLocale(currentCode) === normalizeTheLocale(firstResult.locale)) {
-              result = currentLocale.path;
+              result = currentCode;
+              break;
             }
           }
         }
@@ -987,13 +1104,7 @@ function computePreferredLocaleList(request, locales) {
   if (acceptHeader) {
     const browserLocaleList = sortAndFilterLocales(parseLocale(acceptHeader), locales);
     if (browserLocaleList.length === 1 && browserLocaleList.at(0).locale === "*") {
-      return locales.map((locale) => {
-        if (typeof locale === "string") {
-          return locale;
-        } else {
-          return locale.codes.at(0);
-        }
-      });
+      return getAllCodes(locales);
     } else if (browserLocaleList.length > 0) {
       for (const browserLocale of browserLocaleList) {
         for (const loopLocale of locales) {
@@ -1004,7 +1115,7 @@ function computePreferredLocaleList(request, locales) {
           } else {
             for (const code of loopLocale.codes) {
               if (code === browserLocale.locale) {
-                result.push(loopLocale.path);
+                result.push(code);
               }
             }
           }
@@ -1015,7 +1126,7 @@ function computePreferredLocaleList(request, locales) {
   return result;
 }
 function computeCurrentLocale(pathname, locales, defaultLocale) {
-  for (const segment of pathname.split("/")) {
+  for (const segment of pathname.split("/").map(normalizeThePath)) {
     for (const locale of locales) {
       if (typeof locale === "string") {
         if (!segment.includes(locale)) continue;
@@ -1046,6 +1157,38 @@ function computeCurrentLocale(pathname, locales, defaultLocale) {
       }
     }
   }
+}
+
+function deduplicateDirectiveValues(existingDirective, newDirective) {
+  const [directiveName, ...existingValues] = existingDirective.split(/\s+/).filter(Boolean);
+  const [newDirectiveName, ...newValues] = newDirective.split(/\s+/).filter(Boolean);
+  if (directiveName !== newDirectiveName) {
+    return void 0;
+  }
+  const finalDirectives = Array.from(/* @__PURE__ */ new Set([...existingValues, ...newValues]));
+  return `${directiveName} ${finalDirectives.join(" ")}`;
+}
+function pushDirective(directives, newDirective) {
+  let deduplicated = false;
+  if (directives.length === 0) {
+    return [newDirective];
+  }
+  const finalDirectives = [];
+  for (const directive of directives) {
+    if (deduplicated) {
+      finalDirectives.push(directive);
+      continue;
+    }
+    const result = deduplicateDirectiveValues(directive, newDirective);
+    if (result) {
+      finalDirectives.push(result);
+      deduplicated = true;
+    } else {
+      finalDirectives.push(directive);
+      finalDirectives.push(newDirective);
+    }
+  }
+  return finalDirectives;
 }
 
 async function callMiddleware(onRequest, apiContext, responseFunction) {
@@ -1135,7 +1278,8 @@ function findRouteToRewrite({
   request,
   trailingSlash,
   buildFormat,
-  base
+  base,
+  outDir
 }) {
   let newUrl = void 0;
   if (payload instanceof URL) {
@@ -1147,9 +1291,14 @@ function findRouteToRewrite({
   }
   let pathname = newUrl.pathname;
   const shouldAppendSlash = shouldAppendForwardSlash(trailingSlash, buildFormat);
-  if (base !== "/" && newUrl.pathname.startsWith(base)) {
-    pathname = shouldAppendSlash ? appendForwardSlash(newUrl.pathname) : removeTrailingForwardSlash(newUrl.pathname);
-    pathname = pathname.slice(base.length);
+  if (base !== "/") {
+    const isBasePathRequest = newUrl.pathname === base || newUrl.pathname === removeTrailingForwardSlash(base);
+    if (isBasePathRequest) {
+      pathname = shouldAppendSlash ? "/" : "";
+    } else if (newUrl.pathname.startsWith(base)) {
+      pathname = shouldAppendSlash ? appendForwardSlash(newUrl.pathname) : removeTrailingForwardSlash(newUrl.pathname);
+      pathname = pathname.slice(base.length);
+    }
   }
   if (!pathname.startsWith("/") && shouldAppendSlash && newUrl.pathname.endsWith("/")) {
     pathname = prependForwardSlash(pathname);
@@ -1157,11 +1306,25 @@ function findRouteToRewrite({
   if (pathname === "/" && base !== "/" && !shouldAppendSlash) {
     pathname = "";
   }
-  newUrl.pathname = joinPaths(...[base, pathname].filter(Boolean));
+  if (buildFormat === "file") {
+    pathname = pathname.replace(/\.html$/, "");
+  }
+  if (base !== "/" && (pathname === "" || pathname === "/") && !shouldAppendSlash) {
+    newUrl.pathname = removeTrailingForwardSlash(base);
+  } else {
+    newUrl.pathname = joinPaths(...[base, pathname].filter(Boolean));
+  }
   const decodedPathname = decodeURI(pathname);
   let foundRoute;
   for (const route of routes) {
     if (route.pattern.test(decodedPathname)) {
+      if (route.params && route.params.length !== 0 && route.distURL && route.distURL.length !== 0) {
+        if (!route.distURL.find(
+          (url) => url.href.replace(outDir.toString(), "").replace(/(?:\/index\.html|\.html)$/, "") == trimSlashes(decodedPathname)
+        )) {
+          continue;
+        }
+      }
       foundRoute = route;
       break;
     }
@@ -1209,8 +1372,20 @@ function copyRequest(newUrl, oldRequest, isPrerendered, logger, routePattern) {
     }
   });
 }
-function setOriginPathname(request, pathname) {
-  Reflect.set(request, originPathnameSymbol, encodeURIComponent(pathname));
+function setOriginPathname(request, pathname, trailingSlash, buildFormat) {
+  if (!pathname) {
+    pathname = "/";
+  }
+  const shouldAppendSlash = shouldAppendForwardSlash(trailingSlash, buildFormat);
+  let finalPathname;
+  if (pathname === "/") {
+    finalPathname = "/";
+  } else if (shouldAppendSlash) {
+    finalPathname = appendForwardSlash(pathname);
+  } else {
+    finalPathname = removeTrailingForwardSlash(pathname);
+  }
+  Reflect.set(request, originPathnameSymbol, encodeURIComponent(finalPathname));
 }
 function getOriginPathname(request) {
   const origin = Reflect.get(request, originPathnameSymbol);
@@ -1219,6 +1394,10 @@ function getOriginPathname(request) {
   }
   return new URL(request.url).pathname;
 }
+
+const NOOP_ACTIONS_MOD = {
+  server: {}
+};
 
 const FORM_CONTENT_TYPES = [
   "application/x-www-form-urlencoded",
@@ -1444,7 +1623,8 @@ async function callGetStaticPaths({
   staticPaths = await mod.getStaticPaths({
     // Q: Why the cast?
     // A: So users downstream can have nicer typings, we have to make some sacrifice in our internal typings, which necessitate a cast here
-    paginate: generatePaginateFunction(route, base)
+    paginate: generatePaginateFunction(route, base),
+    routePattern: route.route
   });
   validateGetStaticPathsResult(staticPaths, logger, route);
   const keyedStaticPaths = staticPaths;
@@ -1548,11 +1728,11 @@ class Pipeline {
     } else if (this.middleware) {
       const middlewareInstance = await this.middleware();
       const onRequest = middlewareInstance.onRequest ?? NOOP_MIDDLEWARE_FN;
+      const internalMiddlewares = [onRequest];
       if (this.manifest.checkOrigin) {
-        this.resolvedMiddleware = sequence(createOriginCheckMiddleware(), onRequest);
-      } else {
-        this.resolvedMiddleware = onRequest;
+        internalMiddlewares.unshift(createOriginCheckMiddleware());
       }
+      this.resolvedMiddleware = sequence(...internalMiddlewares);
       return this.resolvedMiddleware;
     } else {
       this.resolvedMiddleware = NOOP_MIDDLEWARE_FN;
@@ -1566,9 +1746,9 @@ class Pipeline {
     if (this.resolvedActions) {
       return this.resolvedActions;
     } else if (this.actions) {
-      return this.actions;
+      return await this.actions();
     }
-    return { server: {} };
+    return NOOP_ACTIONS_MOD;
   }
   async getAction(path) {
     const pathKeys = path.split(".").map((key) => decodeURIComponent(key));
@@ -1764,13 +1944,14 @@ function sequence(...handlers) {
             if (payload instanceof Request) {
               newRequest = payload;
             } else if (payload instanceof URL) {
-              newRequest = new Request(payload, handleContext.request);
+              newRequest = new Request(payload, handleContext.request.clone());
             } else {
               newRequest = new Request(
                 new URL(payload, handleContext.url.origin),
-                handleContext.request
+                handleContext.request.clone()
               );
             }
+            const oldPathname = handleContext.url.pathname;
             const pipeline = Reflect.get(handleContext, apiContextRoutesSymbol);
             const { routeData, pathname } = await pipeline.tryRewrite(
               payload,
@@ -1790,8 +1971,14 @@ function sequence(...handlers) {
             carriedPayload = payload;
             handleContext.request = newRequest;
             handleContext.url = new URL(newRequest.url);
-            handleContext.cookies = new AstroCookies(newRequest);
             handleContext.params = getParams(routeData, pathname);
+            handleContext.routePattern = routeData.route;
+            setOriginPathname(
+              handleContext.request,
+              oldPathname,
+              pipeline.manifest.trailingSlash,
+              pipeline.manifest.buildFormat
+            );
           }
           return applyHandle(i + 1, handleContext);
         } else {
@@ -1853,7 +2040,16 @@ class AstroSession {
   constructor(cookies, {
     cookie: cookieConfig = DEFAULT_COOKIE_NAME,
     ...config
-  }) {
+  }, runtimeMode) {
+    const { driver } = config;
+    if (!driver) {
+      throw new AstroError({
+        ...SessionStorageInitError,
+        message: SessionStorageInitError.message(
+          "No driver was defined in the session configuration and the adapter did not provide a default driver."
+        )
+      });
+    }
     this.#cookies = cookies;
     let cookieConfigObject;
     if (typeof cookieConfig === "object") {
@@ -1865,12 +2061,12 @@ class AstroSession {
     }
     this.#cookieConfig = {
       sameSite: "lax",
-      secure: true,
+      secure: runtimeMode === "production",
       path: "/",
       ...cookieConfigObject,
       httpOnly: true
     };
-    this.#config = config;
+    this.#config = { ...config, driver };
   }
   /**
    * Gets a session value. Returns `undefined` if the session or value does not exist.
@@ -1952,7 +2148,14 @@ class AstroSession {
    * Destroys the session, clearing the cookie and storage if it exists.
    */
   destroy() {
-    this.#destroySafe();
+    const sessionId = this.#sessionID ?? this.#cookies.get(this.#cookieName)?.value;
+    if (sessionId) {
+      this.#toDestroy.add(sessionId);
+    }
+    this.#cookies.delete(this.#cookieName, this.#cookieConfig);
+    this.#sessionID = void 0;
+    this.#data = void 0;
+    this.#dirty = true;
   }
   /**
    * Regenerates the session, creating a new session ID. The existing session data is preserved.
@@ -2018,6 +2221,19 @@ class AstroSession {
     return this.#sessionID;
   }
   /**
+   * Loads a session from storage with the given ID, and replaces the current session.
+   * Any changes made to the current session will be lost.
+   * This is not normally needed, as the session is automatically loaded using the cookie.
+   * However it can be used to restore a session where the ID has been recorded somewhere
+   * else (e.g. in a database).
+   */
+  async load(sessionID) {
+    this.#sessionID = sessionID;
+    this.#data = void 0;
+    await this.#setCookie();
+    await this.#ensureData();
+  }
+  /**
    * Sets the session cookie.
    */
   async #setCookie() {
@@ -2047,7 +2263,7 @@ class AstroSession {
     try {
       const storedMap = unflatten(raw);
       if (!(storedMap instanceof Map)) {
-        await this.#destroySafe();
+        await this.destroy();
         throw new AstroError({
           ...SessionStorageInitError,
           message: SessionStorageInitError.message(
@@ -2066,7 +2282,7 @@ class AstroSession {
       this.#partial = false;
       return this.#data;
     } catch (err) {
-      await this.#destroySafe();
+      await this.destroy();
       if (err instanceof AstroError) {
         throw err;
       }
@@ -2081,20 +2297,6 @@ class AstroSession {
         { cause: err }
       );
     }
-  }
-  /**
-   * Safely destroys the session, clearing the cookie and storage if it exists.
-   */
-  #destroySafe() {
-    if (this.#sessionID) {
-      this.#toDestroy.add(this.#sessionID);
-    }
-    if (this.#cookieName) {
-      this.#cookies.delete(this.#cookieName, this.#cookieConfig);
-    }
-    this.#sessionID = void 0;
-    this.#data = void 0;
-    this.#dirty = true;
   }
   /**
    * Returns the session ID, generating a new one if it does not exist.
@@ -2124,21 +2326,15 @@ class AstroSession {
       this.#config.driver = "fs-lite";
       this.#config.options.base ??= ".astro/session";
     }
-    if (!this.#config?.driver) {
-      throw new AstroError({
-        ...SessionStorageInitError,
-        message: SessionStorageInitError.message(
-          "No driver was defined in the session configuration and the adapter did not provide a default driver."
-        )
-      });
-    }
     let driver = null;
-    const driverPackage = await resolveSessionDriver(this.#config.driver);
     try {
       if (this.#config.driverModule) {
         driver = (await this.#config.driverModule()).default;
-      } else if (driverPackage) {
-        driver = (await import(driverPackage)).default;
+      } else if (this.#config.driver) {
+        const driverName = resolveSessionDriverName(this.#config.driver);
+        if (driverName) {
+          driver = (await import(driverName)).default;
+        }
       }
     } catch (err) {
       if (err.code === "ERR_MODULE_NOT_FOUND") {
@@ -2146,7 +2342,7 @@ class AstroSession {
           {
             ...SessionStorageInitError,
             message: SessionStorageInitError.message(
-              err.message.includes(`Cannot find package '${driverPackage}'`) ? "The driver module could not be found." : err.message,
+              err.message.includes(`Cannot find package`) ? "The driver module could not be found." : err.message,
               this.#config.driver
             )
           },
@@ -2181,16 +2377,16 @@ class AstroSession {
     }
   }
 }
-async function resolveSessionDriver(driver) {
+function resolveSessionDriverName(driver) {
   if (!driver) {
     return null;
   }
   try {
     if (driver === "fs") {
-      return await import.meta.resolve(builtinDrivers.fsLite);
+      return builtinDrivers.fsLite;
     }
     if (driver in builtinDrivers) {
-      return await import.meta.resolve(builtinDrivers[driver]);
+      return builtinDrivers[driver];
     }
   } catch {
     return null;
@@ -2198,9 +2394,24 @@ async function resolveSessionDriver(driver) {
   return driver;
 }
 
+function validateAndDecodePathname(pathname) {
+  let decoded;
+  try {
+    decoded = decodeURI(pathname);
+  } catch (_e) {
+    throw new Error("Invalid URL encoding");
+  }
+  const hasDecoding = decoded !== pathname;
+  const decodedStillHasEncoding = /%[0-9a-fA-F]{2}/.test(decoded);
+  if (hasDecoding && decodedStillHasEncoding) {
+    throw new Error("Multi-level URL encoding is not allowed");
+  }
+  return decoded;
+}
+
 const apiContextRoutesSymbol = Symbol.for("context.routes");
 class RenderContext {
-  constructor(pipeline, locals, middleware, actions, pathname, request, routeData, status, clientAddress, cookies = new AstroCookies(request), params = getParams(routeData, pathname), url = new URL(request.url), props = {}, partial = void 0, session = pipeline.manifest.sessionConfig ? new AstroSession(cookies, pipeline.manifest.sessionConfig) : void 0) {
+  constructor(pipeline, locals, middleware, actions, pathname, request, routeData, status, clientAddress, cookies = new AstroCookies(request), params = getParams(routeData, pathname), url = RenderContext.#createNormalizedUrl(request.url), props = {}, partial = void 0, shouldInjectCspMetaTags = !!pipeline.manifest.csp, session = pipeline.manifest.sessionConfig ? new AstroSession(cookies, pipeline.manifest.sessionConfig, pipeline.runtimeMode) : void 0) {
     this.pipeline = pipeline;
     this.locals = locals;
     this.middleware = middleware;
@@ -2215,7 +2426,20 @@ class RenderContext {
     this.url = url;
     this.props = props;
     this.partial = partial;
+    this.shouldInjectCspMetaTags = shouldInjectCspMetaTags;
     this.session = session;
+  }
+  static #createNormalizedUrl(requestUrl) {
+    const url = new URL(requestUrl);
+    try {
+      url.pathname = validateAndDecodePathname(url.pathname);
+    } catch {
+      try {
+        url.pathname = decodeURI(url.pathname);
+      } catch {
+      }
+    }
+    return url;
   }
   /**
    * A flag that tells the render content if the rewriting was triggered
@@ -2225,6 +2449,7 @@ class RenderContext {
    * A safety net in case of loops
    */
   counter = 0;
+  result = void 0;
   static async create({
     locals = {},
     middleware,
@@ -2236,11 +2461,17 @@ class RenderContext {
     status = 200,
     props,
     partial = void 0,
-    actions
+    actions,
+    shouldInjectCspMetaTags
   }) {
     const pipelineMiddleware = await pipeline.getMiddleware();
     const pipelineActions = actions ?? await pipeline.getActions();
-    setOriginPathname(request, pathname);
+    setOriginPathname(
+      request,
+      pathname,
+      pipeline.manifest.trailingSlash,
+      pipeline.manifest.buildFormat
+    );
     return new RenderContext(
       pipeline,
       locals,
@@ -2255,7 +2486,8 @@ class RenderContext {
       void 0,
       void 0,
       props,
-      partial
+      partial,
+      shouldInjectCspMetaTags ?? !!pipeline.manifest.csp
     );
   }
   /**
@@ -2270,7 +2502,7 @@ class RenderContext {
    * - fallback
    */
   async render(componentInstance, slots = {}) {
-    const { cookies, middleware, pipeline } = this;
+    const { middleware, pipeline } = this;
     const { logger, serverLike, streaming, manifest } = pipeline;
     const props = Object.keys(this.props).length > 0 ? this.props : await getProps({
       mod: componentInstance,
@@ -2293,6 +2525,7 @@ class RenderContext {
     }
     const lastNext = async (ctx, payload) => {
       if (payload) {
+        const oldPathname = this.pathname;
         pipeline.logger.debug("router", "Called rewriting to:", payload);
         const {
           routeData,
@@ -2322,11 +2555,16 @@ class RenderContext {
           );
         }
         this.isRewriting = true;
-        this.url = new URL(this.request.url);
-        this.cookies = new AstroCookies(this.request);
+        this.url = RenderContext.#createNormalizedUrl(this.request.url);
         this.params = getParams(routeData, pathname);
         this.pathname = pathname;
         this.status = 200;
+        setOriginPathname(
+          this.request,
+          oldPathname,
+          this.pipeline.manifest.trailingSlash,
+          this.pipeline.manifest.buildFormat
+        );
       }
       let response2;
       if (!ctx.isPrerendered) {
@@ -2349,10 +2587,10 @@ class RenderContext {
         case "redirect":
           return renderRedirect(this);
         case "page": {
-          const result = await this.createResult(componentInstance, actionApiContext);
+          this.result = await this.createResult(componentInstance, actionApiContext);
           try {
             response2 = await renderPage(
-              result,
+              this.result,
               componentInstance?.default,
               props,
               slots,
@@ -2360,7 +2598,7 @@ class RenderContext {
               this.routeData
             );
           } catch (e) {
-            result.cancelled = true;
+            this.result.cancelled = true;
             throw e;
           }
           response2.headers.set(ROUTE_TYPE_HEADER, "page");
@@ -2378,7 +2616,7 @@ class RenderContext {
       }
       const responseCookies = getCookiesFromResponse(response2);
       if (responseCookies) {
-        cookies.merge(responseCookies);
+        this.cookies.merge(responseCookies);
       }
       return response2;
     };
@@ -2389,7 +2627,7 @@ class RenderContext {
     if (response.headers.get(ROUTE_TYPE_HEADER)) {
       response.headers.delete(ROUTE_TYPE_HEADER);
     }
-    attachCookiesToResponse(response, cookies);
+    attachCookiesToResponse(response, this.cookies);
     return response;
   }
   createAPIContext(props, context) {
@@ -2404,11 +2642,13 @@ class RenderContext {
   }
   async #executeRewrite(reroutePayload) {
     this.pipeline.logger.debug("router", "Calling rewrite: ", reroutePayload);
+    const oldPathname = this.pathname;
     const { routeData, componentInstance, newUrl, pathname } = await this.pipeline.tryRewrite(
       reroutePayload,
       this.request
     );
-    if (this.pipeline.serverLike === true && this.routeData.prerender === false && routeData.prerender === true) {
+    const isI18nFallback = routeData.fallbackRoutes && routeData.fallbackRoutes.length > 0;
+    if (this.pipeline.serverLike && !this.routeData.prerender && routeData.prerender && !isI18nFallback) {
       throw new AstroError({
         ...ForbiddenRewrite,
         message: ForbiddenRewrite.message(this.pathname, pathname, routeData.component),
@@ -2428,23 +2668,36 @@ class RenderContext {
         this.routeData.route
       );
     }
-    this.url = new URL(this.request.url);
-    this.cookies = new AstroCookies(this.request);
+    this.url = RenderContext.#createNormalizedUrl(this.request.url);
+    const newCookies = new AstroCookies(this.request);
+    if (this.cookies) {
+      newCookies.merge(this.cookies);
+    }
+    this.cookies = newCookies;
     this.params = getParams(routeData, pathname);
     this.pathname = pathname;
     this.isRewriting = true;
     this.status = 200;
+    setOriginPathname(
+      this.request,
+      oldPathname,
+      this.pipeline.manifest.trailingSlash,
+      this.pipeline.manifest.buildFormat
+    );
     return await this.render(componentInstance);
   }
   createActionAPIContext() {
     const renderContext = this;
-    const { cookies, params, pipeline, url, session } = this;
+    const { params, pipeline, url } = this;
     const generator = `Astro v${ASTRO_VERSION}`;
     const rewrite = async (reroutePayload) => {
       return await this.#executeRewrite(reroutePayload);
     };
     return {
-      cookies,
+      // Don't allow reassignment of cookies because it doesn't work
+      get cookies() {
+        return renderContext.cookies;
+      },
       routePattern: this.routeData.route,
       isPrerendered: this.routeData.prerender,
       get clientAddress() {
@@ -2474,13 +2727,82 @@ class RenderContext {
       get originPathname() {
         return getOriginPathname(renderContext.request);
       },
-      session
+      get session() {
+        if (this.isPrerendered) {
+          pipeline.logger.warn(
+            "session",
+            `context.session was used when rendering the route ${colors.green(this.routePattern)}, but it is not available on prerendered routes. If you need access to sessions, make sure that the route is server-rendered using \`export const prerender = false;\` or by setting \`output\` to \`"server"\` in your Astro config to make all your routes server-rendered by default. For more information, see https://docs.astro.build/en/guides/sessions/`
+          );
+          return void 0;
+        }
+        if (!renderContext.session) {
+          pipeline.logger.warn(
+            "session",
+            `context.session was used when rendering the route ${colors.green(this.routePattern)}, but no storage configuration was provided. Either configure the storage manually or use an adapter that provides session storage. For more information, see https://docs.astro.build/en/guides/sessions/`
+          );
+          return void 0;
+        }
+        return renderContext.session;
+      },
+      get csp() {
+        return {
+          insertDirective(payload) {
+            if (!pipeline.manifest.csp) {
+              throw new AstroError(CspNotEnabled);
+            }
+            if (renderContext?.result?.directives) {
+              renderContext.result.directives = pushDirective(
+                renderContext.result.directives,
+                payload
+              );
+            } else {
+              renderContext?.result?.directives.push(payload);
+            }
+          },
+          insertScriptResource(resource) {
+            if (!pipeline.manifest.csp) {
+              throw new AstroError(CspNotEnabled);
+            }
+            renderContext.result?.scriptResources.push(resource);
+          },
+          insertStyleResource(resource) {
+            if (!pipeline.manifest.csp) {
+              throw new AstroError(CspNotEnabled);
+            }
+            renderContext.result?.styleResources.push(resource);
+          },
+          insertStyleHash(hash) {
+            if (!pipeline.manifest.csp) {
+              throw new AstroError(CspNotEnabled);
+            }
+            renderContext.result?.styleHashes.push(hash);
+          },
+          insertScriptHash(hash) {
+            if (!pipeline.manifest.csp) {
+              throw new AstroError(CspNotEnabled);
+            }
+            renderContext.result?.scriptHashes.push(hash);
+          }
+        };
+      }
     };
   }
   async createResult(mod, ctx) {
     const { cookies, pathname, pipeline, routeData, status } = this;
     const { clientDirectives, inlinedScripts, compressHTML, manifest, renderers, resolve } = pipeline;
     const { links, scripts, styles } = await pipeline.headElements(routeData);
+    const extraStyleHashes = [];
+    const extraScriptHashes = [];
+    const shouldInjectCspMetaTags = this.shouldInjectCspMetaTags;
+    const cspAlgorithm = manifest.csp?.algorithm ?? "SHA-256";
+    if (shouldInjectCspMetaTags) {
+      for (const style of styles) {
+        extraStyleHashes.push(await generateCspDigest(style.children, cspAlgorithm));
+      }
+      for (const script of scripts) {
+        extraScriptHashes.push(await generateCspDigest(script.children, cspAlgorithm));
+      }
+    }
     const componentMetadata = await pipeline.componentMetadata(routeData) ?? manifest.componentMetadata;
     const headers = new Headers({ "Content-Type": "text/html" });
     const partial = typeof this.partial === "boolean" ? this.partial : Boolean(mod.partial);
@@ -2527,10 +2849,24 @@ class RenderContext {
         hasRenderedHead: false,
         renderedScripts: /* @__PURE__ */ new Set(),
         hasDirectives: /* @__PURE__ */ new Set(),
+        hasRenderedServerIslandRuntime: false,
         headInTree: false,
         extraHead: [],
+        extraStyleHashes,
+        extraScriptHashes,
         propagators: /* @__PURE__ */ new Set()
-      }
+      },
+      cspDestination: manifest.csp?.cspDestination ?? (routeData.prerender ? "meta" : "header"),
+      shouldInjectCspMetaTags,
+      cspAlgorithm,
+      // The following arrays must be cloned, otherwise they become mutable across routes.
+      scriptHashes: manifest.csp?.scriptHashes ? [...manifest.csp.scriptHashes] : [],
+      scriptResources: manifest.csp?.scriptResources ? [...manifest.csp.scriptResources] : [],
+      styleHashes: manifest.csp?.styleHashes ? [...manifest.csp.styleHashes] : [],
+      styleResources: manifest.csp?.styleResources ? [...manifest.csp.styleResources] : [],
+      directives: manifest.csp?.directives ? [...manifest.csp.directives] : [],
+      isStrictDynamic: manifest.csp?.isStrictDynamic ?? false,
+      internalFetchHeaders: manifest.internalFetchHeaders
     };
     return result;
   }
@@ -2580,7 +2916,7 @@ class RenderContext {
   }
   createAstroPagePartial(result, astroStaticPartial, apiContext) {
     const renderContext = this;
-    const { cookies, locals, params, pipeline, url, session } = this;
+    const { cookies, locals, params, pipeline, url } = this;
     const { response } = result;
     const redirect = (path, status = 302) => {
       if (this.request[responseSentSymbol$1]) {
@@ -2600,7 +2936,23 @@ class RenderContext {
       routePattern: this.routeData.route,
       isPrerendered: this.routeData.prerender,
       cookies,
-      session,
+      get session() {
+        if (this.isPrerendered) {
+          pipeline.logger.warn(
+            "session",
+            `Astro.session was used when rendering the route ${colors.green(this.routePattern)}, but it is not available on prerendered pages. If you need access to sessions, make sure that the page is server-rendered using \`export const prerender = false;\` or by setting \`output\` to \`"server"\` in your Astro config to make all your pages server-rendered by default. For more information, see https://docs.astro.build/en/guides/sessions/`
+          );
+          return void 0;
+        }
+        if (!renderContext.session) {
+          pipeline.logger.warn(
+            "session",
+            `Astro.session was used when rendering the route ${colors.green(this.routePattern)}, but no storage configuration was provided. Either configure the storage manually or use an adapter that provides session storage. For more information, see https://docs.astro.build/en/guides/sessions/`
+          );
+          return void 0;
+        }
+        return renderContext.session;
+      },
       get clientAddress() {
         return renderContext.getClientAddress();
       },
@@ -2627,13 +2979,57 @@ class RenderContext {
       url,
       get originPathname() {
         return getOriginPathname(renderContext.request);
+      },
+      get csp() {
+        return {
+          insertDirective(payload) {
+            if (!pipeline.manifest.csp) {
+              throw new AstroError(CspNotEnabled);
+            }
+            if (renderContext?.result?.directives) {
+              renderContext.result.directives = pushDirective(
+                renderContext.result.directives,
+                payload
+              );
+            } else {
+              renderContext?.result?.directives.push(payload);
+            }
+          },
+          insertScriptResource(resource) {
+            if (!pipeline.manifest.csp) {
+              throw new AstroError(CspNotEnabled);
+            }
+            renderContext.result?.scriptResources.push(resource);
+          },
+          insertStyleResource(resource) {
+            if (!pipeline.manifest.csp) {
+              throw new AstroError(CspNotEnabled);
+            }
+            renderContext.result?.styleResources.push(resource);
+          },
+          insertStyleHash(hash) {
+            if (!pipeline.manifest.csp) {
+              throw new AstroError(CspNotEnabled);
+            }
+            renderContext.result?.styleHashes.push(hash);
+          },
+          insertScriptHash(hash) {
+            if (!pipeline.manifest.csp) {
+              throw new AstroError(CspNotEnabled);
+            }
+            renderContext.result?.scriptHashes.push(hash);
+          }
+        };
       }
     };
   }
   getClientAddress() {
     const { pipeline, request, routeData, clientAddress } = this;
     if (routeData.prerender) {
-      throw new AstroError(PrerenderClientAddressNotAvailable);
+      throw new AstroError({
+        ...PrerenderClientAddressNotAvailable,
+        message: PrerenderClientAddressNotAvailable.message(routeData.component)
+      });
     }
     if (clientAddress) {
       return clientAddress;
@@ -2711,82 +3107,25 @@ class RenderContext {
   }
 }
 
-function getAssetsPrefix(fileExtension, assetsPrefix) {
-  if (!assetsPrefix) return "";
-  if (typeof assetsPrefix === "string") return assetsPrefix;
-  const dotLessFileExtension = fileExtension.slice(1);
-  if (assetsPrefix[dotLessFileExtension]) {
-    return assetsPrefix[dotLessFileExtension];
-  }
-  return assetsPrefix.fallback;
-}
-
-function createAssetLink(href, base, assetsPrefix) {
-  if (assetsPrefix) {
-    const pf = getAssetsPrefix(fileExtension(href), assetsPrefix);
-    return joinPaths(pf, slash(href));
-  } else if (base) {
-    return prependForwardSlash(joinPaths(base, slash(href)));
-  } else {
-    return href;
-  }
-}
-function createStylesheetElement(stylesheet, base, assetsPrefix) {
-  if (stylesheet.type === "inline") {
-    return {
-      props: {},
-      children: stylesheet.content
-    };
-  } else {
-    return {
-      props: {
-        rel: "stylesheet",
-        href: createAssetLink(stylesheet.src, base, assetsPrefix)
-      },
-      children: ""
-    };
-  }
-}
-function createStylesheetElementSet(stylesheets, base, assetsPrefix) {
-  return new Set(stylesheets.map((s) => createStylesheetElement(s, base, assetsPrefix)));
-}
-function createModuleScriptElement(script, base, assetsPrefix) {
-  if (script.type === "external") {
-    return createModuleScriptElementWithSrc(script.value, base, assetsPrefix);
-  } else {
-    return {
-      props: {
-        type: "module"
-      },
-      children: script.value
-    };
-  }
-}
-function createModuleScriptElementWithSrc(src, base, assetsPrefix) {
-  return {
-    props: {
-      type: "module",
-      src: createAssetLink(src, base, assetsPrefix)
-    },
-    children: ""
-  };
-}
-
-function redirectTemplate({ status, location, from }) {
+function redirectTemplate({
+  status,
+  absoluteLocation,
+  relativeLocation,
+  from
+}) {
   const delay = status === 302 ? 2 : 0;
   return `<!doctype html>
-<title>Redirecting to: ${location}</title>
-<meta http-equiv="refresh" content="${delay};url=${location}">
+<title>Redirecting to: ${relativeLocation}</title>
+<meta http-equiv="refresh" content="${delay};url=${relativeLocation}">
 <meta name="robots" content="noindex">
-<link rel="canonical" href="${location}">
+<link rel="canonical" href="${absoluteLocation}">
 <body>
-	<a href="${location}">Redirecting ${from ? `from <code>${from}</code> ` : ""}to <code>${location}</code></a>
+	<a href="${relativeLocation}">Redirecting ${from ? `from <code>${from}</code> ` : ""}to <code>${relativeLocation}</code></a>
 </body>`;
 }
 
 class AppPipeline extends Pipeline {
-  #manifestData;
-  static create(manifestData, {
+  static create({
     logger,
     manifest,
     runtimeMode,
@@ -2814,7 +3153,6 @@ class AppPipeline extends Pipeline {
       void 0,
       defaultRoutes
     );
-    pipeline.#manifestData = manifestData;
     return pipeline;
   }
   headElements(routeData) {
@@ -2849,7 +3187,8 @@ class AppPipeline extends Pipeline {
       routes: this.manifest?.routes.map((r) => r.routeData),
       trailingSlash: this.manifest.trailingSlash,
       buildFormat: this.manifest.buildFormat,
-      base: this.manifest.base
+      base: this.manifest.base,
+      outDir: this.serverLike ? this.manifest.buildClientDir : this.manifest.outDir
     });
     const componentInstance = await this.getComponentByRoute(routeData);
     return { newUrl, pathname, componentInstance, routeData };
@@ -2894,7 +3233,6 @@ class App {
   #baseWithoutTrailingSlash;
   #pipeline;
   #adapterLogger;
-  #renderOptionsDeprecationWarningShown = false;
   constructor(manifest, streaming = true) {
     this.#manifest = manifest;
     this.#manifestData = {
@@ -2902,7 +3240,7 @@ class App {
     };
     ensure404Route(this.#manifestData);
     this.#baseWithoutTrailingSlash = removeTrailingForwardSlash(this.#manifest.base);
-    this.#pipeline = this.#createPipeline(this.#manifestData, streaming);
+    this.#pipeline = this.#createPipeline(streaming);
     this.#adapterLogger = new AstroIntegrationLogger(
       this.#logger.options,
       this.#manifest.adapterName
@@ -2911,15 +3249,105 @@ class App {
   getAdapterLogger() {
     return this.#adapterLogger;
   }
+  getAllowedDomains() {
+    return this.#manifest.allowedDomains;
+  }
+  get manifest() {
+    return this.#manifest;
+  }
+  set manifest(value) {
+    this.#manifest = value;
+  }
+  matchesAllowedDomains(forwardedHost, protocol) {
+    return App.validateForwardedHost(forwardedHost, this.#manifest.allowedDomains, protocol);
+  }
+  static validateForwardedHost(forwardedHost, allowedDomains, protocol) {
+    if (!allowedDomains || allowedDomains.length === 0) {
+      return false;
+    }
+    try {
+      const testUrl = new URL(`${protocol || "https"}://${forwardedHost}`);
+      return allowedDomains.some((pattern) => {
+        return matchPattern(testUrl, pattern);
+      });
+    } catch {
+      return false;
+    }
+  }
+  /**
+   * Validate a hostname by rejecting any with path separators.
+   * Prevents path injection attacks. Invalid hostnames return undefined.
+   */
+  static sanitizeHost(hostname) {
+    if (!hostname) return void 0;
+    if (/[/\\]/.test(hostname)) return void 0;
+    return hostname;
+  }
+  /**
+   * Validate forwarded headers (proto, host, port) against allowedDomains.
+   * Returns validated values or undefined for rejected headers.
+   * Uses strict defaults: http/https only for proto, rejects port if not in allowedDomains.
+   */
+  static validateForwardedHeaders(forwardedProtocol, forwardedHost, forwardedPort, allowedDomains) {
+    const result = {};
+    if (forwardedProtocol) {
+      if (allowedDomains && allowedDomains.length > 0) {
+        const hasProtocolPatterns = allowedDomains.some(
+          (pattern) => pattern.protocol !== void 0
+        );
+        if (hasProtocolPatterns) {
+          try {
+            const testUrl = new URL(`${forwardedProtocol}://example.com`);
+            const isAllowed = allowedDomains.some((pattern) => matchPattern(testUrl, pattern));
+            if (isAllowed) {
+              result.protocol = forwardedProtocol;
+            }
+          } catch {
+          }
+        } else if (/^https?$/.test(forwardedProtocol)) {
+          result.protocol = forwardedProtocol;
+        }
+      } else if (/^https?$/.test(forwardedProtocol)) {
+        result.protocol = forwardedProtocol;
+      }
+    }
+    if (forwardedPort && allowedDomains && allowedDomains.length > 0) {
+      const hasPortPatterns = allowedDomains.some((pattern) => pattern.port !== void 0);
+      if (hasPortPatterns) {
+        const isAllowed = allowedDomains.some((pattern) => pattern.port === forwardedPort);
+        if (isAllowed) {
+          result.port = forwardedPort;
+        }
+      }
+    }
+    if (forwardedHost && forwardedHost.length > 0 && allowedDomains && allowedDomains.length > 0) {
+      const protoForValidation = result.protocol || "https";
+      const sanitized = App.sanitizeHost(forwardedHost);
+      if (sanitized) {
+        try {
+          const hostnameOnly = sanitized.split(":")[0];
+          const portFromHost = sanitized.includes(":") ? sanitized.split(":")[1] : void 0;
+          const portForValidation = result.port || portFromHost;
+          const hostWithPort = portForValidation ? `${hostnameOnly}:${portForValidation}` : hostnameOnly;
+          const testUrl = new URL(`${protoForValidation}://${hostWithPort}`);
+          const isAllowed = allowedDomains.some((pattern) => matchPattern(testUrl, pattern));
+          if (isAllowed) {
+            result.host = sanitized;
+          }
+        } catch {
+        }
+      }
+    }
+    return result;
+  }
   /**
    * Creates a pipeline by reading the stored manifest
    *
-   * @param manifestData
    * @param streaming
    * @private
    */
-  #createPipeline(manifestData, streaming = false) {
-    return AppPipeline.create(manifestData, {
+  #createPipeline(streaming = false) {
+    return AppPipeline.create({
       logger: this.#logger,
       manifest: this.#manifest,
       runtimeMode: "production",
@@ -2960,37 +3388,53 @@ class App {
     const url = new URL(request.url);
     const pathname = prependForwardSlash(this.removeBase(url.pathname));
     try {
-      return decodeURI(pathname);
+      return validateAndDecodePathname(pathname);
     } catch (e) {
       this.getAdapterLogger().error(e.toString());
       return pathname;
     }
   }
-  match(request) {
+  /**
+   * Given a `Request`, it returns the `RouteData` that matches its `pathname`. By default, prerendered
+   * routes aren't returned, even if they are matched.
+   *
+   * When `allowPrerenderedRoutes` is `true`, the function returns matched prerendered routes too.
+   * @param request
+   * @param allowPrerenderedRoutes
+   */
+  match(request, allowPrerenderedRoutes = false) {
     const url = new URL(request.url);
     if (this.#manifest.assets.has(url.pathname)) return void 0;
     let pathname = this.#computePathnameFromDomain(request);
     if (!pathname) {
       pathname = prependForwardSlash(this.removeBase(url.pathname));
     }
-    let routeData = matchRoute(decodeURI(pathname), this.#manifestData);
-    if (!routeData || routeData.prerender) return void 0;
+    try {
+      pathname = validateAndDecodePathname(pathname);
+    } catch {
+      return void 0;
+    }
+    let routeData = matchRoute(pathname, this.#manifestData);
+    if (!routeData) return void 0;
+    if (allowPrerenderedRoutes) {
+      return routeData;
+    } else if (routeData.prerender) {
+      return void 0;
+    }
     return routeData;
   }
   #computePathnameFromDomain(request) {
     let pathname = void 0;
     const url = new URL(request.url);
     if (this.#manifest.i18n && (this.#manifest.i18n.strategy === "domains-prefix-always" || this.#manifest.i18n.strategy === "domains-prefix-other-locales" || this.#manifest.i18n.strategy === "domains-prefix-always-no-redirect")) {
-      let host = request.headers.get("X-Forwarded-Host");
-      let protocol = request.headers.get("X-Forwarded-Proto");
-      if (protocol) {
-        protocol = protocol + ":";
-      } else {
-        protocol = url.protocol;
-      }
-      if (!host) {
-        host = request.headers.get("Host");
-      }
+      const validated = App.validateForwardedHeaders(
+        request.headers.get("X-Forwarded-Proto") ?? void 0,
+        request.headers.get("X-Forwarded-Host") ?? void 0,
+        request.headers.get("X-Forwarded-Port") ?? void 0,
+        this.#manifest.allowedDomains
+      );
+      let protocol = validated.protocol ? validated.protocol + ":" : url.protocol;
+      let host = validated.host ?? request.headers.get("Host");
       if (host && protocol) {
         host = host.split(":")[0];
         try {
@@ -3026,7 +3470,7 @@ class App {
   }
   #redirectTrailingSlash(pathname) {
     const { trailingSlash } = this.#manifest;
-    if (pathname === "/" || pathname.startsWith("/_")) {
+    if (pathname === "/" || isInternalPath(pathname)) {
       return pathname;
     }
     const path = collapseDuplicateTrailingSlashes(pathname, trailingSlash !== "never");
@@ -3051,14 +3495,23 @@ class App {
     let addCookieHeader;
     const url = new URL(request.url);
     const redirect = this.#redirectTrailingSlash(url.pathname);
+    const prerenderedErrorPageFetch = renderOptions?.prerenderedErrorPageFetch ?? fetch;
     if (redirect !== url.pathname) {
       const status = request.method === "GET" ? 301 : 308;
-      return new Response(redirectTemplate({ status, location: redirect, from: request.url }), {
-        status,
-        headers: {
-          location: redirect + url.search
+      return new Response(
+        redirectTemplate({
+          status,
+          relativeLocation: url.pathname,
+          absoluteLocation: redirect,
+          from: request.url
+        }),
+        {
+          status,
+          headers: {
+            location: redirect + url.search
+          }
         }
-      });
+      );
     }
     addCookieHeader = renderOptions?.addCookieHeader;
     clientAddress = renderOptions?.clientAddress ?? Reflect.get(request, clientAddressSymbol);
@@ -3076,7 +3529,12 @@ class App {
       if (typeof locals !== "object") {
         const error = new AstroError(LocalsNotAnObject);
         this.#logger.error(null, error.stack);
-        return this.#renderError(request, { status: 500, error, clientAddress });
+        return this.#renderError(request, {
+          status: 500,
+          error,
+          clientAddress,
+          prerenderedErrorPageFetch
+        });
       }
     }
     if (!routeData) {
@@ -3085,9 +3543,19 @@ class App {
       this.#logger.debug("router", "RouteData:\n" + routeData);
     }
     if (!routeData) {
+      routeData = this.#manifestData.routes.find(
+        (route) => route.component === "404.astro" || route.component === DEFAULT_404_COMPONENT
+      );
+    }
+    if (!routeData) {
       this.#logger.debug("router", "Astro hasn't found routes that match " + request.url);
       this.#logger.debug("router", "Here's the available routes:\n", this.#manifestData);
-      return this.#renderError(request, { locals, status: 404, clientAddress });
+      return this.#renderError(request, {
+        locals,
+        status: 404,
+        clientAddress,
+        prerenderedErrorPageFetch
+      });
     }
     const pathname = this.#getPathnameFromRequest(request);
     const defaultStatus = this.#getDefaultStatusCode(routeData, pathname);
@@ -3108,11 +3576,19 @@ class App {
       response = await renderContext.render(await mod.page());
     } catch (err) {
       this.#logger.error(null, err.stack || err.message || String(err));
-      return this.#renderError(request, { locals, status: 500, error: err, clientAddress });
+      return this.#renderError(request, {
+        locals,
+        status: 500,
+        error: err,
+        clientAddress,
+        prerenderedErrorPageFetch
+      });
     } finally {
       await session?.[PERSIST_SYMBOL]();
     }
-    if (REROUTABLE_STATUS_CODES.includes(response.status) && response.headers.get(REROUTE_DIRECTIVE_HEADER) !== "no") {
+    if (REROUTABLE_STATUS_CODES.includes(response.status) && // If the body isn't null, that means the user sets the 404 status
+    // but uses the current route to handle the 404
+    response.body === null && response.headers.get(REROUTE_DIRECTIVE_HEADER) !== "no") {
       return this.#renderError(request, {
         locals,
         response,
@@ -3120,7 +3596,8 @@ class App {
         // We don't have an error to report here. Passing null means we pass nothing intentionally
         // while undefined means there's no error
         error: response.status === 500 ? null : void 0,
-        clientAddress
+        clientAddress,
+        prerenderedErrorPageFetch
       });
     }
     if (response.headers.has(REROUTE_DIRECTIVE_HEADER)) {
@@ -3159,7 +3636,8 @@ class App {
     response: originalResponse,
     skipMiddleware = false,
     error,
-    clientAddress
+    clientAddress,
+    prerenderedErrorPageFetch
   }) {
     const errorRoutePath = `/${status}${this.#manifest.trailingSlash === "always" ? "/" : ""}`;
     const errorRouteData = matchRoute(errorRoutePath, this.#manifestData);
@@ -3172,8 +3650,8 @@ class App {
           url
         );
         if (statusURL.toString() !== request.url) {
-          const response2 = await fetch(statusURL.toString());
-          const override = { status };
+          const response2 = await prerenderedErrorPageFetch(statusURL.toString());
+          const override = { status, removeContentEncodingHeaders: true };
           return this.#mergeResponses(response2, originalResponse, override);
         }
       }
@@ -3201,7 +3679,8 @@ class App {
             status,
             response: originalResponse,
             skipMiddleware: true,
-            clientAddress
+            clientAddress,
+            prerenderedErrorPageFetch
           });
         }
       } finally {
@@ -3213,12 +3692,18 @@ class App {
     return response;
   }
   #mergeResponses(newResponse, originalResponse, override) {
+    let newResponseHeaders = newResponse.headers;
+    if (override?.removeContentEncodingHeaders) {
+      newResponseHeaders = new Headers(newResponseHeaders);
+      newResponseHeaders.delete("Content-Encoding");
+      newResponseHeaders.delete("Content-Length");
+    }
     if (!originalResponse) {
       if (override !== void 0) {
         return new Response(newResponse.body, {
           status: override.status,
           statusText: newResponse.statusText,
-          headers: newResponse.headers
+          headers: newResponseHeaders
         });
       }
       return newResponse;
@@ -3229,7 +3714,7 @@ class App {
     } catch {
     }
     const mergedHeaders = new Map([
-      ...Array.from(newResponse.headers),
+      ...Array.from(newResponseHeaders),
       ...Array.from(originalResponse.headers)
     ]);
     const newHeaders = new Headers();
@@ -3293,17 +3778,24 @@ function apply() {
 }
 
 class NodeApp extends App {
-  match(req) {
+  headersMap = void 0;
+  setHeadersMap(headers) {
+    this.headersMap = headers;
+  }
+  match(req, allowPrerenderedRoutes = false) {
     if (!(req instanceof Request)) {
       req = NodeApp.createRequest(req, {
-        skipBody: true
+        skipBody: true,
+        allowedDomains: this.manifest.allowedDomains
       });
     }
-    return super.match(req);
+    return super.match(req, allowPrerenderedRoutes);
   }
   render(req, routeDataOrOptions, maybeLocals) {
     if (!(req instanceof Request)) {
-      req = NodeApp.createRequest(req);
+      req = NodeApp.createRequest(req, {
+        allowedDomains: this.manifest.allowedDomains
+      });
     }
     return super.render(req, routeDataOrOptions, maybeLocals);
   }
@@ -3320,28 +3812,81 @@ class NodeApp extends App {
    * })
    * ```
    */
-  static createRequest(req, { skipBody = false } = {}) {
+  static createRequest(req, {
+    skipBody = false,
+    allowedDomains = []
+  } = {}) {
+    const controller = new AbortController();
     const isEncrypted = "encrypted" in req.socket && req.socket.encrypted;
     const getFirstForwardedValue = (multiValueHeader) => {
       return multiValueHeader?.toString()?.split(",").map((e) => e.trim())?.[0];
     };
-    const forwardedProtocol = getFirstForwardedValue(req.headers["x-forwarded-proto"]);
-    const protocol = forwardedProtocol ?? (isEncrypted ? "https" : "http");
-    const forwardedHostname = getFirstForwardedValue(req.headers["x-forwarded-host"]);
-    const hostname = forwardedHostname ?? req.headers.host ?? req.headers[":authority"];
-    const port = getFirstForwardedValue(req.headers["x-forwarded-port"]);
-    const portInHostname = typeof hostname === "string" && /:\d+$/.test(hostname);
-    const hostnamePort = portInHostname ? hostname : `${hostname}${port ? `:${port}` : ""}`;
-    const url = `${protocol}://${hostnamePort}${req.url}`;
+    const providedProtocol = isEncrypted ? "https" : "http";
+    const providedHostname = req.headers.host ?? req.headers[":authority"];
+    const validated = App.validateForwardedHeaders(
+      getFirstForwardedValue(req.headers["x-forwarded-proto"]),
+      getFirstForwardedValue(req.headers["x-forwarded-host"]),
+      getFirstForwardedValue(req.headers["x-forwarded-port"]),
+      allowedDomains
+    );
+    const protocol = validated.protocol ?? providedProtocol;
+    const sanitizedProvidedHostname = App.sanitizeHost(
+      typeof providedHostname === "string" ? providedHostname : void 0
+    );
+    const hostname = validated.host ?? sanitizedProvidedHostname;
+    const port = validated.port;
+    let url;
+    try {
+      const hostnamePort = getHostnamePort(hostname, port);
+      url = new URL(`${protocol}://${hostnamePort}${req.url}`);
+    } catch {
+      const hostnamePort = getHostnamePort(providedHostname, port);
+      url = new URL(`${providedProtocol}://${hostnamePort}`);
+    }
     const options = {
       method: req.method || "GET",
-      headers: makeRequestHeaders(req)
+      headers: makeRequestHeaders(req),
+      signal: controller.signal
     };
     const bodyAllowed = options.method !== "HEAD" && options.method !== "GET" && skipBody === false;
     if (bodyAllowed) {
       Object.assign(options, makeRequestBody(req));
     }
     const request = new Request(url, options);
+    const socket = getRequestSocket(req);
+    if (socket && typeof socket.on === "function") {
+      const existingCleanup = getAbortControllerCleanup(req);
+      if (existingCleanup) {
+        existingCleanup();
+      }
+      let cleanedUp = false;
+      const removeSocketListener = () => {
+        if (typeof socket.off === "function") {
+          socket.off("close", onSocketClose);
+        } else if (typeof socket.removeListener === "function") {
+          socket.removeListener("close", onSocketClose);
+        }
+      };
+      const cleanup = () => {
+        if (cleanedUp) return;
+        cleanedUp = true;
+        removeSocketListener();
+        controller.signal.removeEventListener("abort", cleanup);
+        Reflect.deleteProperty(req, nodeRequestAbortControllerCleanupSymbol);
+      };
+      const onSocketClose = () => {
+        cleanup();
+        if (!controller.signal.aborted) {
+          controller.abort();
+        }
+      };
+      socket.on("close", onSocketClose);
+      controller.signal.addEventListener("abort", cleanup, { once: true });
+      Reflect.set(req, nodeRequestAbortControllerCleanupSymbol, cleanup);
+      if (socket.destroyed) {
+        onSocketClose();
+      }
+    }
     const forwardedClientIp = getFirstForwardedValue(req.headers["x-forwarded-for"]);
     const clientIp = forwardedClientIp || req.socket?.remoteAddress;
     if (clientIp) {
@@ -3370,6 +3915,23 @@ class NodeApp extends App {
       destination.statusMessage = statusText;
     }
     destination.writeHead(status, createOutgoingHttpHeaders(headers));
+    const cleanupAbortFromDestination = getAbortControllerCleanup(
+      destination.req ?? void 0
+    );
+    if (cleanupAbortFromDestination) {
+      const runCleanup = () => {
+        cleanupAbortFromDestination();
+        if (typeof destination.off === "function") {
+          destination.off("finish", runCleanup);
+          destination.off("close", runCleanup);
+        } else {
+          destination.removeListener?.("finish", runCleanup);
+          destination.removeListener?.("close", runCleanup);
+        }
+      };
+      destination.on("finish", runCleanup);
+      destination.on("close", runCleanup);
+    }
     if (!body) return destination.end();
     try {
       const reader = body.getReader();
@@ -3393,6 +3955,11 @@ class NodeApp extends App {
       });
     }
   }
+}
+function getHostnamePort(hostname, port) {
+  const portInHostname = typeof hostname === "string" && /:\d+$/.test(hostname);
+  const hostnamePort = portInHostname ? hostname : `${hostname}${port ? `:${port}` : ""}`;
+  return hostnamePort;
 }
 function makeRequestHeaders(req) {
   const headers = new Headers();
@@ -3436,14 +4003,25 @@ function asyncIterableToBodyProps(iterable) {
     duplex: "half"
   };
 }
+function getAbortControllerCleanup(req) {
+  if (!req) return void 0;
+  const cleanup = Reflect.get(req, nodeRequestAbortControllerCleanupSymbol);
+  return typeof cleanup === "function" ? cleanup : void 0;
+}
+function getRequestSocket(req) {
+  if (req.socket && typeof req.socket.on === "function") {
+    return req.socket;
+  }
+  const http2Socket = req.stream?.session?.socket;
+  if (http2Socket && typeof http2Socket.on === "function") {
+    return http2Socket;
+  }
+  return void 0;
+}
 
 apply();
 
 nodePath.posix.join;
-
-new RegExp(
-  builtinModules.map((mod) => `(^${mod}$|^node:${mod}$)`).join("|")
-);
 
 const ASTRO_PATH_HEADER = "x-astro-path";
 const ASTRO_PATH_PARAM = "x_astro_path";
@@ -3491,4 +4069,10 @@ const createExports = (manifest, {
 function start() {
 }
 
-export { createExports as c, start as s };
+const serverEntrypointModule = /*#__PURE__*/Object.freeze(/*#__PURE__*/Object.defineProperty({
+  __proto__: null,
+  createExports,
+  start
+}, Symbol.toStringTag, { value: 'Module' }));
+
+export { start as a, createExports as c, serverEntrypointModule as s };

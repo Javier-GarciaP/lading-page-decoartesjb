@@ -1,7 +1,6 @@
 import { renderers } from './renderers.mjs';
-import { a as actions } from './chunks/_noop-actions_CfKMStZn.mjs';
-import { c as createExports } from './chunks/entrypoint_DKKSRXmI.mjs';
-import { manifest } from './manifest_KaZwJ7bq.mjs';
+import { c as createExports, s as serverEntrypointModule } from './chunks/_@astrojs-ssr-adapter_EwgVdT_e.mjs';
+import { manifest } from './manifest_DEtzW89P.mjs';
 
 const serverIslandMap = new Map();;
 
@@ -50,14 +49,16 @@ const _manifest = Object.assign(manifest, {
     pageMap,
     serverIslandMap,
     renderers,
-    actions,
+    actions: () => import('./noop-entrypoint.mjs'),
     middleware: () => import('./_noop-middleware.mjs')
 });
 const _args = {
-    "middlewareSecret": "0660eafa-165f-4509-b978-ba175c030d48",
+    "middlewareSecret": "092f288f-4ab1-4b83-b94c-8e727da3437f",
     "skewProtection": false
 };
 const _exports = createExports(_manifest, _args);
 const __astrojsSsrVirtualEntry = _exports.default;
+const _start = 'start';
+if (Object.prototype.hasOwnProperty.call(serverEntrypointModule, _start)) ;
 
 export { __astrojsSsrVirtualEntry as default, pageMap };

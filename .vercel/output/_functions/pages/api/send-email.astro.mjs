@@ -1,8 +1,9 @@
 import { Resend } from 'resend';
 export { renderers } from '../../renderers.mjs';
 
-const resend = new Resend("re_9fuEHeNM_BUFjzuAJ9eoSc2YsVezZmbYD");
-const sendEmail = async (to, subject, html) => {
+const sendEmail = async (to, subject, html, apiKey) => {
+  const key = apiKey || "re_9fuEHeNM_BUFjzuAJ9eoSc2YsVezZmbYD";
+  const resend = new Resend(key);
   return await resend.emails.send({
     from: "Event Planner <onboarding@resend.dev>",
     to: ["josejaviergarciap123@gmail.com"],
@@ -13,7 +14,8 @@ const sendEmail = async (to, subject, html) => {
 
 const prerender = false;
 const POST = async ({
-  request
+  request,
+  locals
 }) => {
   try {
     const data = await request.json();
@@ -62,7 +64,7 @@ const POST = async ({
     `;
     const {
       error
-    } = await sendEmail('josejaviergarciap123@gmail.com', `✨ Nueva Consulta de Evento: ${nombre}`, html);
+    } = await sendEmail('josejaviergarciap123@gmail.com', `✨ Nueva Consulta de Evento: ${nombre}`, html, locals?.runtime?.env?.RESEND_API_KEY);
     if (error) {
       console.error('Error Resend:', error);
       return new Response(JSON.stringify({
