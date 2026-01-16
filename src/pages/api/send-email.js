@@ -51,7 +51,7 @@ export const POST = async ({ request, locals }) => {
       'josejaviergarciap123@gmail.com',
       `✨ Nueva Consulta de Evento: ${nombre}`,
       html,
-      locals?.runtime?.env?.RESEND_API_KEY
+      process.env.RESEND_API_KEY || import.meta.env.RESEND_API_KEY
     );
 
     if (error) {
