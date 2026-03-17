@@ -42,7 +42,7 @@ export const POST = async ({ request, locals }) => {
         </div>
         
         <p style="font-size: 12px; color: #999; margin-top: 20px; text-align: center;">
-          Este mensaje fue enviado desde el formulario de contacto de DecoArtes JB.
+          Este mensaje fue enviado desde el formulario de contacto de SJBDecoarte.
         </p>
       </div>
     `;

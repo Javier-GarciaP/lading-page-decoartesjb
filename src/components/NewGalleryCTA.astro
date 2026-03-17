@@ -1,0 +1,73 @@
+---
+---
+
+<section class="py-20 relative overflow-hidden bg-bg">
+  <!-- Decorative background elements -->
+  <div class="absolute top-0 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-[120px] -z-10 animate-pulse"></div>
+  <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-primary/5 rounded-full blur-[120px] -z-10"></div>
+  
+  <div class="max-w-7xl mx-auto px-6 lg:px-10">
+    <div class="relative group rounded-3xl overflow-hidden border border-white/10 bg-white/5 backdrop-blur-sm p-1 lg:p-2">
+      <div class="grid grid-cols-1 lg:grid-cols-2 items-center gap-0">
+        
+        <!-- Image side -->
+        <div class="relative h-[400px] lg:h-[600px] overflow-hidden rounded-2xl">
+          <img 
+            src="/matrimonios/matrimonio-8/imagen-1.jpg" 
+            alt="Nueva Colección de Matrimonios" 
+            class="w-full h-full object-cover transform transition-transform duration-1000 group-hover:scale-110"
+          />
+          <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent lg:hidden"></div>
+        </div>
+
+        <!-- Content side -->
+        <div class="p-8 lg:p-16 flex flex-col justify-center">
+            <div class="mb-6 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold tracking-wider uppercase">
+                <span class="relative flex h-2 w-2">
+                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                    <span class="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                </span>
+                Recién Agregado
+            </div>
+            
+            <h2 class="text-4xl lg:text-6xl font-heading text-white mb-6 leading-tight">
+                Nueva Colección <br/>
+                <span class="text-primary italic">Matrimonios 2026</span>
+            </h2>
+            
+            <p class="text-secondary text-lg mb-10 max-w-lg leading-relaxed">
+                Déjate cautivar por nuestra nueva selección premium, encabezada por <span class="text-white font-semibold">"Boda Galante: Perlas, Vid y Terciopelo"</span>. 19 nuevas historias de amor transformadas en decoraciones mágicas.
+            </p>
+            
+            <div class="flex flex-wrap gap-4">
+                <a 
+                    href="/galeria/matrimonios" 
+                    class="group/btn relative px-8 py-4 bg-primary text-bg font-bold rounded-full overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(212,175,55,0.5)] transform hover:-translate-y-1"
+                >
+                    <span class="relative z-10 flex items-center gap-2">
+                        Ver Galería Completa
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 transform transition-transform group-hover/btn:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                        </svg>
+                    </span>
+                    <div class="absolute inset-0 bg-white opacity-0 group-hover/btn:opacity-20 transition-opacity"></div>
+                </a>
+                
+                <a 
+                    href="/galeria/matrimonio-8" 
+                    class="px-8 py-4 bg-transparent border border-white/20 text-white font-semibold rounded-full hover:bg-white/10 transition-all duration-300"
+                >
+                    Explorar Novedades
+                </a>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+    .font-heading {
+        font-family: var(--font-heading);
+    }
+</style>

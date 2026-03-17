@@ -7,7 +7,7 @@ import vercel from '@astrojs/vercel';
 
 export default defineConfig({
   // Importante: añade tu URL aquí para que el sitemap no dé error
-  site: 'https://decoartesjb.vercel.app',
+  site: 'https://sjbdecoarte.vercel.app',
   output: 'static',
 
   integrations: [preact(), sitemap()],
