@@ -5,52 +5,84 @@ import Section from "./Section.astro";
 ---
 
 <Section id="contact">
-  <section class="relative py-24 md:py-32 border-t border-white/5 overflow-hidden">
+  <section
+    class="relative py-24 md:py-32 border-t border-white/5 overflow-hidden"
+  >
     <div class="max-w-[1600px] mx-auto px-6 md:px-12">
       <div class="grid lg:grid-cols-12 gap-16 lg:gap-24 items-start">
-        
         {/* Narrative & Info Section */}
         <div class="lg:col-span-5 space-y-12">
           {/* Header */}
           <div>
-            <h3 class="text-[11px] font-bold tracking-[0.2em] uppercase text-primary mb-8 flex items-center gap-4">
+            <h3
+              class="text-[11px] font-bold tracking-[0.2em] uppercase text-primary mb-8 flex items-center gap-4"
+            >
               <span class="w-12 h-[1px] bg-primary/50"></span>
               Contáctanos
             </h3>
-            <h2 class="text-4xl md:text-5xl lg:text-6xl font-heading font-light text-white leading-tight mb-6">
-              Hagamos Realidad <br/>
+            <h2
+              class="text-4xl md:text-5xl lg:text-6xl font-heading font-light text-white leading-tight mb-6"
+            >
+              Hagamos Realidad <br />
               tu <span class="italic text-primary">Evento Soñado</span>
             </h2>
-            <p class="text-sm font-light text-secondary/80 max-w-sm leading-relaxed">
-              Cada detalle cuenta. Desde la primera consulta hasta el último adorno, transformamos tus ideas en experiencias inolvidables.
+            <p
+              class="text-sm font-light text-secondary/80 max-w-sm leading-relaxed"
+            >
+              Cada detalle cuenta. Desde la primera consulta hasta el último
+              adorno, transformamos tus ideas en experiencias inolvidables.
             </p>
           </div>
 
           {/* Social Links */}
           <div class="space-y-6 pt-8 border-t border-white/10">
-            <a href="https://wa.me/56937708933" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-6 p-6 border border-white/10 hover:border-primary/50 transition-colors">
-              <div class="w-12 h-12 flex items-center justify-center text-primary border border-white/5 group-hover:bg-primary/5 transition-colors">
+            <a
+              href="https://wa.me/56937708933"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex items-center gap-6 p-6 border border-white/10 hover:border-primary/50 transition-colors"
+            >
+              <div
+                class="w-12 h-12 flex items-center justify-center text-primary border border-white/5 group-hover:bg-primary/5 transition-colors"
+              >
                 <Whatsapp />
               </div>
               <div>
-                <p class="text-[10px] font-bold tracking-[0.2em] uppercase text-white/50 mb-1">WhatsApp</p>
+                <p
+                  class="text-[10px] font-bold tracking-[0.2em] uppercase text-white/50 mb-1"
+                >
+                  WhatsApp
+                </p>
                 <p class="text-white font-light text-lg">+56 9 3770 8933</p>
               </div>
             </a>
 
-            <a href="https://www.instagram.com/decoartesjb" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-6 p-6 border border-white/10 hover:border-primary/50 transition-colors">
-              <div class="w-12 h-12 flex items-center justify-center text-primary border border-white/5 group-hover:bg-primary/5 transition-colors">
+            <a
+              href="https://www.instagram.com/sjbdecoarte"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group flex items-center gap-6 p-6 border border-white/10 hover:border-primary/50 transition-colors"
+            >
+              <div
+                class="w-12 h-12 flex items-center justify-center text-primary border border-white/5 group-hover:bg-primary/5 transition-colors"
+              >
                 <Instagram />
               </div>
               <div>
-                <p class="text-[10px] font-bold tracking-[0.2em] uppercase text-white/50 mb-1">Instagram</p>
-                <p class="text-white font-light text-lg">@decoartesjb</p>
+                <p
+                  class="text-[10px] font-bold tracking-[0.2em] uppercase text-white/50 mb-1"
+                >
+                  Instagram
+                </p>
+                <p class="text-white font-light text-lg">@sjbdecoarte</p>
               </div>
             </a>
           </div>
 
           <div class="pt-8">
-            <p class="text-white/80 italic text-xl leading-relaxed font-light border-l border-primary/50 pl-6">
+            <p
+              class="text-white/80 italic text-xl leading-relaxed font-light border-l border-primary/50 pl-6"
+            >
               "Los detalles no son detalles. Son los que marcan la diferencia."
             </p>
           </div>
@@ -59,76 +91,151 @@ import Section from "./Section.astro";
         {/* Editorial Form */}
         <div class="lg:col-span-7">
           <div class="border border-white/10 p-8 lg:p-16 bg-white/[0.01]">
-            
             <form id="event-form" class="space-y-16">
               <div class="space-y-8">
-                <h3 class="text-[10px] font-bold tracking-[0.2em] uppercase text-white/80 border-b border-white/10 pb-4">
+                <h3
+                  class="text-[10px] font-bold tracking-[0.2em] uppercase text-white/80 border-b border-white/10 pb-4"
+                >
                   01. Información Personal
                 </h3>
 
                 <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
                   <div class="space-y-2">
-                    <label class="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">Nombre Completo *</label>
-                    <input type="text" name="nombre" required class="w-full bg-transparent border-b border-white/20 px-0 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-primary transition-colors rounded-none" placeholder="Ej. María González"/>
+                    <label
+                      class="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary"
+                      >Nombre Completo *</label
+                    >
+                    <input
+                      type="text"
+                      name="nombre"
+                      required
+                      class="w-full bg-transparent border-b border-white/20 px-0 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-primary transition-colors rounded-none"
+                      placeholder="Ej. María González"
+                    />
                   </div>
                   <div class="space-y-2">
-                    <label class="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">Email *</label>
-                    <input type="email" name="email" required class="w-full bg-transparent border-b border-white/20 px-0 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-primary transition-colors rounded-none" placeholder="maria@ejemplo.com"/>
+                    <label
+                      class="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary"
+                      >Email *</label
+                    >
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      class="w-full bg-transparent border-b border-white/20 px-0 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-primary transition-colors rounded-none"
+                      placeholder="maria@ejemplo.com"
+                    />
                   </div>
                 </div>
 
                 <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
                   <div class="space-y-2">
-                    <label class="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">Teléfono *</label>
-                    <input type="tel" name="telefono" required class="w-full bg-transparent border-b border-white/20 px-0 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-primary transition-colors rounded-none" placeholder="+56 9 1234 5678"/>
+                    <label
+                      class="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary"
+                      >Teléfono *</label
+                    >
+                    <input
+                      type="tel"
+                      name="telefono"
+                      required
+                      class="w-full bg-transparent border-b border-white/20 px-0 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-primary transition-colors rounded-none"
+                      placeholder="+56 9 1234 5678"
+                    />
                   </div>
                   <div class="space-y-2">
-                    <label class="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">Ubicación *</label>
-                    <input type="text" name="ubicacion" required class="w-full bg-transparent border-b border-white/20 px-0 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-primary transition-colors rounded-none" placeholder="Santiago, Las Condes"/>
+                    <label
+                      class="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary"
+                      >Ubicación *</label
+                    >
+                    <input
+                      type="text"
+                      name="ubicacion"
+                      required
+                      class="w-full bg-transparent border-b border-white/20 px-0 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-primary transition-colors rounded-none"
+                      placeholder="Santiago, Las Condes"
+                    />
                   </div>
                 </div>
               </div>
 
               <div class="space-y-8">
-                <h3 class="text-[10px] font-bold tracking-[0.2em] uppercase text-white/80 border-b border-white/10 pb-4">
+                <h3
+                  class="text-[10px] font-bold tracking-[0.2em] uppercase text-white/80 border-b border-white/10 pb-4"
+                >
                   02. Detalles del Evento
                 </h3>
 
                 <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
                   <div class="space-y-2">
-                    <label class="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">Tipo de Evento *</label>
-                    <select name="tipoEvento" required class="w-full bg-transparent border-b border-white/20 px-0 py-3 text-white focus:outline-none focus:border-primary transition-colors appearance-none rounded-none cursor-pointer">
-                      <option value="" class="bg-bg text-white/50">Selecciona un tipo</option>
+                    <label
+                      class="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary"
+                      >Tipo de Evento *</label
+                    >
+                    <select
+                      name="tipoEvento"
+                      required
+                      class="w-full bg-transparent border-b border-white/20 px-0 py-3 text-white focus:outline-none focus:border-primary transition-colors appearance-none rounded-none cursor-pointer"
+                    >
+                      <option value="" class="bg-bg text-white/50"
+                        >Selecciona un tipo</option
+                      >
                       <option value="Boda" class="bg-bg">Boda</option>
-                      <option value="Corporativo" class="bg-bg">Evento Corporativo</option>
-                      <option value="Social" class="bg-bg">Celebración Social</option>
+                      <option value="Corporativo" class="bg-bg"
+                        >Evento Corporativo</option
+                      >
+                      <option value="Social" class="bg-bg"
+                        >Celebración Social</option
+                      >
                       <option value="Otro" class="bg-bg">Otro</option>
                     </select>
                   </div>
                   <div class="space-y-2">
-                    <label class="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">Fecha *</label>
-                    <input type="date" name="fechaEvento" required class="w-full bg-transparent border-b border-white/20 px-0 py-3 text-white focus:outline-none focus:border-primary transition-colors rounded-none cursor-pointer" style="color-scheme: dark;"/>
+                    <label
+                      class="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary"
+                      >Fecha *</label
+                    >
+                    <input
+                      type="date"
+                      name="fechaEvento"
+                      required
+                      class="w-full bg-transparent border-b border-white/20 px-0 py-3 text-white focus:outline-none focus:border-primary transition-colors rounded-none cursor-pointer"
+                      style="color-scheme: dark;"
+                    />
                   </div>
                 </div>
 
                 <div class="space-y-2">
-                  <label class="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">Cuéntanos tu visión *</label>
-                  <textarea name="mensaje" required rows="4" class="w-full bg-transparent border-b border-white/20 px-0 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-primary transition-colors resize-none rounded-none" placeholder="Describe tu evento ideal..."></textarea>
+                  <label
+                    class="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary"
+                    >Cuéntanos tu visión *</label
+                  >
+                  <textarea
+                    name="mensaje"
+                    required
+                    rows="4"
+                    class="w-full bg-transparent border-b border-white/20 px-0 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-primary transition-colors resize-none rounded-none"
+                    placeholder="Describe tu evento ideal..."></textarea>
                 </div>
               </div>
 
               <div class="pt-8">
-                <button id="submit-btn" type="submit" class="w-full border border-primary text-primary font-bold text-[11px] tracking-[0.2em] uppercase py-6 hover:bg-primary hover:text-bg transition-colors duration-300">
+                <button
+                  id="submit-btn"
+                  type="submit"
+                  class="w-full border border-primary text-primary font-bold text-[11px] tracking-[0.2em] uppercase py-6 hover:bg-primary hover:text-bg transition-colors duration-300"
+                >
                   Solicitar Consulta
                 </button>
               </div>
 
-              <div id="status-msg" class="hidden text-center text-[10px] tracking-[0.2em] uppercase mt-4"></div>
+              <div
+                id="status-msg"
+                class="hidden text-center text-[10px] tracking-[0.2em] uppercase mt-4"
+              >
+              </div>
             </form>
-            
           </div>
         </div>
-
       </div>
     </div>
   </section>
@@ -142,10 +249,12 @@ import Section from "./Section.astro";
   const statusMsg = document.getElementById("status-msg") as HTMLDivElement;
 
   const showStatus = (text: string, isError = false) => {
-    if(!statusMsg) return;
+    if (!statusMsg) return;
     statusMsg.textContent = text;
     statusMsg.className = `text-center text-[10px] tracking-[0.2em] uppercase p-4 mt-6 border ${
-      isError ? "border-red-500/50 text-red-400" : "border-primary/50 text-primary"
+      isError
+        ? "border-red-500/50 text-red-400"
+        : "border-primary/50 text-primary"
     }`;
     statusMsg.classList.remove("hidden");
   };
@@ -155,14 +264,14 @@ import Section from "./Section.astro";
       particleCount: 100,
       spread: 70,
       origin: { y: 0.6 },
-      colors: ['#D4AF37', '#ffffff', '#000000']
+      colors: ["#D4AF37", "#ffffff", "#000000"],
     });
   };
 
   form?.addEventListener("submit", async (e) => {
     e.preventDefault();
-    if(!submitBtn || !statusMsg) return;
-    
+    if (!submitBtn || !statusMsg) return;
+
     submitBtn.disabled = true;
     const originalText = submitBtn.textContent || "Solicitar Consulta";
     submitBtn.textContent = "ENVIANDO...";

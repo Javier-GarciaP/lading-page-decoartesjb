@@ -1,0 +1,175 @@
+---
+// Componente de Historia Única Minimalista - Fix Stacking Context
+const storyImages = [
+    "/ig-post/ig-post-1.jpeg",
+];
+
+const profilePic = "/favicon.png";
+---
+
+<div class="relative inline-block">
+    <button 
+        id="story-trigger"
+        class="flex items-center gap-3 group outline-none focus:outline-none"
+    >
+        <div class="relative p-[2px] rounded-full bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] transition-transform duration-500 group-hover:rotate-12">
+            <div class="p-[1.5px] rounded-full bg-bg">
+                <img 
+                    src={profilePic} 
+                    alt="Historias" 
+                    class="w-10 h-10 md:w-12 md:h-12 rounded-full object-contain bg-white/5 shadow-inner"
+                />
+            </div>
+        </div>
+        <div class="flex flex-col items-start">
+            <span class="text-[9px] font-bold tracking-[0.2em] uppercase text-primary group-hover:text-white transition-colors">Historias</span>
+            <span class="text-[10px] text-white/40 font-light">Ver tendencias</span>
+        </div>
+    </button>
+
+    <!-- El Modal se moverá al final del body vía Script para evitar problemas de z-index (Stacking Context) -->
+    <div id="story-modal" class="fixed inset-0 z-[100000] bg-black hidden flex-col items-center justify-center opacity-0 transition-opacity duration-500">
+        
+        <!-- Progress Bars -->
+        <div id="progress-container" class="absolute top-6 left-4 right-4 z-[100100] flex gap-1.5 px-2">
+            {storyImages.map((_, i) => (
+                <div class="h-[1.5px] flex-grow bg-white/10 rounded-full overflow-hidden">
+                    <div class={`story-progress-bar h-full bg-white/80 w-0`} data-index={i}></div>
+                </div>
+            ))}
+        </div>
+
+        <!-- Minimal Header -->
+        <div class="absolute top-10 left-6 right-6 z-[100100] flex justify-between items-center">
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full border border-white/10 p-0.5">
+                    <img src={profilePic} class="w-full h-full rounded-full object-contain" />
+                </div>
+                <span class="text-white/90 text-[11px] font-medium tracking-widest uppercase">SJB Decoarte</span>
+            </div>
+            <button 
+                id="close-story"
+                class="text-white/40 hover:text-white transition-colors p-2"
+            >
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+        </div>
+
+        <!-- Clean Viewer -->
+        <div class="relative w-full h-full flex items-center justify-center">
+            <img id="story-viewer-img" src="" alt="Story" class="max-h-screen w-full object-contain" />
+            
+            <!-- Tap Areas -->
+            <div class="absolute inset-0 flex z-[100050]">
+                <div id="prev-area" class="w-1/4 h-full cursor-pointer"></div>
+                <div id="next-area" class="w-3/4 h-full cursor-pointer"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script is:inline define:vars={{ storyImages }}>
+    let currentIndex = 0;
+    let progress = 0;
+    let interval;
+    const DURATION = 5000;
+
+    const modal = document.getElementById('story-modal');
+    
+    // TRUCO CRÍTICO: Movemos el modal al final del body para que el z-index 
+    // sea global y no quede atrapado por el contexto de apilamiento del Hero
+    if (modal && modal.parentElement !== document.body) {
+        document.body.appendChild(modal);
+    }
+
+    const trigger = document.getElementById('story-trigger');
+    const closeBtn = document.getElementById('close-story');
+    const img = document.getElementById('story-viewer-img');
+    const nextArea = document.getElementById('next-area');
+    const prevArea = document.getElementById('prev-area');
+    const progressBars = document.querySelectorAll('.story-progress-bar');
+
+    function openStories() {
+        currentIndex = 0;
+        showStory();
+        modal.classList.remove('hidden');
+        modal.classList.add('flex');
+        requestAnimationFrame(() => {
+            modal.classList.remove('opacity-0');
+        });
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeStories() {
+        clearInterval(interval);
+        modal.classList.add('opacity-0');
+        setTimeout(() => {
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }, 500);
+        document.body.style.overflow = '';
+    }
+
+    function showStory() {
+        img.src = storyImages[currentIndex];
+        resetProgress();
+        startProgress();
+    }
+
+    function resetProgress() {
+        clearInterval(interval);
+        progress = 0;
+        progressBars.forEach((bar, idx) => {
+            if (idx < currentIndex) bar.style.width = '100%';
+            else if (idx === currentIndex) bar.style.width = '0%';
+            else bar.style.width = '0%';
+        });
+    }
+
+    function startProgress() {
+        const bar = progressBars[currentIndex];
+        const step = 100 / (DURATION / 30);
+        
+        interval = setInterval(() => {
+            progress += step;
+            if (bar) bar.style.width = `${progress}%`;
+            
+            if (progress >= 100) {
+                nextStory();
+            }
+        }, 30);
+    }
+
+    function nextStory() {
+        if (currentIndex < storyImages.length - 1) {
+            currentIndex++;
+            showStory();
+        } else {
+            closeStories();
+        }
+    }
+
+    function prevStory() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            showStory();
+        } else {
+            progress = 0;
+            resetProgress();
+            startProgress();
+        }
+    }
+
+    // Listeners
+    trigger?.addEventListener('click', openStories);
+    closeBtn?.addEventListener('click', closeStories);
+    nextArea?.addEventListener('click', nextStory);
+    prevArea?.addEventListener('click', prevStory);
+
+    document.addEventListener('keydown', (e) => {
+        if (modal.classList.contains('hidden')) return;
+        if (e.key === 'Escape') closeStories();
+        if (e.key === 'ArrowRight') nextStory();
+        if (e.key === 'ArrowLeft') prevStory();
+    });
+</script>
