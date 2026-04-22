@@ -1,0 +1,415 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Section from "../components/Section.astro";
+import DownloadCatalog from "../components/pdf/CatalogPDF";
+import catalogo from "../data/catalogo.json";
+---
+
+<Layout title="Especial Día de la Madre" showHero={false}>
+    <!-- Custom Hero for Mother's Day (Editorial Style) -->
+    <header class="relative w-full min-h-screen bg-bg text-secondary flex flex-col overflow-hidden font-body">
+        <!-- Matte Dark Paper Texture Background -->
+        <div class="absolute inset-0 z-0 opacity-[0.15] pointer-events-none mix-blend-overlay" style="background-image: url('data:image/svg+xml,%3Csvg viewBox=%220 0 200 200%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cfilter id=%22noiseFilter%22%3E%3CfeTurbulence type=%22fractalNoise%22 baseFrequency=%220.8%22 numOctaves=%223%22 stitchTiles=%22stitch%22/%3E%3C/filter%3E%3Crect width=%22100%25%22 height=%22100%25%22 filter=%22url(%23noiseFilter)%22/%3E%3C/svg%3E');"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent to-bg/90 z-0 pointer-events-none"></div>
+
+        <!-- Header / Navigation -->
+        <nav class="relative z-50 w-full px-6 py-6 md:px-12 flex justify-between items-center border-b border-white/5">
+            <!-- Left Links -->
+            <div class="hidden lg:flex flex-1 gap-12 text-[11px] font-bold tracking-[0.2em] uppercase text-white/70">
+                <a href="/#sobre-mi" class="hover:text-primary transition-colors">Nosotros</a>
+                <a href="/#proceso" class="hover:text-primary transition-colors">Proceso</a>
+            </div>
+            
+            <!-- Logo Center -->
+            <a href="/" class="flex-shrink-0 z-50 group mx-auto">
+                <span class="font-heading font-black text-2xl md:text-3xl tracking-widest text-white uppercase">
+                    SJB<span class="text-primary font-light">Decoarte</span>
+                </span>
+            </a>
+            
+            <!-- Right Links & CTA -->
+            <div class="hidden lg:flex flex-1 justify-end items-center gap-12 text-[11px] font-bold tracking-[0.2em] uppercase text-white/70">
+                <a href="/gallery" class="hover:text-primary transition-colors">Portafolio</a>
+                <a href="/#opiniones" class="hover:text-primary transition-colors">Testimonios</a>
+                <a href="/#contact" class="text-white hover:text-primary transition-colors pb-1 border-b border-primary">Consulta</a>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <div class="relative z-10 flex-grow max-w-[1600px] mx-auto w-full px-6 md:px-12 py-12 flex flex-col justify-center">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center h-full">
+                
+                <!-- Left Column -->
+                <div class="lg:col-span-3 h-full flex flex-col justify-between py-12 order-2 lg:order-1 relative z-20">
+                    <div class="mb-16 lg:mb-0">
+                        <span class="text-[10px] font-bold tracking-[0.2em] uppercase text-primary mb-6 block">Colección 2026</span>
+                        <h2 class="font-heading text-4xl md:text-5xl text-white leading-[1.15] font-normal tracking-tight">
+                            Homenaje <br/>
+                            al amor <br/>
+                            maternal e <br/>
+                            infinito.
+                        </h2>
+                    </div>
+                    
+                    <div class="mt-auto pt-12 lg:pt-0">
+                        <p class="text-sm text-secondary/80 leading-relaxed mb-8 max-w-[280px] font-light">
+                            Nuestra selección exclusiva para mamá combina la elegancia del arte floral con el sentimiento más puro.
+                        </p>
+                        <div class="flex flex-col gap-4">
+                            <DownloadCatalog client:only="react" />
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Center Composition -->
+                <div class="lg:col-span-6 relative flex justify-center items-center h-full order-1 lg:order-2 min-h-[55vh] lg:min-h-0 py-10 lg:py-0">
+                    <div class="relative w-full max-w-[500px] flex items-center justify-center">
+                        <div class="relative w-full z-10 flex items-center justify-center overflow-visible">
+                            <!-- Pop-out Effect for Statue -->
+                            <div class="relative group">
+                                <img src="/estatua-madre.png" alt="Madre e Hijo" class="w-[140%] max-w-none md:scale-110 object-contain drop-shadow-[0_20px_50px_rgba(212,175,55,0.3)] transform transition-transform duration-1000 group-hover:scale-115" />
+                            </div>
+                        </div>
+
+                        <!-- Central Typography -->
+                        <div class="absolute inset-0 z-30 flex flex-col justify-center items-center pointer-events-none w-full translate-y-32 md:translate-y-48">
+                            <h1 class="font-heading text-5xl md:text-7xl lg:text-8xl text-white leading-[0.9] tracking-tight w-full max-w-4xl text-center px-4">
+                                <span class="block text-white" style="text-shadow: 0 10px 40px rgba(0,0,0,0.8);">Especial Día</span>
+                                <span class="block text-primary font-light mt-2 italic" style="text-shadow: 0 10px 40px rgba(0,0,0,0.8);">de la Madre</span>
+                            </h1>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="lg:col-span-3 h-full flex flex-col justify-between py-12 order-3">
+                    <div class="mb-16 lg:mb-0">
+                        <h3 class="text-[11px] font-bold tracking-[0.2em] uppercase text-primary mb-8">Nuestros Arreglos</h3>
+                        <ul class="space-y-0 text-sm border-t border-white/10 w-full">
+                            <li class="border-b border-white/10 py-5 text-white/80 font-light tracking-wide">Selección Premium de Flores</li>
+                            <li class="border-b border-white/10 py-5 text-white/80 font-light tracking-wide">Diseño Editorial Único</li>
+                            <li class="border-b border-white/10 py-5 text-white/80 font-light tracking-wide">Entrega Personalizada</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="mt-auto pt-10 lg:pt-0 flex flex-col items-start lg:items-end text-left lg:text-right">
+                        <p class="text-sm text-secondary/80 mb-2 font-light">Celebramos cada detalle.</p>
+                        <div class="flex items-baseline gap-2 text-white">
+                            <span class="text-7xl md:text-8xl font-heading font-light leading-none tracking-tighter">10</span>
+                            <span class="text-sm font-bold tracking-widest uppercase text-primary">/MAY</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Información del Servicio y Métodos de Pago -->
+    <Section id="info">
+        <div class="relative py-24 border-t border-white/5 bg-white/[0.01]">
+            <div class="max-w-[1200px] mx-auto px-6 md:px-12">
+                <div class="grid md:grid-cols-2 gap-16 lg:gap-32">
+                    <!-- Servicio -->
+                    <div class="reveal">
+                        <h3 class="text-3xl font-heading font-light text-white mb-8 border-l-2 border-primary pl-6">El Servicio Premium</h3>
+                        <p class="text-sm font-light text-secondary/70 leading-relaxed mb-8">
+                            Cada arreglo es una pieza única, diseñada bajo estándares editoriales. Utilizamos flores de la más alta calidad y un envoltorio que es, en sí mismo, un regalo.
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div class="flex items-center gap-4 group">
+                                <div class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-primary transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                                </div>
+                                <span class="text-[10px] font-bold tracking-widest uppercase text-white/60">Tarjeta Personalizada</span>
+                            </div>
+                            <div class="flex items-center gap-4 group">
+                                <div class="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center group-hover:border-primary transition-colors">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                                </div>
+                                <span class="text-[10px] font-bold tracking-widest uppercase text-white/60">Papel Mate Importado</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Métodos de Pago -->
+                    <div class="reveal delay-100">
+                        <h3 class="text-3xl font-heading font-light text-white mb-8 border-l-2 border-primary pl-6">Facilidades de Pago</h3>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="bg-white/[0.02] border border-white/5 p-8 flex flex-col items-center hover:bg-white/[0.05] hover:border-primary/20 transition-all duration-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white/30 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" /></svg>
+                                <span class="text-[10px] font-bold tracking-widest uppercase text-white/50 text-center">Transferencia</span>
+                            </div>
+                            <div class="bg-white/[0.02] border border-white/5 p-8 flex flex-col items-center hover:bg-white/[0.05] hover:border-primary/20 transition-all duration-500">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8 text-white/30 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" /></svg>
+                                <span class="text-[10px] font-bold tracking-widest uppercase text-white/50 text-center">Webpay</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </Section>
+
+    <!-- Catálogo de Ramos con Efecto 3D -->
+    <Section id="catalogo">
+        <div class="relative py-32 border-t border-white/5">
+            <div class="max-w-[1600px] mx-auto px-6 md:px-12 mb-24 text-center">
+                <span class="text-[11px] font-bold tracking-[0.4em] uppercase text-primary mb-6 block">Catálogo Exclusivo</span>
+                <h2 class="text-5xl md:text-7xl font-heading font-light text-white leading-none">
+                    Arreglos que <span class="italic text-primary font-normal">Cuentan Historias</span>
+                </h2>
+            </div>
+            
+            <div class="max-w-[1400px] mx-auto px-6 md:px-12">
+                <!-- Abstract 3D Grid -->
+                
+                {/* Row 1 */}
+                <div class="flex flex-col md:flex-row justify-between items-end gap-20 mb-32">
+                    {[1, 2, 3].map(id => {
+                        const item = catalogo.find(c => c.id === id);
+                        if (!item) return null;
+                        return (
+                            <div class="w-full md:w-[28%] group perspective-1000" onclick={`openLightbox('/ramos-dia-madre/${item.image}')`}>
+                                <div class="relative transform-style-3d transition-transform duration-700 group-hover:rotate-y-12 group-hover:-rotate-x-6">
+                                    <div class="border border-white/10 p-6 bg-white/[0.02] backdrop-blur-sm group-hover:border-primary/30 transition-colors">
+                                        <!-- Image popping out -->
+                                        <div class="relative overflow-visible h-[300px] flex items-center justify-center">
+                                            <img 
+                                                src={`/ramos-dia-madre/${item.image}`} 
+                                                alt={item.name} 
+                                                class="w-full h-full object-contain transform transition-all duration-700 group-hover:scale-125 group-hover:-translate-y-8 drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] group-hover:drop-shadow-[0_30px_60px_rgba(212,175,55,0.4)]" 
+                                                loading="lazy" 
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="mt-8 flex justify-between items-baseline px-2">
+                                        <h4 class="font-heading text-xl text-white/90 tracking-tight">{item.name}</h4>
+                                        <div class="h-[1px] flex-grow mx-4 bg-white/10"></div>
+                                        <span class="text-sm font-bold text-primary">${item.price}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    })}
+                </div>
+
+                {/* Row 2 with Poem (Modern Layout) */}
+                <div class="flex flex-col md:flex-row justify-between items-center gap-20 mb-32 bg-white/[0.01] py-16 px-8 border-y border-white/5">
+                    <div class="w-full md:w-[35%]">
+                        <div class="relative">
+                            <span class="absolute -top-10 -left-6 text-9xl text-white/5 font-serif">“</span>
+                            <p class="font-heading italic text-xl leading-relaxed text-secondary/80 text-center md:text-left">
+                                Siento el aroma de rosas blancas<br/>
+                                Sin abrir mis ojos, las respiro<br/>
+                                Y volando lejos, al valle del rocío,<br/>
+                                Mi alma imperceptiblemente se disuelve.<br/>
+                                Son gentiles y por siempre inocentes.
+                            </p>
+                        </div>
+                    </div>
+                    {[4, 5].map(id => {
+                        const item = catalogo.find(c => c.id === id);
+                        if (!item) return null;
+                        return (
+                            <div class="w-full md:w-[28%] group perspective-1000" onclick={`openLightbox('/ramos-dia-madre/${item.image}')`}>
+                                <div class="relative transform-style-3d transition-transform duration-700 group-hover:rotate-y-12 group-hover:-rotate-x-6">
+                                    <div class="border border-white/10 p-6 bg-white/[0.02] backdrop-blur-sm group-hover:border-primary/30 transition-colors">
+                                        <div class="relative overflow-visible h-[300px] flex items-center justify-center">
+                                            <img 
+                                                src={`/ramos-dia-madre/${item.image}`} 
+                                                alt={item.name} 
+                                                class="w-full h-full object-contain transform transition-all duration-700 group-hover:scale-125 group-hover:-translate-y-8 drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] group-hover:drop-shadow-[0_30px_60px_rgba(212,175,55,0.4)]" 
+                                                loading="lazy" 
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="mt-8 flex justify-between items-baseline px-2">
+                                        <h4 class="font-heading text-xl text-white/90 tracking-tight">{item.name}</h4>
+                                        <div class="h-[1px] flex-grow mx-4 bg-white/10"></div>
+                                        <span class="text-sm font-bold text-primary">${item.price}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    })}
+                </div>
+
+                {/* Row 3 */}
+                <div class="flex flex-col md:flex-row justify-between items-end gap-20 mb-32">
+                    {[6, 7, 8].map(id => {
+                        const item = catalogo.find(c => c.id === id);
+                        if (!item) return null;
+                        return (
+                            <div class="w-full md:w-[28%] group perspective-1000" onclick={`openLightbox('/ramos-dia-madre/${item.image}')`}>
+                                <div class="relative transform-style-3d transition-transform duration-700 group-hover:rotate-y-12 group-hover:-rotate-x-6">
+                                    <div class="border border-white/10 p-6 bg-white/[0.02] backdrop-blur-sm group-hover:border-primary/30 transition-colors">
+                                        <div class="relative overflow-visible h-[300px] flex items-center justify-center">
+                                            <img 
+                                                src={`/ramos-dia-madre/${item.image}`} 
+                                                alt={item.name} 
+                                                class="w-full h-full object-contain transform transition-all duration-700 group-hover:scale-125 group-hover:-translate-y-8 drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] group-hover:drop-shadow-[0_30px_60px_rgba(212,175,55,0.4)]" 
+                                                loading="lazy" 
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="mt-8 flex justify-between items-baseline px-2">
+                                        <h4 class="font-heading text-xl text-white/90 tracking-tight">{item.name}</h4>
+                                        <div class="h-[1px] flex-grow mx-4 bg-white/10"></div>
+                                        <span class="text-sm font-bold text-primary">${item.price}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    })}
+                </div>
+
+                {/* Row 4 */}
+                <div class="flex flex-col md:flex-row justify-between items-end gap-20">
+                    {[9, 10, 11].map(id => {
+                        const item = catalogo.find(c => c.id === id);
+                        if (!item) return null;
+                        return (
+                            <div class="w-full md:w-[28%] group perspective-1000" onclick={`openLightbox('/ramos-dia-madre/${item.image}')`}>
+                                <div class="relative transform-style-3d transition-transform duration-700 group-hover:rotate-y-12 group-hover:-rotate-x-6">
+                                    <div class="border border-white/10 p-6 bg-white/[0.02] backdrop-blur-sm group-hover:border-primary/30 transition-colors">
+                                        <div class="relative overflow-visible h-[300px] flex items-center justify-center">
+                                            <img 
+                                                src={`/ramos-dia-madre/${item.image}`} 
+                                                alt={item.name} 
+                                                class="w-full h-full object-contain transform transition-all duration-700 group-hover:scale-125 group-hover:-translate-y-8 drop-shadow-[0_10px_30px_rgba(0,0,0,0.5)] group-hover:drop-shadow-[0_30px_60px_rgba(212,175,55,0.4)]" 
+                                                loading="lazy" 
+                                            />
+                                        </div>
+                                    </div>
+                                    <div class="mt-8 flex justify-between items-baseline px-2">
+                                        <h4 class="font-heading text-xl text-white/90 tracking-tight">{item.name}</h4>
+                                        <div class="h-[1px] flex-grow mx-4 bg-white/10"></div>
+                                        <span class="text-sm font-bold text-primary">${item.price}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        )
+                    })}
+                </div>
+            </div>
+            
+            <!-- Lightbox -->
+            <div id="lightbox" class="fixed inset-0 z-[100] bg-bg/95 hidden flex justify-center items-center opacity-0 transition-all duration-300 backdrop-blur-md">
+                <button class="absolute top-8 right-8 text-white/50 hover:text-primary transition-all focus:outline-none z-50 p-2 hover:rotate-90 duration-500" onclick="closeLightbox()">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M6 18L18 6M6 6l12 12"></path>
+                    </svg>
+                </button>
+                <img id="lightbox-img" src="" alt="Vista ampliada" class="max-h-[85vh] max-w-[90vw] object-contain shadow-2xl rounded-sm transform scale-95 transition-transform duration-500" />
+            </div>
+
+            <script is:inline>
+                function openLightbox(src) {
+                    const lightbox = document.getElementById("lightbox");
+                    const img = document.getElementById("lightbox-img");
+                    img.src = src;
+                    lightbox.classList.remove("hidden");
+                    setTimeout(() => {
+                        lightbox.classList.remove("opacity-0");
+                        img.classList.add("scale-100");
+                        img.classList.remove("scale-95");
+                    }, 10);
+                    document.body.style.overflow = "hidden";
+                }
+
+                function closeLightbox() {
+                    const lightbox = document.getElementById("lightbox");
+                    const img = document.getElementById("lightbox-img");
+                    lightbox.classList.add("opacity-0");
+                    img.classList.add("scale-95");
+                    img.classList.remove("scale-100");
+                    setTimeout(() => {
+                        lightbox.classList.add("hidden");
+                        img.src = "";
+                    }, 300);
+                    document.body.style.overflow = "";
+                }
+
+                document.getElementById("lightbox")?.addEventListener("click", (e) => {
+                    if (e.target.id === "lightbox") closeLightbox();
+                });
+
+                document.addEventListener("keydown", (e) => {
+                    if (e.key === "Escape") closeLightbox();
+                });
+            </script>
+        </div>
+    </Section>
+
+    <!-- CTA Final -->
+    <Section id="reserva">
+        <div class="relative py-32 border-t border-white/5 text-center overflow-hidden">
+            <div class="absolute inset-0 bg-primary/5 blur-[120px] rounded-full -translate-y-1/2"></div>
+            <div class="relative z-10">
+                <h2 class="text-4xl md:text-6xl font-heading font-light text-white mb-12 max-w-4xl mx-auto px-6">
+                    Hagamos que este día sea <span class="italic text-primary font-normal">absolutamente inolvidable.</span>
+                </h2>
+                <a href="/#contact" class="inline-flex items-center gap-6 group">
+                    <span class="text-[11px] font-bold tracking-[0.4em] uppercase text-white group-hover:text-primary transition-colors">Agendar Pedido Ahora</span>
+                    <div class="w-12 h-12 rounded-full border border-white/20 flex items-center justify-center group-hover:border-primary group-hover:translate-x-2 transition-all">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </Section>
+</Layout>
+
+<style>
+    .perspective-1000 {
+        perspective: 1000px;
+    }
+    .transform-style-3d {
+        transform-style: preserve-3d;
+    }
+    .rotate-y-12 {
+        transform: rotateY(12deg);
+    }
+    .-rotate-x-6 {
+        transform: rotateX(-6deg);
+    }
+    
+    .reveal {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+    }
+    
+    .reveal.active {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    @keyframes fade-in-up {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+</style>
+
+<script>
+    // Reveal animation on scroll
+    const observerOptions = {
+        threshold: 0.1
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('active');
+            }
+        });
+    }, observerOptions);
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>

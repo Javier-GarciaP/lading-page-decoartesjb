@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "name": "Peonías Rosas",
+    "price": 99,
+    "type": "Ramo",
+    "image": "ramo-1.png",
+    "row": 1,
+    "col": 1
+  },
+  {
+    "id": 2,
+    "name": "Flores en Cesta",
+    "price": 170,
+    "type": "Cesta",
+    "image": "ramo-2.png",
+    "row": 1,
+    "col": 2
+  },
+  {
+    "id": 3,
+    "name": "Mimosa Dorada",
+    "price": 70,
+    "type": "Caja",
+    "image": "ramo-3.png",
+    "row": 1,
+    "col": 4
+  },
+  {
+    "id": 4,
+    "name": "Caja de Flores Nº3",
+    "price": 155,
+    "type": "Caja",
+    "image": "ramo-4.png",
+    "row": 2,
+    "col": 2
+  },
+  {
+    "id": 5,
+    "name": "Rosas en Caja",
+    "price": 145,
+    "type": "Caja",
+    "image": "ramo-5.png",
+    "row": 2,
+    "col": 3
+  },
+  {
+    "id": 6,
+    "name": "Calas de Pureza",
+    "price": 99,
+    "type": "Ramo",
+    "image": "ramo-6.png",
+    "row": 2,
+    "col": 4
+  },
+  {
+    "id": 7,
+    "name": "Corazón de Rosas",
+    "price": 120,
+    "type": "Corazón",
+    "image": "ramo-7.png",
+    "row": 3,
+    "col": 1
+  },
+  {
+    "id": 8,
+    "name": "Ramo de Novia",
+    "price": 85,
+    "type": "Ramo",
+    "image": "ramo-8.png",
+    "row": 3,
+    "col": 2
+  },
+  {
+    "id": 9,
+    "name": "Claveles Rojos",
+    "price": 90,
+    "type": "Ramo",
+    "image": "ramo-9.png",
+    "row": 3,
+    "col": 4
+  },
+  {
+    "id": 10,
+    "name": "Elegancia Blanca",
+    "price": 110,
+    "type": "Ramo",
+    "image": "ramo-10.png",
+    "row": 4,
+    "col": 1
+  },
+  {
+    "id": 11,
+    "name": "Mix Primaveral",
+    "price": 95,
+    "type": "Cesta",
+    "image": "ramo-11.png",
+    "row": 4,
+    "col": 2
+  }
+]

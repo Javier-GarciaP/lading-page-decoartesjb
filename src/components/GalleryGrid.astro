@@ -3,9 +3,11 @@ export interface Props {
   title: string;
   folder: string;
   count: number;
+  prefix?: string;
+  extension?: string;
 }
 
-const { title, folder, count } = Astro.props;
+const { title, folder, count, prefix = "imagen", extension = ".jpg" } = Astro.props;
 ---
 
 <div class="px-4 md:px-10 py-6">
@@ -17,10 +19,10 @@ const { title, folder, count } = Astro.props;
       Array.from({ length: count }, (_, i) => (
         <div
           class="reveal-scale break-inside-avoid relative group overflow-hidden rounded-2xl cursor-pointer border border-white/5 hover:border-primary/50 transition-all duration-500"
-          onclick={`openLightbox('/${folder}/imagen-${i + 1}.jpg')`}
+          onclick={`openLightbox('/${folder}/${prefix}-${i + 1}${extension}')`}
         >
           <img
-            src={`/${folder}/imagen-${i + 1}.jpg`}
+            src={`/${folder}/${prefix}-${i + 1}${extension}`}
             alt={`Imagen ${i + 1}`}
             class="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-110"
             loading="lazy"

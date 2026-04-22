@@ -2,7 +2,7 @@ import { sendEmail } from '../../utils/send-email';
 
 export const prerender = false;
 
-export const POST = async ({ request, locals }) => {
+export const POST = async ({ request }) => {
   try {
     const data = await request.json();
     const {

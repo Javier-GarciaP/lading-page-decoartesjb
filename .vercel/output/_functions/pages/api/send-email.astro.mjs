@@ -6,17 +6,14 @@ const sendEmail = async (to, subject, html, apiKey) => {
   const resend = new Resend(key);
   return await resend.emails.send({
     from: "Event Planner <onboarding@resend.dev>",
-    to: ["josejaviergarciap123@gmail.com"],
+    to: [to],
     subject,
     html
   });
 };
 
 const prerender = false;
-const POST = async ({
-  request,
-  locals
-}) => {
+const POST = async ({ request }) => {
   try {
     const data = await request.json();
     const {
@@ -30,11 +27,7 @@ const POST = async ({
       mensaje
     } = data;
     if (!nombre || !email || !mensaje) {
-      return new Response(JSON.stringify({
-        error: "Faltan campos requeridos"
-      }), {
-        status: 400
-      });
+      return new Response(JSON.stringify({ error: "Faltan campos requeridos" }), { status: 400 });
     }
     const html = `
       <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; background-color: #f9f9f9; padding: 20px; border-radius: 10px;">
@@ -58,32 +51,23 @@ const POST = async ({
         </div>
         
         <p style="font-size: 12px; color: #999; margin-top: 20px; text-align: center;">
-          Este mensaje fue enviado desde el formulario de contacto de DecoArtes JB.
+          Este mensaje fue enviado desde el formulario de contacto de SJBDecoarte.
         </p>
       </div>
     `;
-    const {
-      error
-    } = await sendEmail("josejaviergarciap123@gmail.com", `✨ Nueva Consulta de Evento: ${nombre}`, html, process.env.RESEND_API_KEY || "re_9fuEHeNM_BUFjzuAJ9eoSc2YsVezZmbYD");
+    const { error } = await sendEmail(
+      "josejaviergarciap123@gmail.com",
+      `✨ Nueva Consulta de Evento: ${nombre}`,
+      html,
+      process.env.RESEND_API_KEY || "re_9fuEHeNM_BUFjzuAJ9eoSc2YsVezZmbYD"
+    );
     if (error) {
       console.error("Error Resend:", error);
-      return new Response(JSON.stringify({
-        error: error.message
-      }), {
-        status: 500
-      });
+      return new Response(JSON.stringify({ error: error.message }), { status: 500 });
     }
-    return new Response(JSON.stringify({
-      success: true
-    }), {
-      status: 200
-    });
+    return new Response(JSON.stringify({ success: true }), { status: 200 });
   } catch (err) {
-    return new Response(JSON.stringify({
-      error: "Error interno del servidor"
-    }), {
-      status: 500
-    });
+    return new Response(JSON.stringify({ error: "Error interno del servidor" }), { status: 500 });
   }
 };
 

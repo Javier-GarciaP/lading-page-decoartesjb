@@ -1,170 +1,205 @@
-import { h, Component } from 'preact';
-import { renderToStringAsync } from 'preact-render-to-string';
+import React, { memo, createElement } from 'react';
+import ReactDOM from 'react-dom/server';
 
 const contexts = /* @__PURE__ */ new WeakMap();
-function getContext(result) {
-  if (contexts.has(result)) {
-    return contexts.get(result);
+const ID_PREFIX = "r";
+function getContext(rendererContextResult) {
+  if (contexts.has(rendererContextResult)) {
+    return contexts.get(rendererContextResult);
   }
-  let ctx = {
-    c: 0,
+  const ctx = {
+    currentIndex: 0,
     get id() {
-      return "p" + this.c.toString();
-    },
-    signals: /* @__PURE__ */ new Map(),
-    propsToSignals: /* @__PURE__ */ new Map()
+      return ID_PREFIX + this.currentIndex.toString();
+    }
   };
-  contexts.set(result, ctx);
+  contexts.set(rendererContextResult, ctx);
   return ctx;
 }
-function incrementId(ctx) {
-  let id = ctx.id;
-  ctx.c++;
+function incrementId(rendererContextResult) {
+  const ctx = getContext(rendererContextResult);
+  const id = ctx.id;
+  ctx.currentIndex++;
   return id;
 }
 
-function isSignal(x) {
-  return x != null && typeof x === "object" && typeof x.peek === "function" && "value" in x;
-}
-function restoreSignalsOnProps(ctx, props) {
-  let propMap;
-  if (ctx.propsToSignals.has(props)) {
-    propMap = ctx.propsToSignals.get(props);
-  } else {
-    propMap = /* @__PURE__ */ new Map();
-    ctx.propsToSignals.set(props, propMap);
-  }
-  for (const [key, signal] of propMap) {
-    props[key] = signal;
-  }
-  return propMap;
-}
-function serializeSignals(ctx, props, attrs, map) {
-  const signals = {};
-  for (const [key, value] of Object.entries(props)) {
-    const isPropArray = Array.isArray(value);
-    const isPropObject = !isSignal(value) && typeof props[key] === "object" && props[key] !== null && !isPropArray;
-    if (isPropObject || isPropArray) {
-      const values = isPropObject ? Object.keys(props[key]) : value;
-      values.forEach((valueKey, valueIndex) => {
-        const signal = isPropObject ? props[key][valueKey] : valueKey;
-        if (isSignal(signal)) {
-          const keyOrIndex = isPropObject ? valueKey.toString() : valueIndex;
-          props[key] = isPropObject ? Object.assign({}, props[key], { [keyOrIndex]: signal.peek() }) : props[key].map(
-            (v, i) => i === valueIndex ? [signal.peek(), i] : v
-          );
-          const currentMap = map.get(key) || [];
-          map.set(key, [...currentMap, [signal, keyOrIndex]]);
-          const currentSignals = signals[key] || [];
-          signals[key] = [...currentSignals, [getSignalId(ctx, signal), keyOrIndex]];
-        }
-      });
-    } else if (isSignal(value)) {
-      props[key] = value.peek();
-      map.set(key, value);
-      signals[key] = getSignalId(ctx, value);
-    }
-  }
-  if (Object.keys(signals).length) {
-    attrs["data-preact-signals"] = JSON.stringify(signals);
-  }
-}
-function getSignalId(ctx, item) {
-  let id = ctx.signals.get(item);
-  if (!id) {
-    id = incrementId(ctx);
-    ctx.signals.set(item, id);
-  }
-  return id;
-}
-
-const StaticHtml = ({ value, name, hydrate = true }) => {
-  if (!value) return null;
+const StaticHtml = ({
+  value,
+  name,
+  hydrate = true
+}) => {
+  if (value == null || value.trim() === "") return null;
   const tagName = hydrate ? "astro-slot" : "astro-static-slot";
-  return h(tagName, { name, dangerouslySetInnerHTML: { __html: value } });
+  return createElement(tagName, {
+    name,
+    suppressHydrationWarning: true,
+    dangerouslySetInnerHTML: { __html: value }
+  });
 };
-StaticHtml.shouldComponentUpdate = () => false;
-var static_html_default = StaticHtml;
+var static_html_default = memo(StaticHtml, () => true);
 
 const slotName = (str) => str.trim().replace(/[-_]([a-z])/g, (_, w) => w.toUpperCase());
-let originalConsoleError;
-let consoleFilterRefs = 0;
-async function check(Component$1, props, children) {
-  if (typeof Component$1 !== "function") return false;
-  if (Component$1.name === "QwikComponent") return false;
-  if (Component$1.prototype != null && typeof Component$1.prototype.render === "function") {
-    return Component.isPrototypeOf(Component$1);
+const reactTypeof = /* @__PURE__ */ Symbol.for("react.element");
+const reactTransitionalTypeof = /* @__PURE__ */ Symbol.for("react.transitional.element");
+async function check(Component, props, children, metadata) {
+  if (typeof Component === "object") {
+    return Component["$$typeof"].toString().slice("Symbol(".length).startsWith("react");
   }
-  useConsoleFilter();
-  try {
-    const { html } = await renderToStaticMarkup.call(this, Component$1, props, children, void 0);
-    if (typeof html !== "string") {
-      return false;
-    }
-    return html == "" ? false : !html.includes("<undefined>");
-  } catch {
+  if (typeof Component !== "function") return false;
+  if (Component.name === "QwikComponent") return false;
+  if (typeof Component === "function" && Component["$$typeof"] === /* @__PURE__ */ Symbol.for("react.forward_ref"))
     return false;
-  } finally {
-    finishUsingConsoleFilter();
+  if (Component.prototype != null && typeof Component.prototype.render === "function") {
+    return React.Component.isPrototypeOf(Component) || React.PureComponent.isPrototypeOf(Component);
   }
+  let isReactComponent = false;
+  function Tester(...args) {
+    try {
+      const vnode = Component(...args);
+      if (vnode && (vnode["$$typeof"] === reactTypeof || vnode["$$typeof"] === reactTransitionalTypeof)) {
+        isReactComponent = true;
+      }
+    } catch {
+    }
+    return React.createElement("div");
+  }
+  await renderToStaticMarkup.call(this, Tester, props, children);
+  return isReactComponent;
 }
-function shouldHydrate(metadata) {
+async function getNodeWritable() {
+  let nodeStreamBuiltinModuleName = "node:stream";
+  let { Writable } = await import(
+    /* @vite-ignore */
+    nodeStreamBuiltinModuleName
+  );
+  return Writable;
+}
+function needsHydration(metadata) {
   return metadata?.astroStaticSlot ? !!metadata.hydrate : true;
 }
 async function renderToStaticMarkup(Component, props, { default: children, ...slotted }, metadata) {
-  const ctx = getContext(this.result);
+  let prefix;
+  if (this && this.result) {
+    prefix = incrementId(this.result);
+  }
+  const attrs = { prefix };
+  delete props["class"];
   const slots = {};
   for (const [key, value] of Object.entries(slotted)) {
     const name = slotName(key);
-    slots[name] = h(static_html_default, {
-      hydrate: shouldHydrate(metadata),
+    slots[name] = React.createElement(static_html_default, {
+      hydrate: needsHydration(metadata),
       value,
       name
     });
   }
-  let propsMap = restoreSignalsOnProps(ctx, props);
-  const newProps = { ...props, ...slots };
-  const attrs = {};
-  serializeSignals(ctx, props, attrs, propsMap);
-  const vNode = h(
-    Component,
-    newProps,
-    children != null ? h(static_html_default, {
-      hydrate: shouldHydrate(metadata),
-      value: children
-    }) : children
+  const newProps = {
+    ...props,
+    ...slots
+  };
+  const newChildren = children ?? props.children;
+  if (newChildren != null) {
+    newProps.children = React.createElement(static_html_default, {
+      hydrate: needsHydration(metadata),
+      value: newChildren
+    });
+  }
+  const formState = this ? await getFormState(this) : void 0;
+  if (formState) {
+    attrs["data-action-result"] = JSON.stringify(formState[0]);
+    attrs["data-action-key"] = formState[1];
+    attrs["data-action-name"] = formState[2];
+  }
+  const vnode = React.createElement(Component, newProps);
+  const renderOptions = {
+    identifierPrefix: prefix,
+    formState
+  };
+  let html;
+  if ("renderToReadableStream" in ReactDOM) {
+    html = await renderToReadableStreamAsync(vnode, renderOptions);
+  } else {
+    html = await renderToPipeableStreamAsync(vnode, renderOptions);
+  }
+  html = html.replace(
+    /<link\s[^>]*rel="(?:preload|modulepreload|stylesheet|preconnect|dns-prefetch)"[^>]*>/g,
+    ""
   );
-  const html = await renderToStringAsync(vNode);
-  return { attrs, html };
+  return { html, attrs };
 }
-function useConsoleFilter() {
-  consoleFilterRefs++;
-  if (!originalConsoleError) {
-    originalConsoleError = console.error;
-    try {
-      console.error = filteredConsoleError;
-    } catch {
+async function getFormState({
+  result
+}) {
+  const { request, actionResult } = result;
+  if (!actionResult) return void 0;
+  if (!isFormRequest(request.headers.get("content-type"))) return void 0;
+  const { searchParams } = new URL(request.url);
+  const formData = await request.clone().formData();
+  const actionKey = formData.get("$ACTION_KEY")?.toString();
+  const actionName = searchParams.get("_action");
+  if (!actionKey || !actionName) return void 0;
+  return [actionResult, actionKey, actionName];
+}
+async function renderToPipeableStreamAsync(vnode, options) {
+  const Writable = await getNodeWritable();
+  let html = "";
+  return new Promise((resolve, reject) => {
+    let error = void 0;
+    let stream = ReactDOM.renderToPipeableStream(vnode, {
+      ...options,
+      onError(err) {
+        error = err;
+        reject(error);
+      },
+      onAllReady() {
+        stream.pipe(
+          new Writable({
+            write(chunk, _encoding, callback) {
+              html += chunk.toString("utf-8");
+              callback();
+            },
+            destroy() {
+              resolve(html);
+            }
+          })
+        );
+      }
+    });
+  });
+}
+async function readResult(stream) {
+  const reader = stream.getReader();
+  let result = "";
+  const decoder = new TextDecoder("utf-8");
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) {
+      if (value) {
+        result += decoder.decode(value);
+      } else {
+        decoder.decode(new Uint8Array());
+      }
+      return result;
     }
+    result += decoder.decode(value, { stream: true });
   }
 }
-function finishUsingConsoleFilter() {
-  consoleFilterRefs--;
+async function renderToReadableStreamAsync(vnode, options) {
+  return await readResult(await ReactDOM.renderToReadableStream(vnode, options));
 }
-function filteredConsoleError(msg, ...rest) {
-  if (consoleFilterRefs > 0 && typeof msg === "string") {
-    const isKnownReactHookError = msg.includes("Warning: Invalid hook call.") && msg.includes("https://reactjs.org/link/invalid-hook-call");
-    if (isKnownReactHookError) return;
-  }
-  originalConsoleError(msg, ...rest);
+const formContentTypes = ["application/x-www-form-urlencoded", "multipart/form-data"];
+function isFormRequest(contentType) {
+  const type = contentType?.split(";")[0].toLowerCase();
+  return formContentTypes.some((t) => type === t);
 }
 const renderer = {
-  name: "@astrojs/preact",
+  name: "@astrojs/react",
   check,
   renderToStaticMarkup,
   supportsAstroStaticSlot: true
 };
 var server_default = renderer;
 
-const renderers = [Object.assign({"name":"@astrojs/preact","clientEntrypoint":"@astrojs/preact/client.js","serverEntrypoint":"@astrojs/preact/server.js"}, { ssr: server_default }),];
+const renderers = [Object.assign({"name":"@astrojs/react","clientEntrypoint":"@astrojs/react/client.js","serverEntrypoint":"@astrojs/react/server.js"}, { ssr: server_default }),];
 
 export { renderers };

@@ -5,568 +5,130 @@ import Section from "./Section.astro";
 ---
 
 <Section id="contact">
-  <section class="max-w-6xl mx-auto px-6 py-12">
-    <div class="grid lg:grid-cols-2 gap-12 items-start">
-      {/* Narrative & Info Section - Redesigned */}
-      <div class="space-y-6 animate-fade-in-up">
-        {/* Header */}
-        <div class="space-y-4">
-          <div
-            class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20 backdrop-blur-sm"
-          >
-            <svg
-              class="w-4 h-4 text-primary"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path
-                d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"
-              ></path>
-              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"
-              ></path>
-            </svg>
-            <span
-              class="text-sm font-semibold text-primary uppercase tracking-wider"
-              >Contáctanos</span
-            >
+  <section class="relative py-24 md:py-32 border-t border-white/5 overflow-hidden">
+    <div class="max-w-[1600px] mx-auto px-6 md:px-12">
+      <div class="grid lg:grid-cols-12 gap-16 lg:gap-24 items-start">
+        
+        {/* Narrative & Info Section */}
+        <div class="lg:col-span-5 space-y-12">
+          {/* Header */}
+          <div>
+            <h3 class="text-[11px] font-bold tracking-[0.2em] uppercase text-primary mb-8 flex items-center gap-4">
+              <span class="w-12 h-[1px] bg-primary/50"></span>
+              Contáctanos
+            </h3>
+            <h2 class="text-4xl md:text-5xl lg:text-6xl font-heading font-light text-white leading-tight mb-6">
+              Hagamos Realidad <br/>
+              tu <span class="italic text-primary">Evento Soñado</span>
+            </h2>
+            <p class="text-sm font-light text-secondary/80 max-w-sm leading-relaxed">
+              Cada detalle cuenta. Desde la primera consulta hasta el último adorno, transformamos tus ideas en experiencias inolvidables.
+            </p>
           </div>
 
-          <h2
-            class="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-white leading-tight"
-          >
-            Hagamos Realidad tu
-            <span
-              class="block mt-2 bg-gradient-to-r from-primary via-amber-300 to-primary bg-clip-text text-transparent animate-gradient"
-            >
-              Evento Soñado
-            </span>
-          </h2>
-
-          <p
-            class="text-lg md:text-xl text-secondary/90 max-w-lg leading-relaxed"
-          >
-            Cada detalle cuenta. Desde la primera consulta hasta el último
-            adorno,
-            <span class="text-white font-semibold"
-              >transformamos tus ideas en experiencias inolvidables</span
-            >.
-          </p>
-        </div>
-
-        {/* Contact Cards */}
-        <div class="grid sm:grid-cols-2 gap-4">
-          {/* WhatsApp Card - Clickeable */}
-          <a
-            href="https://wa.me/56937708933?text=Hola%20Decoartesjb!%20Me%20gustaría%20cotizar%20una%20decoración%20para%20mi%20evento."
-            target="_blank"
-            rel="noopener noreferrer"
-            class="group relative p-5 rounded-2xl bg-gradient-to-br from-green-500/10 via-bg-secondary to-bg-secondary border border-green-500/20 hover:border-green-500/50 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-green-500/20"
-          >
-            {/* Glow Effect */}
-            <div
-              class="absolute inset-0 rounded-2xl bg-gradient-to-br from-green-500/0 via-green-500/5 to-green-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            >
-            </div>
-
-            <div class="relative flex items-center gap-4">
-              <div class="relative">
-                <div
-                  class="absolute inset-0 bg-green-500/30 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-                >
-                </div>
-                <div
-                  class="relative w-14 h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform"
-                >
-                  <Whatsapp />
-                </div>
-              </div>
-
-              <div class="flex-1">
-                <p
-                  class="text-xs font-bold text-green-400 uppercase tracking-wider mb-1 flex items-center gap-1"
-                >
-                  WhatsApp
-                  <svg
-                    class="w-3 h-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                  </svg>
-                </p>
-                <p class="text-white font-bold text-lg">+56 9 3770 8933</p>
-                <p class="text-xs text-green-400/70 mt-1">
-                  Click para chatear →
-                </p>
-              </div>
-            </div>
-          </a>
-
-          {/* Instagram Card */}
-          <a
-            href="https://www.instagram.com/decoartesjb"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="group relative p-5 rounded-2xl bg-gradient-to-br from-pink-500/10 via-bg-secondary to-bg-secondary border border-pink-500/20 hover:border-pink-500/50 backdrop-blur-sm transition-all duration-300 hover:scale-[1.02] hover:shadow-2xl hover:shadow-pink-500/20"
-          >
-            {/* Glow Effect */}
-            <div
-              class="absolute inset-0 rounded-2xl bg-gradient-to-br from-pink-500/0 via-pink-500/5 to-pink-500/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            >
-            </div>
-
-            <div class="relative flex items-center gap-4">
-              <div class="relative">
-                <div
-                  class="absolute inset-0 bg-pink-500/30 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity"
-                >
-                </div>
-                <div
-                  class="relative w-14 h-14 bg-gradient-to-br from-pink-500 to-rose-600 rounded-xl flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform"
-                >
-                  <Instagram />
-                </div>
-              </div>
-
-              <div class="flex-1">
-                <p
-                  class="text-xs font-bold text-pink-400 uppercase tracking-wider mb-1 flex items-center gap-1"
-                >
-                  Instagram
-                  <svg
-                    class="w-3 h-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
-                      d="M13 7l5 5m0 0l-5 5m5-5H6"></path>
-                  </svg>
-                </p>
-                <p class="text-white font-bold text-lg">@decoartesjb</p>
-                <p class="text-xs text-pink-400/70 mt-1">
-                  Ver nuestro portafolio →
-                </p>
-              </div>
-            </div>
-          </a>
-        </div>
-
-        {/* Stats/Benefits Cards */}
-        <div class="grid grid-cols-3 gap-3">
-          <div
-            class="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-colors group"
-          >
-            <div class="flex flex-col items-center text-center gap-2">
-              <div
-                class="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center text-primary group-hover:scale-110 transition-transform"
-              >
-                <svg
-                  class="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
+          {/* Social Links */}
+          <div class="space-y-6 pt-8 border-t border-white/10">
+            <a href="https://wa.me/56937708933" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-6 p-6 border border-white/10 hover:border-primary/50 transition-colors">
+              <div class="w-12 h-12 flex items-center justify-center text-primary border border-white/5 group-hover:bg-primary/5 transition-colors">
+                <Whatsapp />
               </div>
               <div>
-                <p class="text-2xl font-bold text-white">24h</p>
-                <p class="text-xs text-secondary">Respuesta</p>
+                <p class="text-[10px] font-bold tracking-[0.2em] uppercase text-white/50 mb-1">WhatsApp</p>
+                <p class="text-white font-light text-lg">+56 9 3770 8933</p>
               </div>
-            </div>
-          </div>
+            </a>
 
-          <div
-            class="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-colors group"
-          >
-            <div class="flex flex-col items-center text-center gap-2">
-              <div
-                class="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center text-primary group-hover:scale-110 transition-transform"
-              >
-                <svg
-                  class="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M5 13l4 4L19 7"></path>
-                </svg>
+            <a href="https://www.instagram.com/decoartesjb" target="_blank" rel="noopener noreferrer" class="group flex items-center gap-6 p-6 border border-white/10 hover:border-primary/50 transition-colors">
+              <div class="w-12 h-12 flex items-center justify-center text-primary border border-white/5 group-hover:bg-primary/5 transition-colors">
+                <Instagram />
               </div>
               <div>
-                <p class="text-2xl font-bold text-white">100%</p>
-                <p class="text-xs text-secondary">Dedicación</p>
+                <p class="text-[10px] font-bold tracking-[0.2em] uppercase text-white/50 mb-1">Instagram</p>
+                <p class="text-white font-light text-lg">@decoartesjb</p>
               </div>
-            </div>
+            </a>
           </div>
 
-          <div
-            class="p-4 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm hover:bg-white/10 transition-colors group"
-          >
-            <div class="flex flex-col items-center text-center gap-2">
-              <div
-                class="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center text-primary group-hover:scale-110 transition-transform"
-              >
-                <svg
-                  class="w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-              </div>
-              <div>
-                <p class="text-2xl font-bold text-white">∞</p>
-                <p class="text-xs text-secondary">Creatividad</p>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Quote Card */}
-        <div
-          class="relative p-6 rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/5 via-transparent to-transparent backdrop-blur-sm overflow-hidden group"
-        >
-          {/* Decorative Elements */}
-          <div
-            class="absolute top-0 right-0 w-32 h-32 bg-primary/10 blur-3xl rounded-full -z-10"
-          >
-          </div>
-          <div
-            class="absolute -bottom-8 -left-8 w-24 h-24 bg-amber-500/10 blur-2xl rounded-full -z-10"
-          >
-          </div>
-
-          {/* Quote Icon */}
-          <div
-            class="absolute top-4 right-4 opacity-10 group-hover:opacity-20 transition-opacity"
-          >
-            <svg
-              class="w-16 h-16 text-primary"
-              fill="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"
-              ></path>
-            </svg>
-          </div>
-
-          <div class="relative">
-            <p
-              class="text-white/90 italic text-lg md:text-xl leading-relaxed mb-4 font-light"
-            >
+          <div class="pt-8">
+            <p class="text-white/80 italic text-xl leading-relaxed font-light border-l border-primary/50 pl-6">
               "Los detalles no son detalles. Son los que marcan la diferencia."
             </p>
-            <div class="flex items-center gap-3">
-              <div
-                class="h-px flex-1 bg-gradient-to-r from-primary/50 to-transparent"
-              >
-              </div>
-              <span class="text-sm font-semibold text-primary"
-                >Nuestra Filosofía</span
-              >
-            </div>
           </div>
         </div>
-      </div>
 
-      {/* Modern Form */}
-      <div
-        class="glass-card p-6 md:p-8 rounded-2xl relative overflow-hidden animate-fade-in-up delay-150"
-      >
-        <div
-          class="absolute top-0 right-0 w-64 h-64 bg-primary/10 blur-[80px] -z-10 rounded-full pointer-events-none"
-        >
+        {/* Editorial Form */}
+        <div class="lg:col-span-7">
+          <div class="border border-white/10 p-8 lg:p-16 bg-white/[0.01]">
+            
+            <form id="event-form" class="space-y-16">
+              <div class="space-y-8">
+                <h3 class="text-[10px] font-bold tracking-[0.2em] uppercase text-white/80 border-b border-white/10 pb-4">
+                  01. Información Personal
+                </h3>
+
+                <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+                  <div class="space-y-2">
+                    <label class="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">Nombre Completo *</label>
+                    <input type="text" name="nombre" required class="w-full bg-transparent border-b border-white/20 px-0 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-primary transition-colors rounded-none" placeholder="Ej. María González"/>
+                  </div>
+                  <div class="space-y-2">
+                    <label class="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">Email *</label>
+                    <input type="email" name="email" required class="w-full bg-transparent border-b border-white/20 px-0 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-primary transition-colors rounded-none" placeholder="maria@ejemplo.com"/>
+                  </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+                  <div class="space-y-2">
+                    <label class="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">Teléfono *</label>
+                    <input type="tel" name="telefono" required class="w-full bg-transparent border-b border-white/20 px-0 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-primary transition-colors rounded-none" placeholder="+56 9 1234 5678"/>
+                  </div>
+                  <div class="space-y-2">
+                    <label class="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">Ubicación *</label>
+                    <input type="text" name="ubicacion" required class="w-full bg-transparent border-b border-white/20 px-0 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-primary transition-colors rounded-none" placeholder="Santiago, Las Condes"/>
+                  </div>
+                </div>
+              </div>
+
+              <div class="space-y-8">
+                <h3 class="text-[10px] font-bold tracking-[0.2em] uppercase text-white/80 border-b border-white/10 pb-4">
+                  02. Detalles del Evento
+                </h3>
+
+                <div class="grid md:grid-cols-2 gap-8 lg:gap-12">
+                  <div class="space-y-2">
+                    <label class="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">Tipo de Evento *</label>
+                    <select name="tipoEvento" required class="w-full bg-transparent border-b border-white/20 px-0 py-3 text-white focus:outline-none focus:border-primary transition-colors appearance-none rounded-none cursor-pointer">
+                      <option value="" class="bg-bg text-white/50">Selecciona un tipo</option>
+                      <option value="Boda" class="bg-bg">Boda</option>
+                      <option value="Corporativo" class="bg-bg">Evento Corporativo</option>
+                      <option value="Social" class="bg-bg">Celebración Social</option>
+                      <option value="Otro" class="bg-bg">Otro</option>
+                    </select>
+                  </div>
+                  <div class="space-y-2">
+                    <label class="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">Fecha *</label>
+                    <input type="date" name="fechaEvento" required class="w-full bg-transparent border-b border-white/20 px-0 py-3 text-white focus:outline-none focus:border-primary transition-colors rounded-none cursor-pointer" style="color-scheme: dark;"/>
+                  </div>
+                </div>
+
+                <div class="space-y-2">
+                  <label class="text-[10px] font-bold uppercase tracking-[0.2em] text-secondary">Cuéntanos tu visión *</label>
+                  <textarea name="mensaje" required rows="4" class="w-full bg-transparent border-b border-white/20 px-0 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-primary transition-colors resize-none rounded-none" placeholder="Describe tu evento ideal..."></textarea>
+                </div>
+              </div>
+
+              <div class="pt-8">
+                <button id="submit-btn" type="submit" class="w-full border border-primary text-primary font-bold text-[11px] tracking-[0.2em] uppercase py-6 hover:bg-primary hover:text-bg transition-colors duration-300">
+                  Solicitar Consulta
+                </button>
+              </div>
+
+              <div id="status-msg" class="hidden text-center text-[10px] tracking-[0.2em] uppercase mt-4"></div>
+            </form>
+            
+          </div>
         </div>
 
-        <form id="event-form" class="space-y-6">
-          <!-- Información Personal -->
-          <div class="space-y-4">
-            <h3
-              class="text-sm font-bold text-primary uppercase tracking-wider flex items-center gap-2"
-            >
-              <svg
-                class="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                ></path>
-              </svg>
-              Información Personal
-            </h3>
-
-            <div class="grid md:grid-cols-2 gap-4">
-              <div class="space-y-2">
-                <label
-                  class="text-xs font-semibold text-secondary uppercase ml-1 flex items-center gap-1"
-                >
-                  Nombre Completo <span class="text-primary">*</span>
-                </label>
-                <input
-                  type="text"
-                  name="nombre"
-                  placeholder="Ej. María José González"
-                  required
-                  class="w-full bg-bg-secondary border border-white/10 rounded-lg px-4 py-3.5 text-white placeholder:text-white/30 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                />
-              </div>
-
-              <div class="space-y-2">
-                <label
-                  class="text-xs font-semibold text-secondary uppercase ml-1 flex items-center gap-1"
-                >
-                  Email <span class="text-primary">*</span>
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="maria@ejemplo.com"
-                  required
-                  class="w-full bg-bg-secondary border border-white/10 rounded-lg px-4 py-3.5 text-white placeholder:text-white/30 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                />
-              </div>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-4">
-              <div class="space-y-2">
-                <label
-                  class="text-xs font-semibold text-secondary uppercase ml-1 flex items-center gap-1"
-                >
-                  Teléfono <span class="text-primary">*</span>
-                </label>
-                <input
-                  type="tel"
-                  name="telefono"
-                  placeholder="+56 9 1234 5678"
-                  required
-                  class="w-full bg-bg-secondary border border-white/10 rounded-lg px-4 py-3.5 text-white placeholder:text-white/30 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                />
-              </div>
-
-              <div class="space-y-2">
-                <label
-                  class="text-xs font-semibold text-secondary uppercase ml-1 flex items-center gap-1"
-                >
-                  Ubicación del Evento <span class="text-primary">*</span>
-                </label>
-                <input
-                  type="text"
-                  name="ubicacion"
-                  placeholder="Santiago, Las Condes"
-                  required
-                  class="w-full bg-bg-secondary border border-white/10 rounded-lg px-4 py-3.5 text-white placeholder:text-white/30 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                />
-              </div>
-            </div>
-          </div>
-
-          <!-- Detalles del Evento -->
-          <div class="space-y-4 pt-2 border-t border-white/5">
-            <h3
-              class="text-sm font-bold text-primary uppercase tracking-wider flex items-center gap-2"
-            >
-              <svg
-                class="w-4 h-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-                ></path>
-              </svg>
-              Detalles del Evento
-            </h3>
-
-            <div class="grid md:grid-cols-2 gap-4">
-              <div class="space-y-2">
-                <label
-                  class="text-xs font-semibold text-secondary uppercase ml-1 flex items-center gap-1"
-                >
-                  Tipo de Evento <span class="text-primary">*</span>
-                </label>
-                <select
-                  name="tipoEvento"
-                  required
-                  class="w-full bg-bg-secondary border border-white/10 rounded-lg px-4 py-3.5 text-white focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all appearance-none cursor-pointer"
-                  style="background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 fill=%22none%22 viewBox=%220 0 24 24%22 stroke=%22%23D4AF37%22%3E%3Cpath stroke-linecap=%22round%22 stroke-linejoin=%22round%22 stroke-width=%222%22 d=%22M19 9l-7 7-7-7%22/%3E%3C/svg%3E'); background-repeat: no-repeat; background-position: right 0.75rem center; background-size: 1.5em 1.5em; padding-right: 2.5rem;"
-                >
-                  <option value="">Selecciona un tipo</option>
-                  <option value="Boda">💍 Boda</option>
-                  <option value="Cumpleaños Infantil"
-                    >🎈 Cumpleaños Infantil</option
-                  >
-                  <option value="Cumpleaños Adulto">🎂 Cumpleaños Adulto</option
-                  >
-                  <option value="Baby Shower">👶 Baby Shower</option>
-                  <option value="Evento Corporativo"
-                    >🏢 Evento Corporativo</option
-                  >
-                  <option value="Quinceañera">👑 Quinceañera</option>
-                  <option value="Aniversario">💐 Aniversario</option>
-                  <option value="Graduación">🎓 Graduación</option>
-                  <option value="Otro">✨ Otro</option>
-                </select>
-              </div>
-
-              <div class="space-y-2">
-                <label
-                  class="text-xs font-semibold text-secondary uppercase ml-1 flex items-center gap-1"
-                >
-                  Fecha del Evento <span class="text-primary">*</span>
-                </label>
-                <input
-                  type="date"
-                  name="fechaEvento"
-                  required
-                  class="w-full bg-bg-secondary border border-white/10 rounded-lg px-4 py-3.5 text-white focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                />
-              </div>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-4">
-              <div class="space-y-2">
-                <label
-                  class="text-xs font-semibold text-secondary uppercase ml-1"
-                >
-                  Número de Invitados (aprox.)
-                </label>
-                <input
-                  type="number"
-                  name="invitados"
-                  placeholder="Ej. 50"
-                  min="1"
-                  class="w-full bg-bg-secondary border border-white/10 rounded-lg px-4 py-3.5 text-white placeholder:text-white/30 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all"
-                />
-              </div>
-
-              <div class="space-y-2">
-                <label
-                  class="text-xs font-semibold text-secondary uppercase ml-1"
-                >
-                  Presupuesto Aproximado
-                </label>
-                <select
-                  name="presupuesto"
-                  class="w-full bg-bg-secondary border border-white/10 rounded-lg px-4 py-3.5 text-white focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all appearance-none cursor-pointer"
-                  style="background-image: url('data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 fill=%22none%22 viewBox=%220 0 24 24%22 stroke=%22%23D4AF37%22%3E%3Cpath stroke-linecap=%22round%22 stroke-linejoin=%22round%22 stroke-width=%222%22 d=%22M19 9l-7 7-7-7%22/%3E%3C/svg%3E'); background-repeat: no-repeat; background-position: right 0.75rem center; background-size: 1.5em 1.5em; padding-right: 2.5rem;"
-                >
-                  <option value="">Selecciona un rango</option>
-                  <option value="Menos de $200.000">Menos de $200.000</option>
-                  <option value="$200.000 - $500.000"
-                    >$200.000 - $500.000</option
-                  >
-                  <option value="$500.000 - $1.000.000"
-                    >$500.000 - $1.000.000</option
-                  >
-                  <option value="$1.000.000 - $2.000.000"
-                    >$1.000.000 - $2.000.000</option
-                  >
-                  <option value="Más de $2.000.000">Más de $2.000.000</option>
-                  <option value="Por definir">Por definir</option>
-                </select>
-              </div>
-            </div>
-          </div>
-
-          <!-- Mensaje -->
-          <div class="space-y-2 pt-2">
-            <label
-              class="text-xs font-semibold text-secondary uppercase ml-1 flex items-center gap-1"
-            >
-              Cuéntanos tu Visión <span class="text-primary">*</span>
-            </label>
-            <textarea
-              name="mensaje"
-              placeholder="Describe tu evento ideal: colores preferidos, temática, estilo, elementos especiales que te gustaría incluir..."
-              required
-              rows="5"
-              class="w-full bg-bg-secondary border border-white/10 rounded-lg px-4 py-3.5 text-white placeholder:text-white/30 focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all resize-none"
-            ></textarea>
-            <p class="text-xs text-secondary/60 ml-1 flex items-center gap-1">
-              <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                <path
-                  fill-rule="evenodd"
-                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                  clip-rule="evenodd"></path>
-              </svg>
-              Mientras más detalles compartas, mejor podremos ayudarte a crear tu
-              evento perfecto
-            </p>
-          </div>
-
-          <!-- Submit Button -->
-          <div class="pt-2">
-            <button
-              id="submit-btn"
-              type="submit"
-              class="group relative w-full bg-gradient-to-r from-primary to-amber-400 text-bg font-bold text-lg py-4 rounded-xl hover:shadow-2xl hover:shadow-primary/50 transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] overflow-hidden"
-            >
-              <span
-                class="relative z-10 flex items-center justify-center gap-2"
-              >
-                <svg
-                  class="w-5 h-5 group-hover:rotate-12 transition-transform"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
-                </svg>
-                SOLICITAR CONSULTA GRATUITA
-              </span>
-              <div
-                class="absolute inset-0 bg-gradient-to-r from-amber-400 to-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-              >
-              </div>
-            </button>
-            <p class="text-center text-xs text-secondary/60 mt-3">
-              📞 Respuesta en menos de 24 horas
-            </p>
-          </div>
-
-          <!-- Status Message -->
-          <div
-            id="status-msg"
-            class="hidden text-center text-sm p-4 rounded-xl font-medium"
-          >
-          </div>
-        </form>
       </div>
     </div>
   </section>
@@ -580,41 +142,29 @@ import Section from "./Section.astro";
   const statusMsg = document.getElementById("status-msg") as HTMLDivElement;
 
   const showStatus = (text: string, isError = false) => {
+    if(!statusMsg) return;
     statusMsg.textContent = text;
-    statusMsg.className = `text-center text-sm p-3 rounded-lg font-medium ${
-      isError ? "bg-red-500/20 text-red-200" : "bg-green-500/20 text-green-200"
+    statusMsg.className = `text-center text-[10px] tracking-[0.2em] uppercase p-4 mt-6 border ${
+      isError ? "border-red-500/50 text-red-400" : "border-primary/50 text-primary"
     }`;
     statusMsg.classList.remove("hidden");
   };
 
   const fireConfetti = () => {
-    const duration = 3 * 1000;
-    const animationEnd = Date.now() + duration;
-    const defaults = { startVelocity: 30, spread: 360, ticks: 60, zIndex: 0 };
-    const randomInRange = (min: number, max: number) =>
-      Math.random() * (max - min) + min;
-
-    const interval: any = setInterval(function () {
-      const timeLeft = animationEnd - Date.now();
-      if (timeLeft <= 0) return clearInterval(interval);
-      const particleCount = 50 * (timeLeft / duration);
-      confetti({
-        ...defaults,
-        particleCount,
-        origin: { x: randomInRange(0.1, 0.3), y: Math.random() - 0.2 },
-      });
-      confetti({
-        ...defaults,
-        particleCount,
-        origin: { x: randomInRange(0.7, 0.9), y: Math.random() - 0.2 },
-      });
-    }, 250);
+    confetti({
+      particleCount: 100,
+      spread: 70,
+      origin: { y: 0.6 },
+      colors: ['#D4AF37', '#ffffff', '#000000']
+    });
   };
 
   form?.addEventListener("submit", async (e) => {
     e.preventDefault();
+    if(!submitBtn || !statusMsg) return;
+    
     submitBtn.disabled = true;
-    const originalText = submitBtn.textContent;
+    const originalText = submitBtn.textContent || "Solicitar Consulta";
     submitBtn.textContent = "ENVIANDO...";
     statusMsg.classList.add("hidden");
 
@@ -629,7 +179,7 @@ import Section from "./Section.astro";
       });
 
       if (response.ok) {
-        showStatus("¡Recibido! Te contactaremos pronto.");
+        showStatus("Recibido. Te contactaremos pronto.");
         fireConfetti();
         form.reset();
       } else {
