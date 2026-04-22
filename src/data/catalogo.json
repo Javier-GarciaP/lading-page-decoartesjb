@@ -1,101 +1,128 @@
 [
   {
     "id": 1,
-    "name": "Peonías Rosas",
-    "price": 99,
+    "group": "Clásico Innovador",
+    "title": "Arreglo clasico inovador",
+    "description": "Arreglo de 40 varas, con mix de rosas, lisiantos y toques de follajes intercalados, con papelería premium",
+    "price": 50000,
     "type": "Ramo",
-    "image": "ramo-1.png",
-    "row": 1,
-    "col": 1
+    "image": "ramo-1.png"
+  },
+  {
+    "id": 13,
+    "group": "Clásico Innovador",
+    "title": "Arreglo clasico inovador",
+    "description": "Arreglo de 40 varas, con mix de rosas, lisiantos y toques de follajes intercalados, con papelería premium",
+    "price": 50000,
+    "type": "Ramo",
+    "image": "ramo-12.png"
+  },
+  {
+    "id": 14,
+    "group": "Clásico Innovador",
+    "title": "Arreglo clasico inovador",
+    "description": "Arreglo de 40 varas, con mix de rosas, lisiantos y toques de follajes intercalados, con papelería premium",
+    "price": 50000,
+    "type": "Ramo",
+    "image": "ramo-13.png"
   },
   {
     "id": 2,
-    "name": "Flores en Cesta",
-    "price": 170,
-    "type": "Cesta",
-    "image": "ramo-2.png",
-    "row": 1,
-    "col": 2
-  },
-  {
-    "id": 3,
-    "name": "Mimosa Dorada",
-    "price": 70,
-    "type": "Caja",
-    "image": "ramo-3.png",
-    "row": 1,
-    "col": 4
+    "group": "Contemporáneo",
+    "title": "Arreglo contemporaneo",
+    "description": "Arreglo de 40 varas, con mix de flores de temporada y papelería premium",
+    "price": 35000,
+    "type": "Ramo",
+    "image": "ramo-2.png"
   },
   {
     "id": 4,
-    "name": "Caja de Flores Nº3",
-    "price": 155,
-    "type": "Caja",
-    "image": "ramo-4.png",
-    "row": 2,
-    "col": 2
-  },
-  {
-    "id": 5,
-    "name": "Rosas en Caja",
-    "price": 145,
-    "type": "Caja",
-    "image": "ramo-5.png",
-    "row": 2,
-    "col": 3
-  },
-  {
-    "id": 6,
-    "name": "Calas de Pureza",
-    "price": 99,
+    "group": "Contemporáneo",
+    "title": "Arreglo contemporaneo",
+    "description": "Arreglo de 40 varas, con mix de flores de temporada y papelería premium",
+    "price": 35000,
     "type": "Ramo",
-    "image": "ramo-6.png",
-    "row": 2,
-    "col": 4
-  },
-  {
-    "id": 7,
-    "name": "Corazón de Rosas",
-    "price": 120,
-    "type": "Corazón",
-    "image": "ramo-7.png",
-    "row": 3,
-    "col": 1
+    "image": "ramo-4.png"
   },
   {
     "id": 8,
-    "name": "Ramo de Novia",
-    "price": 85,
+    "group": "Contemporáneo",
+    "title": "Arreglo contemporaneo",
+    "description": "Arreglo de 40 varas, con mix de flores de temporada y papelería premium",
+    "price": 38000,
     "type": "Ramo",
-    "image": "ramo-8.png",
-    "row": 3,
-    "col": 2
+    "image": "ramo-8.png"
   },
   {
-    "id": 9,
-    "name": "Claveles Rojos",
-    "price": 90,
-    "type": "Ramo",
-    "image": "ramo-9.png",
-    "row": 3,
-    "col": 4
+    "id": 3,
+    "group": "Ramos al Florero",
+    "title": "Ramos al florero",
+    "description": "Ramo de 20 varas, mezcla equilibrada de follaje y envase de vidrio decorativo",
+    "price": 55000,
+    "type": "Caja",
+    "image": "ramo-3.png"
   },
   {
-    "id": 10,
-    "name": "Elegancia Blanca",
-    "price": 110,
+    "id": 6,
+    "group": "Ramos al Florero",
+    "title": "Ramos al florero",
+    "description": "Ramo de 20 varas, mezcla equilibrada de follaje y envase de vidrio decorativo",
+    "price": 55000,
     "type": "Ramo",
-    "image": "ramo-10.png",
-    "row": 4,
-    "col": 1
+    "image": "ramo-6.png"
+  },
+  {
+    "id": 5,
+    "group": "Tradicional",
+    "title": "Arreglo clasico",
+    "description": "Arreglo tradicional de 20 varas con papelería premium",
+    "price": 35000,
+    "type": "Caja",
+    "image": "ramo-5.png"
   },
   {
     "id": 11,
-    "name": "Mix Primaveral",
-    "price": 95,
+    "group": "Tradicional",
+    "title": "Arreglo clasico",
+    "description": "Arreglo tradicional de 20 varas con papelería premium",
+    "price": 35000,
     "type": "Cesta",
-    "image": "ramo-11.png",
-    "row": 4,
-    "col": 2
+    "image": "ramo-11.png"
+  },
+  {
+    "id": 7,
+    "group": "Tropical Primaveral",
+    "title": "Ramos tropicales primaverales",
+    "description": "Arreglos vibrantes de 30 varas con mix de follaje seleccionado y papelería premium",
+    "price": 38000,
+    "type": "Ramo",
+    "image": "ramo-7.png"
+  },
+  {
+    "id": 9,
+    "group": "Tropical Primaveral",
+    "title": "Ramos tropicales primaverales",
+    "description": "Arreglos vibrantes de 30 varas con mix de follaje seleccionado y papelería premium",
+    "price": 38000,
+    "type": "Ramo",
+    "image": "ramo-9.png"
+  },
+  {
+    "id": 10,
+    "group": "Tropical Primaveral",
+    "title": "Ramos tropicales primaverales",
+    "description": "Arreglos vibrantes de 30 varas con mix de follaje seleccionado y papelería premium",
+    "price": 38000,
+    "type": "Ramo",
+    "image": "ramo-10.png"
+  },
+  {
+    "id": 12,
+    "group": "Especial Rosas",
+    "title": "Arreglo clasico de rosas",
+    "description": "Arreglo de 20 varas de rosas premium según el color de su preferencia con papelería de alta gama",
+    "price": 40000,
+    "type": "Ramo",
+    "image": "ramo-14.png"
   }
 ]
