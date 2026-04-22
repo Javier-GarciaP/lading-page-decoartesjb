@@ -41,11 +41,7 @@ import "../styles/global.css";
     />
     <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#d4af37" />
-    <link
-      rel="canonical"
-      href={new URL(Astro.url.pathname, "https://www.decoartesjb.vercel.app")
-        .href}
-    />
+    <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- Open Graph -->
