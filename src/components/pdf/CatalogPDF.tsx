@@ -597,7 +597,6 @@ const CatalogDocument = ({ origin }: OriginProps) => (
     <Page size="A4" style={S.page}>
       <View style={S.contactPage}>
         <Image src={`${origin}/decoracion-catalogo.png`} style={S.bgDecor} />
-        <Image src={`${origin}/estatua-madre.png`} style={{ position: 'absolute', bottom: 4, right: 0, width: '45%', height: '60%', opacity: 0.15 }} />
         <View style={S.contactTopBar} />
         <View style={S.contactBottomBar} />
 
