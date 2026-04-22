@@ -4,72 +4,72 @@ import catalogo from '../../data/catalogo.json';
 
 // Definición de estilos premium
 const styles = StyleSheet.create({
-  page: { 
-    backgroundColor: '#ffffff', 
-    padding: 50, 
+  page: {
+    backgroundColor: '#ffffff',
+    padding: 35, // Reducido de 50
     fontFamily: 'Helvetica',
     color: '#1a1a1a'
   },
   // Portada
-  cover: { 
-    flex: 1, 
-    justifyContent: 'center', 
+  cover: {
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
     border: '1px solid #d4af37',
-    margin: 10,
-    padding: 40,
+    margin: 5,
+    padding: 30,
     position: 'relative'
   },
   coverLogo: {
-    width: 80,
-    height: 80,
-    marginBottom: 20
+    width: 70,
+    height: 70,
+    marginBottom: 15
   },
   coverBrand: {
-    fontSize: 12,
+    fontSize: 11,
     letterSpacing: 4,
     color: '#d4af37',
-    marginBottom: 40,
+    marginBottom: 30,
     fontWeight: 'bold',
     textTransform: 'uppercase'
   },
-  title: { 
-    fontSize: 42, 
-    marginBottom: 10, 
+  title: {
+    fontSize: 36,
+    marginBottom: 8,
     color: '#1a1a1a',
     textAlign: 'center',
     fontFamily: 'Times-Roman',
     textTransform: 'uppercase',
     letterSpacing: 2
   },
-  subtitle: { 
-    fontSize: 10, 
-    marginBottom: 60, 
+  subtitle: {
+    fontSize: 9,
+    marginBottom: 40,
     color: '#777777',
-    letterSpacing: 6,
+    letterSpacing: 5,
     textTransform: 'uppercase'
   },
   decorativeLine: {
-    width: 40,
+    width: 35,
     height: 1,
     backgroundColor: '#d4af37',
-    marginBottom: 30
+    marginBottom: 25
   },
   // Layout de Catálogo
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: 40,
+    marginBottom: 25, // Reducido de 40
     borderBottom: '0.5px solid #eeeeee',
-    paddingBottom: 15
+    paddingBottom: 10
   },
   headerLogo: {
-    width: 30,
-    height: 30
+    width: 25,
+    height: 25
   },
   headerTitle: {
-    fontSize: 8,
+    fontSize: 7,
     letterSpacing: 2,
     color: '#999999',
     textTransform: 'uppercase'
@@ -77,102 +77,102 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 35,
+    marginBottom: 20, // Reducido de 35
     alignItems: 'flex-start'
   },
   // Cards de Producto
   card: {
-    width: '30%',
+    width: '31%',
   },
   cardLarge: {
     width: '48%',
   },
   imageBox: {
-    marginBottom: 10,
+    marginBottom: 8,
     backgroundColor: '#f9f9f9',
     overflow: 'hidden',
     border: '0.5px solid #f0f0f0'
   },
-  image: { 
-    width: '100%', 
-    height: 160, 
-    objectFit: 'cover' 
+  image: {
+    width: '100%',
+    height: 130, // Reducido de 160
+    objectFit: 'cover'
   },
   imageLarge: {
     width: '100%',
-    height: 240,
+    height: 180, // Reducido de 240
     objectFit: 'cover'
   },
   cardContent: {
-    paddingTop: 5
+    paddingTop: 3
   },
-  cardTitle: { 
-    fontSize: 10, 
-    color: '#1a1a1a', 
+  cardTitle: {
+    fontSize: 9,
+    color: '#1a1a1a',
     fontFamily: 'Times-Roman',
-    marginBottom: 4,
+    marginBottom: 3,
     textTransform: 'uppercase',
     letterSpacing: 0.5
   },
-  cardPrice: { 
-    fontSize: 9, 
+  cardPrice: {
+    fontSize: 8,
     color: '#d4af37',
     fontWeight: 'bold'
   },
   // Secciones Especiales
   poemSection: {
     width: '35%',
-    paddingRight: 20,
+    paddingRight: 15,
     justifyContent: 'center'
   },
   poemText: {
-    fontSize: 10,
-    lineHeight: 1.8,
+    fontSize: 9,
+    lineHeight: 1.6,
     color: '#555555',
     fontFamily: 'Times-Italic',
     textAlign: 'left',
     borderLeft: '1px solid #d4af37',
-    paddingLeft: 15
+    paddingLeft: 12
   },
   // Contacto & Footer
   contactSection: {
-    marginTop: 50,
-    padding: 30,
+    marginTop: 20, // Reducido de 50
+    padding: 20,
     backgroundColor: '#fafafa',
     alignItems: 'center',
     border: '0.5px solid #eeeeee'
   },
   contactTitle: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'Times-Roman',
-    marginBottom: 15,
+    marginBottom: 10,
     color: '#1a1a1a',
     letterSpacing: 2,
     textTransform: 'uppercase'
   },
   contactInfo: {
-    fontSize: 9,
+    fontSize: 8,
     color: '#777777',
-    marginBottom: 8,
+    marginBottom: 5,
     letterSpacing: 1
   },
   footer: {
     position: 'absolute',
-    bottom: 30,
-    left: 50,
-    right: 50,
+    bottom: 25,
+    left: 35,
+    right: 35,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     borderTop: '0.5px solid #eeeeee',
-    paddingTop: 10
+    paddingTop: 8
   },
   pageNumber: {
-    fontSize: 8,
+    fontSize: 7,
     color: '#bbbbbb'
   },
   footerText: {
-    fontSize: 8,
+    fontSize: 7,
     color: '#bbbbbb',
     letterSpacing: 1
   }
@@ -197,7 +197,7 @@ interface OriginProps {
 const PageHeader = ({ origin }: OriginProps) => (
   <View style={styles.header}>
     <Image src={`${origin}/favicon.png`} style={styles.headerLogo} />
-    <Text style={styles.headerTitle}>Colección Día de la Madre 2024</Text>
+    <Text style={styles.headerTitle}>Colección Día de la Madre 2026</Text>
   </View>
 );
 
@@ -241,7 +241,7 @@ const CatalogDocument = ({ origin }: OriginProps) => (
     {/* Catálogo Pág 1 */}
     <Page size="A4" style={styles.page}>
       <PageHeader origin={origin} />
-      
+
       <View style={styles.row}>
         <View style={styles.poemSection}>
           <Text style={styles.poemText}>
@@ -266,17 +266,17 @@ const CatalogDocument = ({ origin }: OriginProps) => (
         <ProductCard item={items[5]} origin={origin} />
         <ProductCard item={items[6]} origin={origin} />
       </View>
-      
+
       <View style={styles.footer}>
         <Text style={styles.footerText}>SJB DECOARTE</Text>
         <Text style={styles.pageNumber}>01</Text>
       </View>
     </Page>
-    
+
     {/* Catálogo Pág 2 */}
     <Page size="A4" style={styles.page}>
       <PageHeader origin={origin} />
-      
+
       <View style={styles.row}>
         <ProductCard item={items[7]} origin={origin} large />
         <ProductCard item={items[8]} origin={origin} large />
@@ -322,8 +322,8 @@ export default function DownloadCatalog() {
   );
 
   return (
-    <PDFDownloadLink 
-      document={<CatalogDocument origin={origin} />} 
+    <PDFDownloadLink
+      document={<CatalogDocument origin={origin} />}
       fileName="Catalogo_Dia_de_la_Madre_SJBDECOARTE.pdf"
       className="group flex items-center gap-4 px-8 py-4 bg-white/5 border border-white/20 hover:border-primary hover:bg-primary/5 transition-all duration-300"
     >
@@ -339,7 +339,7 @@ export default function DownloadCatalog() {
             </span>
             <div className="flex items-center justify-center w-5 h-5 rounded-full border border-white/20 group-hover:border-primary group-hover:bg-primary transition-all">
               <svg xmlns="http://www.w3.org/2000/svg" className="h-3 w-3 text-white group-hover:text-bg transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
               </svg>
             </div>
           </>
