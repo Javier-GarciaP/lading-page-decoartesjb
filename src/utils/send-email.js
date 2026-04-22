@@ -8,7 +8,7 @@ export const sendEmail = async (to, subject, html, apiKey) => {
     const resend = new Resend(key);
 
     return await resend.emails.send({
-        from: 'Event Planner <onboarding@resend.dev>',
+        from: 'SJB Decoarte <onboarding@resend.dev>',
         to: [to],
         subject: subject,
         html: html,
