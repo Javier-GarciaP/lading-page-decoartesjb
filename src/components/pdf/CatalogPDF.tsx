@@ -558,6 +558,9 @@ const CatalogDocument = ({ origin }: OriginProps) => (
         <PageHeader origin={origin} subtitle="Índice de Colección" />
         <Text style={S.indexTitle}>Índice</Text>
         <Text style={S.indexSubtitle}>Selección de arreglos florales premium</Text>
+        <Text style={{ fontSize: 9, color: C.gold, textAlign: 'center', marginBottom: 24, fontStyle: 'italic', maxWidth: '85%', marginHorizontal: 'auto', lineHeight: 1.5 }}>
+          {'Para satisfacer a nuestros clientes, también se podra crear arreglos con el\nDiseño y la selección de flores'}
+        </Text>
         {GROUPS.map((group, i) => (
           <View key={i} style={S.indexRow}>
             <Text style={S.indexNum}>{String(i + 1).padStart(2, '0')}</Text>
