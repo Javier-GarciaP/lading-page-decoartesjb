@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://www.sjbdecoarte.vercel.app/sitemap-index.xml
+# Bloquear acceso a rutas de API internas
+Disallow: /api/
 
+Sitemap: https://www.sjbdecoarte.cl/sitemap-index.xml

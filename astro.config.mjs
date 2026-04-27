@@ -8,7 +8,7 @@ import react from '@astrojs/react';
 
 export default defineConfig({
   // Importante: añade tu URL aquí para que el sitemap no dé error
-  site: 'https://sjbdecoarte.vercel.app',
+  site: 'https://www.sjbdecoarte.cl',
   output: 'static',
 
   integrations: [sitemap(), react()],

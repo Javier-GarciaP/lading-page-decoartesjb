@@ -28,7 +28,8 @@ const galleryEvents = [
 ---
 
 <Layout
-  title="Decoraciones que transmiten profesionalismo y modernidad en reuniones corporativas."
+  title="Decoración de Eventos Corporativos y Empresariales en Santiago"
+  description="Galería de decoración para eventos corporativos y empresariales en Santiago de Chile. SJB Decoarte crea ambientes profesionales para lanzamientos, cenas de gala y reuniones empresariales en la Región Metropolitana."
 >
   <section
     class="px-6 md:px-10 py-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8"
@@ -41,8 +42,9 @@ const galleryEvents = [
         >
           <img
             src={event.image}
-            alt={event.title}
+            alt={`${event.title} - Decoración corporativa en Santiago - SJB Decoarte`}
             class="w-full h-64 object-cover transform transition duration-300 group-hover:scale-110"
+            loading="lazy"
           />
           <div class="absolute inset-0 bg-black/50 flex flex-col justify-end p-4 opacity-0 group-hover:opacity-100 transition">
             <h3 class="text-white text-xl font-bold">{event.title}</h3>

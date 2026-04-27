@@ -7,7 +7,7 @@ export interface Props {
   extension?: string;
 }
 
-const { title, folder, count, prefix = "imagen", extension = ".jpg" } = Astro.props;
+const { title, folder, count, prefix = "imagen", extension = ".jpg", altPrefix = "SJB Decoarte - Decoración de eventos Santiago" } = Astro.props;
 ---
 
 <div class="px-4 md:px-10 py-6">
@@ -23,7 +23,7 @@ const { title, folder, count, prefix = "imagen", extension = ".jpg" } = Astro.pr
         >
           <img
             src={`/${folder}/${prefix}-${i + 1}${extension}`}
-            alt={`Imagen ${i + 1}`}
+            alt={`${altPrefix} - foto ${i + 1}`}
             class="w-full h-auto object-cover transform transition-transform duration-700 group-hover:scale-110"
             loading="lazy"
           />

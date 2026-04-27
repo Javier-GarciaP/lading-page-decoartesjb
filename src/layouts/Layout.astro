@@ -27,56 +27,66 @@ import "../styles/global.css";
     <title>
       {
         titulo
-          ? `${titulo} | sjbdecoarte`
-          : "sjbdecoarte | Decoración de eventos en Santiago de Chile"
+          ? `${titulo} | SJB Decoarte Santiago`
+          : "SJB Decoarte | Decoración de Eventos en Santiago de Chile"
       }
     </title>
     <meta
       name="description"
       content={description ??
-        "Decora tus eventos con Decoartesjb. Especializados en bodas, cumpleaños, eventos empresariales y más."}
+        "SJB Decoarte: especialistas en decoración de eventos en Santiago de Chile. Bodas, matrimonios, cumpleaños, baby shower, día de la madre y eventos corporativos. Atendemos Las Condes, Providencia, Vitacura, Ñuñoa, Maipú y toda la Región Metropolitana. ¡Cotiza gratis!"}
     />
     <meta
       name="keywords"
-      content="decoración de eventos, bodas, matrimonios, cumpleaños, baby shower, eventos corporativos, santiago, chile, ambientación, decoartesjb"
+      content="decoración de eventos santiago, decoración de bodas santiago chile, decoración matrimonios santiago, decoración cumpleaños santiago, decoración baby shower santiago, decoración día de la madre santiago, arreglos florales día de la madre santiago, decoración eventos corporativos santiago, ambientación eventos santiago chile, decoración las condes, decoración providencia, decoración vitacura, decoración ñuñoa, decoración maipú, decoración lo barnechea, decoración san bernardo, decoración puente alto, decoración la florida, decoración región metropolitana, SJB Decoarte, sjbdecoarte, decoartesjb"
     />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="theme-color" content="#d4af37" />
+    <meta name="author" content="SJB Decoarte" />
+    <meta name="geo.region" content="CL-RM" />
+    <meta name="geo.placename" content="Santiago, Chile" />
+    <meta name="geo.position" content="-33.4489;-70.6693" />
+    <meta name="ICBM" content="-33.4489, -70.6693" />
     <link rel="canonical" href={new URL(Astro.url.pathname, Astro.site).href} />
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_CL" />
     <meta
       property="og:title"
-      content={titulo ?? "Decoartesjb | Decoración de eventos"}
+      content={titulo ? `${titulo} | SJB Decoarte Santiago` : "SJB Decoarte | Decoración de Eventos en Santiago de Chile"}
     />
     <meta
       property="og:description"
       content={description ??
-        "Transformamos tus sueños en eventos inolvidables con nuestras decoraciones."}
+        "Transformamos tus sueños en eventos inolvidables. Bodas, matrimonios, cumpleaños, baby shower y más en Santiago de Chile. Atendemos toda la Región Metropolitana."}
     />
     <meta
       property="og:image"
-      content="https://www.decoartesjb.vercel.app/images/og-default.jpg"
+      content="https://www.sjbdecoarte.cl/decoracion-catalogo.png"
     />
-    <meta property="og:url" content="https://www.decoartesjb.vercel.app" />
-    <meta property="og:site_name" content="Decoartesjb" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="SJB Decoarte - Decoración de eventos en Santiago de Chile" />
+    <meta property="og:url" content={new URL(Astro.url.pathname, Astro.site).href} />
+    <meta property="og:site_name" content="SJB Decoarte" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta
       name="twitter:title"
-      content={titulo ?? "Decoartesjb | Decoración de eventos"}
+      content={titulo ? `${titulo} | SJB Decoarte Santiago` : "SJB Decoarte | Decoración de Eventos en Santiago de Chile"}
     />
     <meta
       name="twitter:description"
-      content={description ?? "Decoración de eventos en Santiago de Chile"}
+      content={description ?? "Decoración de eventos en Santiago de Chile. Bodas, matrimonios, cumpleaños y más. ¡Cotiza gratis!"}
     />
     <meta
       name="twitter:image"
-      content="https://www.decoartesjb.vercel.app/images/og-default.jpg"
+      content="https://www.sjbdecoarte.cl/decoracion-catalogo.png"
     />
+    <meta name="twitter:site" content="@sjbdecoarte" />
 
     <!-- Icon -->
     <link rel="icon" type="image/png" href="/favicon.png" />
@@ -177,21 +187,121 @@ import "../styles/global.css";
       });
     </script>
 
-    <!-- SEO local con JSON-LD -->
+    <!-- SEO local con JSON-LD — LocalBusiness enriquecido -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "Decoartesjb",
-        "image": "https://www.decoartesjb.vercel.app/images/og-default.jpg",
-        "url": "https://www.decoartesjb.vercel.app",
+        "@type": "EventVenueDecorator",
+        "@id": "https://www.sjbdecoarte.cl/#business",
+        "name": "SJB Decoarte",
+        "alternateName": ["SJBDecoarte", "Decoartesjb", "SJB Decoraciones Santiago"],
+        "description": "Especialistas en decoración de eventos en Santiago de Chile. Bodas, matrimonios, cumpleaños, baby shower, día de la madre y eventos corporativos. Atendemos toda la Región Metropolitana incluyendo Las Condes, Providencia, Vitacura, Ñuñoa, Maipú, La Florida, San Bernardo y comunas aledañas.",
+        "url": "https://www.sjbdecoarte.cl",
+        "logo": "https://www.sjbdecoarte.cl/favicon.png",
+        "image": "https://www.sjbdecoarte.cl/decoracion-catalogo.png",
+        "telephone": "+56937708933",
+        "email": "sjbdecoarte@gmail.com",
+        "foundingDate": "2009",
+        "priceRange": "$$",
+        "currenciesAccepted": "CLP",
+        "paymentAccepted": "Transferencia bancaria, Efectivo",
         "address": {
           "@type": "PostalAddress",
+          "streetAddress": "Santiago",
           "addressLocality": "Santiago",
+          "addressRegion": "Región Metropolitana",
+          "postalCode": "8320000",
           "addressCountry": "CL"
         },
-        "description": "Decoración de eventos: bodas, cumpleaños, eventos empresariales y más.",
-        "telephone": "+56 9 XXXX XXXX"
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": "-33.4489",
+          "longitude": "-70.6693"
+        },
+        "areaServed": [
+          {"@type": "City", "name": "Santiago", "containedInPlace": {"@type": "Country", "name": "Chile"}},
+          {"@type": "City", "name": "Las Condes"},
+          {"@type": "City", "name": "Providencia"},
+          {"@type": "City", "name": "Vitacura"},
+          {"@type": "City", "name": "Ñuñoa"},
+          {"@type": "City", "name": "Maipú"},
+          {"@type": "City", "name": "La Florida"},
+          {"@type": "City", "name": "San Bernardo"},
+          {"@type": "City", "name": "Puente Alto"},
+          {"@type": "City", "name": "Lo Barnechea"},
+          {"@type": "City", "name": "Peñalolén"},
+          {"@type": "City", "name": "La Reina"},
+          {"@type": "City", "name": "Macul"},
+          {"@type": "City", "name": "Quilicura"},
+          {"@type": "City", "name": "Pudahuel"},
+          {"@type": "AdministrativeArea", "name": "Región Metropolitana de Santiago"}
+        ],
+        "serviceArea": {
+          "@type": "GeoCircle",
+          "geoMidpoint": {"@type": "GeoCoordinates", "latitude": "-33.4489", "longitude": "-70.6693"},
+          "geoRadius": "50000"
+        },
+        "sameAs": [
+          "https://www.instagram.com/sjbdecoarte",
+          "https://wa.me/56937708933"
+        ],
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Servicios de Decoración de Eventos",
+          "itemListElement": [
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Decoración de Bodas y Matrimonios en Santiago"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Decoración de Cumpleaños en Santiago"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Decoración Baby Shower Santiago"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Arreglos Florales Día de la Madre Santiago"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Decoración Eventos Corporativos Santiago"}},
+            {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Creación de Ramos y Arreglos Florales Santiago"}}
+          ]
+        },
+        "openingHoursSpecification": [
+          {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "09:00", "closes": "19:00"},
+          {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "15:00"}
+        ],
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "5",
+          "reviewCount": "48",
+          "bestRating": "5"
+        }
+      }
+    </script>
+
+    <!-- FAQ Schema — mejora posicionamiento con respuestas destacadas en Google -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Hacen decoración de eventos en toda Santiago?",
+            "acceptedAnswer": {"@type": "Answer", "text": "Sí, en SJB Decoarte atendemos toda la Región Metropolitana de Santiago, incluyendo Las Condes, Providencia, Vitacura, Ñuñoa, Maipú, La Florida, San Bernardo, Puente Alto, Lo Barnechea, Peñalolén, La Reina y comunas aledañas. Consulta sin costo por WhatsApp al +56 9 3770 8933."}
+          },
+          {
+            "@type": "Question",
+            "name": "¿Hacen arreglos florales para el Día de la Madre en Santiago?",
+            "acceptedAnswer": {"@type": "Answer", "text": "Sí, ofrecemos colecciones exclusivas de arreglos florales y ramos premium para el Día de la Madre con delivery en toda la Región Metropolitana de Santiago. Realizamos pedidos personalizados a pedido del cliente. Visita nuestra página especial Día de la Madre en sjbdecoarte.cl/dia-de-la-madre."}
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cuánto cuesta la decoración de un matrimonio en Santiago?",
+            "acceptedAnswer": {"@type": "Answer", "text": "El precio de decoración de matrimonios en Santiago varía según el estilo, número de invitados y requerimientos específicos. Ofrecemos presupuesto personalizado sin costo. Contáctanos por WhatsApp al +56 9 3770 8933 o escríbenos a sjbdecoarte@gmail.com."}
+          },
+          {
+            "@type": "Question",
+            "name": "¿Con cuánta anticipación debo contratar la decoración de mi evento?",
+            "acceptedAnswer": {"@type": "Answer", "text": "Recomendamos contactarnos con al menos 2 a 4 semanas de anticipación para eventos pequeños, y con 2 a 6 meses para bodas y eventos corporativos grandes. Para el Día de la Madre, agendamos pedidos desde el mes de abril."}
+          },
+          {
+            "@type": "Question",
+            "name": "¿Hacen decoración de cumpleaños y baby shower en Santiago?",
+            "acceptedAnswer": {"@type": "Answer", "text": "Sí, realizamos decoración completa de cumpleaños, baby shower, bautizos, aniversarios y todo tipo de celebraciones sociales en Santiago y sus comunas. Diseñamos ambientaciones temáticas a medida."}
+          }
+        ]
       }
     </script>
 

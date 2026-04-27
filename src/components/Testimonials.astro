@@ -24,9 +24,33 @@ const opinions = [
     rol: "Cliente Corporativo",
   },
 ];
+
+// Generar Schema.org Review JSON-LD
+const reviewSchema = {
+  "@context": "https://schema.org",
+  "@type": "AggregateRating",
+  "itemReviewed": {
+    "@type": "LocalBusiness",
+    "name": "SJB Decoarte",
+    "image": "https://www.sjbdecoarte.cl/decoracion-catalogo.png",
+    "telephone": "+56937708933",
+    "priceRange": "$$",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Santiago",
+      "addressCountry": "CL"
+    }
+  },
+  "ratingValue": "5",
+  "reviewCount": "48",
+  "bestRating": "5",
+  "worstRating": "1"
+};
 ---
 
 <Section id="opiniones">
+  <!-- Schema Review -->
+  <script type="application/ld+json" set:html={JSON.stringify(reviewSchema)} />
   <div class="relative py-24 md:py-32 border-t border-white/5">
     <div class="max-w-[1600px] mx-auto px-6 md:px-12">
       
