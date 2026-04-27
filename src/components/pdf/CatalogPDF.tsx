@@ -527,9 +527,9 @@ const CatalogDocument = ({ origin }: OriginProps) => (
     <Page size="A4" style={S.page}>
       <View style={S.coverPage}>
         {/* Imagen decorativa de fondo */}
-        <Image src={`${origin}/decoracion-catalogo.png`} style={S.bgDecor} />
+        <Image src={`${origin}/decoracion-catalogo.webp`} style={S.bgDecor} />
         {/* Estatua como silueta */}
-        <Image src={`${origin}/estatua-madre.png`} style={S.coverStatue} />
+        <Image src={`${origin}/estatua-madre.webp`} style={S.coverStatue} />
         {/* Bordes dorados */}
         <View style={S.coverTopBar} />
         <View style={S.coverBottomBar} />
@@ -553,7 +553,7 @@ const CatalogDocument = ({ origin }: OriginProps) => (
 
     {/* ── ÍNDICE ──────────────────────────────────────────────────────────── */}
     <Page size="A4" style={S.page}>
-      <Image src={`${origin}/decoracion-catalogo.png`} style={S.bgDecor} />
+      <Image src={`${origin}/decoracion-catalogo.webp`} style={S.bgDecor} />
       <View style={S.pageWrap}>
         <PageHeader origin={origin} subtitle="Índice de Colección" />
         <Text style={S.indexTitle}>Índice</Text>
@@ -585,7 +585,7 @@ const CatalogDocument = ({ origin }: OriginProps) => (
     {/* ── PÁGINAS DE CATÁLOGO (dinámicas) ─────────────────────────────────── */}
     {CATALOG_PAGES.map((pageGroups, pageIdx) => (
       <Page key={pageIdx} size="A4" style={S.page}>
-        <Image src={`${origin}/decoracion-catalogo.png`} style={S.bgDecor} />
+        <Image src={`${origin}/decoracion-catalogo.webp`} style={S.bgDecor} />
         <View style={S.pageWrap}>
           <PageHeader origin={origin} />
           {pageGroups.map((group, gi) => (
@@ -599,7 +599,7 @@ const CatalogDocument = ({ origin }: OriginProps) => (
     {/* ── PÁGINA DE CONTACTO ───────────────────────────────────────────────── */}
     <Page size="A4" style={S.page}>
       <View style={S.contactPage}>
-        <Image src={`${origin}/decoracion-catalogo.png`} style={S.bgDecor} />
+        <Image src={`${origin}/decoracion-catalogo.webp`} style={S.bgDecor} />
         <View style={S.contactTopBar} />
         <View style={S.contactBottomBar} />
 

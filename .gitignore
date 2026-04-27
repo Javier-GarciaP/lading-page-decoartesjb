@@ -25,3 +25,9 @@ pnpm-debug.log*
 
 # Vercel build output (generated automatically — never commit)
 .vercel/output/
+
+# Ignorar imágenes antiguas (ya pasamos a webp)
+public/**/*.jpg
+public/**/*.jpeg
+public/**/*.png
+!public/favicon.png

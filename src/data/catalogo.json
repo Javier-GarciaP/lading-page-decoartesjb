@@ -6,7 +6,7 @@
     "description": "Arreglo de 40 varas, con mix de rosas, lisiantos y toques de follajes intercalados, con papelería premium",
     "price": 50000,
     "type": "Ramo",
-    "image": "ramo-1.png"
+    "image": "ramo-1.webp"
   },
   {
     "id": 13,
@@ -15,7 +15,7 @@
     "description": "Arreglo de 40 varas, con mix de rosas, lisiantos y toques de follajes intercalados, con papelería premium",
     "price": 50000,
     "type": "Ramo",
-    "image": "ramo-12.png"
+    "image": "ramo-12.webp"
   },
   {
     "id": 14,
@@ -24,7 +24,7 @@
     "description": "Arreglo de 40 varas, con mix de rosas, lisiantos y toques de follajes intercalados, con papelería premium",
     "price": 50000,
     "type": "Ramo",
-    "image": "ramo-13.png"
+    "image": "ramo-13.webp"
   },
   {
     "id": 2,
@@ -33,7 +33,7 @@
     "description": "Arreglo de 40 varas, con mix de flores de temporada y papelería premium",
     "price": 35000,
     "type": "Ramo",
-    "image": "ramo-2.png"
+    "image": "ramo-2.webp"
   },
   {
     "id": 4,
@@ -42,7 +42,7 @@
     "description": "Arreglo de 40 varas, con mix de flores de temporada y papelería premium",
     "price": 35000,
     "type": "Ramo",
-    "image": "ramo-4.png"
+    "image": "ramo-4.webp"
   },
   {
     "id": 8,
@@ -51,7 +51,7 @@
     "description": "Arreglo de 40 varas, con mix de flores de temporada y papelería premium",
     "price": 38000,
     "type": "Ramo",
-    "image": "ramo-8.png"
+    "image": "ramo-8.webp"
   },
   {
     "id": 3,
@@ -60,7 +60,7 @@
     "description": "Ramo de 20 varas, mezcla equilibrada de follaje y envase de vidrio decorativo",
     "price": 55000,
     "type": "Caja",
-    "image": "ramo-3.png"
+    "image": "ramo-3.webp"
   },
   {
     "id": 6,
@@ -69,7 +69,7 @@
     "description": "Ramo de 20 varas, mezcla equilibrada de follaje y envase de vidrio decorativo",
     "price": 55000,
     "type": "Ramo",
-    "image": "ramo-6.png"
+    "image": "ramo-6.webp"
   },
   {
     "id": 5,
@@ -78,7 +78,7 @@
     "description": "Arreglo tradicional de 20 varas con papelería premium",
     "price": 35000,
     "type": "Caja",
-    "image": "ramo-5.png"
+    "image": "ramo-5.webp"
   },
   {
     "id": 11,
@@ -87,7 +87,7 @@
     "description": "Arreglo tradicional de 20 varas con papelería premium",
     "price": 35000,
     "type": "Cesta",
-    "image": "ramo-11.png"
+    "image": "ramo-11.webp"
   },
   {
     "id": 7,
@@ -96,7 +96,7 @@
     "description": "Arreglos vibrantes de 30 varas con mix de follaje seleccionado y papelería premium",
     "price": 38000,
     "type": "Ramo",
-    "image": "ramo-7.png"
+    "image": "ramo-7.webp"
   },
   {
     "id": 9,
@@ -105,7 +105,7 @@
     "description": "Arreglos vibrantes de 30 varas con mix de follaje seleccionado y papelería premium",
     "price": 38000,
     "type": "Ramo",
-    "image": "ramo-9.png"
+    "image": "ramo-9.webp"
   },
   {
     "id": 10,
@@ -114,7 +114,7 @@
     "description": "Arreglos vibrantes de 30 varas con mix de follaje seleccionado y papelería premium",
     "price": 38000,
     "type": "Ramo",
-    "image": "ramo-10.png"
+    "image": "ramo-10.webp"
   },
   {
     "id": 12,
@@ -123,6 +123,6 @@
     "description": "Arreglo de 20 varas de rosas premium según el color de su preferencia con papelería de alta gama",
     "price": 40000,
     "type": "Ramo",
-    "image": "ramo-14.png"
+    "image": "ramo-14.webp"
   }
 ]
