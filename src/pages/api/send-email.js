@@ -48,7 +48,7 @@ export const POST = async ({ request }) => {
     `;
 
     const { error } = await sendEmail(
-      'sjbdecoarte@gmail.com',
+      'josejaviergarciap123@gmail.com',
       `✨ Nueva Consulta de Evento: ${nombre}`,
       html,
       process.env.RESEND_API_KEY || import.meta.env.RESEND_API_KEY
